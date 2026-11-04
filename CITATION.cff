@@ -22,7 +22,7 @@ references:
   - type: report
     title: "Kirkaldy Conformance Properties for Agent Infrastructure"
     version: "0.1"
-    doi: "[[FILL: DOI]]"
+    doi: "10.5281/zenodo.23962762"
     authors:
       - family-names: Karlstrom
         given-names: Kai

@@ -18,7 +18,7 @@ guarantees, raw evidence behind every verdict.
 
 The properties are defined in the Kirkaldy specification (`KRK-n`; this code calls KRK-n `Pn`),
 published on Zenodo: *Kirkaldy Conformance Properties for Agent Infrastructure*, version 0.1,
-doi:[[FILL: DOI]]. Version 0.1 defines KRK-1 to KRK-19; the properties marked *draft* below are
+doi:10.5281/zenodo.23962762. Version 0.1 defines KRK-1 to KRK-19; the properties marked *draft* below are
 ahead of it and are stated by their interface documents in [`docs/`](docs/) until the next version.
 Where the code and the specification differ, the specification is the statement of the property
 and the difference is a defect in one of them.
