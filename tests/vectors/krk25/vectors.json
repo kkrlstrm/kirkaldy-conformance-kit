@@ -1,0 +1,80 @@
+{
+  "_about": "KRK-25 (P25) vectors. Expected answers written by hand; the three digests were computed with openssl dgst -sha256 -mac HMAC and shasum -a 256, not with conformance/disclosure.py.",
+  "pairwise": [
+    {"secret_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+     "principal": "Pr-ALICE@a.example", "audience": "did:web:b.example",
+     "expected": "c02e5a7665b77eae7272bab9f69a1a012cd8260fe14f3d54f54ce1396203cf07"},
+    {"secret_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+     "principal": "Pr-ALICE@a.example", "audience": "did:web:c.example",
+     "expected": "e3a41f1fc96fced68ebface229be0e4f269312c037770e4ea8e488be953a6282"}
+  ],
+  "commitment": [
+    {"salt_hex": "00112233445566778899aabbccddeeff", "principal": "Pr-ALICE@a.example",
+     "expected": "sha256:067b20e4e651e8192b05285a88e077e2292fef92d5664a1f8aeda192dac39ba9"}
+  ],
+  "plain_hash": [
+    {"identifier": "Pr-ALICE@a.example",
+     "expected": "71c785692b7fe376e6c53068f1bfd797ca73b8f888060122a93196a9db213afc"}
+  ],
+  "principal_shapes": [
+    {"principal": {"level": "named", "id": "Pr-ALICE@a.example"}, "ok": true},
+    {"principal": {"level": "pairwise", "pseudonym": "c02e5a7665b77eae7272bab9f69a1a012cd8260fe14f3d54f54ce1396203cf07"}, "ok": true},
+    {"principal": {"level": "organisation", "commitment": "sha256:067b20e4e651e8192b05285a88e077e2292fef92d5664a1f8aeda192dac39ba9"}, "ok": true},
+    {"principal": {"level": "named", "id": "Pr-ALICE@a.example", "pseudonym": "x"}, "ok": false},
+    {"principal": {"level": "pairwise", "pseudonym": "not-hex"}, "ok": false},
+    {"principal": {"level": "organisation", "commitment": "067b20e4e651e8192b05285a88e077e2292fef92d5664a1f8aeda192dac39ba9"}, "ok": false},
+    {"principal": {"level": "none"}, "ok": false},
+    {"principal": "Pr-ALICE@a.example", "ok": false}
+  ],
+  "bases": [
+    {"claims": null, "verified_by": null, "expected": "unattested"},
+    {"claims": {}, "verified_by": "a", "expected": "a-attested"},
+    {"claims": {}, "verified_by": "agent", "expected": "agent-asserted"},
+    {"claims": {}, "verified_by": null, "expected": "agent-asserted"},
+    {"claims": null, "verified_by": "b-consent", "expected": "b-consent"}
+  ],
+  "flatten": [
+    {"input": {"b": [1, {"c": null}], "a": "x"},
+     "expected": {"$.a": "x", "$.b[0]": "1", "$.b[1].c": "null"}},
+    {"input": {"meta": "{\"on_behalf_of\": \"P2\"}"},
+     "expected": {"$.meta": "{\"on_behalf_of\": \"P2\"}", "$.meta#json.on_behalf_of": "P2"}},
+    {"input": {"tok": "eyJhbGciOiJub25lIn0.eyJzdWIiOiJQMSJ9."},
+     "expected": {"$.tok": "eyJhbGciOiJub25lIn0.eyJzdWIiOiJQMSJ9.", "$.tok#jws.sub": "P1"}},
+    {"input": {"e": [], "o": {}, "t": true},
+     "expected": {"$.e": "[]", "$.o": "{}", "$.t": "true"}}
+  ],
+  "find": [
+    {"flat": {"$.a": "user Pr-ALICE@a.example", "$.b": "other"},
+     "needles": {"p": "Pr-ALICE@a.example", "q": "nobody", "e": ""},
+     "expected": {"p": ["$.a"]}},
+    {"flat": {"$.a": "pr-alice@a.example"}, "needles": {"p": "Pr-ALICE@a.example"},
+     "expected": {}, "folded": {"p": ["$.a"]}}
+  ],
+  "infer_fields": [
+    {"rows": [["agent", {"$.actor": "a1", "$.op": "op-1", "$.kind": "agent", "$.p": "P1"}],
+              ["person", {"$.actor": "P1", "$.op": "op-2", "$.kind": "person", "$.p": "P1"}],
+              ["agent", {"$.actor": "a1", "$.op": "op-3", "$.kind": "agent", "$.p": "P1"}],
+              ["person", {"$.actor": "P1", "$.op": "op-4", "$.kind": "person", "$.p": "P1"}]],
+     "exclude": [], "expected": ["$.actor", "$.kind"]},
+    {"rows": [["agent", {"$.actor": "a1", "$.channel": "/ops"}],
+              ["person", {"$.actor": "a1", "$.channel": "/me"}],
+              ["agent", {"$.actor": "a1", "$.channel": "/ops"}],
+              ["person", {"$.actor": "a1", "$.channel": "/me"}]],
+     "exclude": ["$.channel"], "expected": []},
+    {"rows": [["agent", {"$.t": "1"}], ["agent", {"$.t": "2"}]], "exclude": [], "expected": []}
+  ],
+  "over_level": [
+    {"flat": {"$.p": "c02e5a7665b77eae7272bab9f69a1a012cd8260fe14f3d54f54ce1396203cf07"},
+     "level": "pairwise", "expected": []},
+    {"flat": {"$.p": "c02e5a7665b77eae7272bab9f69a1a012cd8260fe14f3d54f54ce1396203cf07"},
+     "level": "organisation", "expected": ["P1:pairwise"]},
+    {"flat": {"$.p": "Pr-ALICE@a.example"}, "level": "pairwise", "expected": ["P1:named"]},
+    {"flat": {"$.p": "71c785692b7fe376e6c53068f1bfd797ca73b8f888060122a93196a9db213afc"},
+     "level": "pairwise", "expected": ["P1:hash"]},
+    {"flat": {"$.p": "sha256:067b20e4e651e8192b05285a88e077e2292fef92d5664a1f8aeda192dac39ba9"},
+     "level": "none", "expected": ["P1:commitment"]},
+    {"flat": {"$.p": "sha256:067b20e4e651e8192b05285a88e077e2292fef92d5664a1f8aeda192dac39ba9"},
+     "level": "organisation", "expected": []},
+    {"flat": {"$.p": "Pr-ALICE@a.example"}, "level": "named", "expected": []}
+  ]
+}

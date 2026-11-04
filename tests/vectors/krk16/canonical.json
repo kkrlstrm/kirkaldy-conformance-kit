@@ -1,0 +1,47 @@
+[
+  {
+    "name": "key-order",
+    "value": {
+      "b": 1,
+      "a": {
+        "d": [
+          3,
+          2
+        ],
+        "c": null
+      },
+      "A": true
+    },
+    "canonical": "{\"A\":true,\"a\":{\"c\":null,\"d\":[3,2]},\"b\":1}",
+    "sha256": "sha256:a1d913dcb571fe09201535eec78ce373c621ab61760c886cc141609bdb4ac674"
+  },
+  {
+    "name": "unicode-values",
+    "value": {
+      "name": "Déjà € 😀",
+      "k": " "
+    },
+    "canonical": "{\"k\":\" \",\"name\":\"Déjà € 😀\"}",
+    "sha256": "sha256:163814488716a4a996bd7baefc906611af0b45ff8d5fe23bbc2087076c54ca06"
+  },
+  {
+    "name": "escapes",
+    "value": {
+      "s": "q\"b\\n\nt\tc\u0001d\u001f"
+    },
+    "canonical": "{\"s\":\"q\\\"b\\\\n\\nt\\tc\\u0001d\\u001f\"}",
+    "sha256": "sha256:c66fe8d4471ab5cbda9eddd9778ae4e9d5b35d241a4e7dd7f2b6a20b88118030"
+  },
+  {
+    "name": "integers",
+    "value": {
+      "n": [
+        0,
+        -1,
+        9007199254740991
+      ]
+    },
+    "canonical": "{\"n\":[0,-1,9007199254740991]}",
+    "sha256": "sha256:5f4d20409785b53d917593d9ffbeb55ed9e0e3a7b37e98e09fec4c80df37b857"
+  }
+]

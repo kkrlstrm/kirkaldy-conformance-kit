@@ -1,0 +1,10 @@
+{
+  "target": "toys",
+  "role": "reference",
+  "note": "The kit's own toys. They are written by the kit's author and model one mechanism each; their statements are the kit's, not a vendor's.",
+  "claims": [
+    {"property": "P1", "basis": "author", "quote": "The good gateway refuses a denied request while its policy decider is down.", "source": "known_bad/toys.py, ToyGateway", "checked": "kit source"},
+    {"property": "P16", "basis": "author", "quote": "The good toy records an effect as done only on B's signed receipt for this request reporting the expected effect.", "source": "known_bad/receipts_toys.py", "checked": "kit source"}
+  ],
+  "not_applicable": {}
+}

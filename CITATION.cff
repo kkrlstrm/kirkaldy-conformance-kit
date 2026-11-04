@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below, and cite the specification it implements."
+type: software
+title: "Kirkaldy conformance kit"
+version: "0.1.0"
+authors:
+  - family-names: Karlstrom
+    given-names: Kai
+    orcid: "https://orcid.org/0009-0003-0371-6071"
+license: Apache-2.0
+repository-code: "https://github.com/kkrlstrm/kirkaldy-conformance-kit"
+abstract: >-
+  Test code for the Kirkaldy conformance properties: probes for the authority, isolation and record
+  guarantees of AI agent infrastructure, with the known-bad fixtures every probe is checked against.
+keywords:
+  - AI agents
+  - agent infrastructure
+  - conformance testing
+  - authorisation
+  - cross-organisation delegation
+references:
+  - type: report
+    title: "Kirkaldy Conformance Properties for Agent Infrastructure"
+    version: "0.1"
+    doi: "[[FILL: DOI]]"
+    authors:
+      - family-names: Karlstrom
+        given-names: Kai
+        orcid: "https://orcid.org/0009-0003-0371-6071"
+    publisher:
+      name: Zenodo
+    license: CC-BY-4.0

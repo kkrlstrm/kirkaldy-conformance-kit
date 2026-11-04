@@ -1,0 +1,164 @@
+{
+ "_source": "RFC 8785 (JSON Canonicalization Scheme): the number table of Appendix B and the examples of \u00a73.2.2.3 (sorting) and \u00a73.2.4 (output); RFC 7638 \u00a73.1 (RSA thumbprint); RFC 8037 Appendix A (Ed25519 key, thumbprint and JWS). Transcribed by the kit's editor without a fetch; the RFC thumbprint and signature vectors were then confirmed by computation (SHA-256 and Ed25519 are deterministic, so a mistranscribed input cannot reproduce the published output). Re-check the number table against the RFC text before a published run [verify].",
+ "jws": [
+  {
+   "jwks": {
+    "keys": [
+     {
+      "crv": "Ed25519",
+      "kty": "OKP",
+      "x": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+     }
+    ]
+   },
+   "jws": "eyJhbGciOiJFZERTQSJ9.RXhhbXBsZSBvZiBFZDI1NTE5IHNpZ25pbmc.hgyY0il_MGCjP0JzlnLWG1PPOt7-09PGcvMg3AIbQR6dWbhijcNR4ki4iylGjg5BhVsPt9g7sVvpAr_MuM0KAg",
+   "name": "rfc8037-A.4",
+   "ok": true,
+   "payload": "Example of Ed25519 signing"
+  }
+ ],
+ "not_ijson": [
+  {
+   "input_json": "{\"amount\":9007199254740993}",
+   "name": "integer beyond 2^53"
+  }
+ ],
+ "numbers": [
+  {
+   "ieee754": "0000000000000000",
+   "jcs": "0"
+  },
+  {
+   "ieee754": "8000000000000000",
+   "jcs": "0"
+  },
+  {
+   "ieee754": "0000000000000001",
+   "jcs": "5e-324"
+  },
+  {
+   "ieee754": "8000000000000001",
+   "jcs": "-5e-324"
+  },
+  {
+   "ieee754": "7fefffffffffffff",
+   "jcs": "1.7976931348623157e+308"
+  },
+  {
+   "ieee754": "ffefffffffffffff",
+   "jcs": "-1.7976931348623157e+308"
+  },
+  {
+   "ieee754": "4340000000000000",
+   "jcs": "9007199254740992"
+  },
+  {
+   "ieee754": "c340000000000000",
+   "jcs": "-9007199254740992"
+  },
+  {
+   "ieee754": "4430000000000000",
+   "jcs": "295147905179352830000"
+  },
+  {
+   "ieee754": "44b52d02c7e14af5",
+   "jcs": "9.999999999999997e+22"
+  },
+  {
+   "ieee754": "44b52d02c7e14af6",
+   "jcs": "1e+23"
+  },
+  {
+   "ieee754": "44b52d02c7e14af7",
+   "jcs": "1.0000000000000001e+23"
+  },
+  {
+   "ieee754": "444b1ae4d6e2ef4e",
+   "jcs": "999999999999999700000"
+  },
+  {
+   "ieee754": "444b1ae4d6e2ef4f",
+   "jcs": "999999999999999900000"
+  },
+  {
+   "ieee754": "444b1ae4d6e2ef50",
+   "jcs": "1e+21"
+  },
+  {
+   "ieee754": "3eb0c6f7a0b5ed8c",
+   "jcs": "9.999999999999997e-7"
+  },
+  {
+   "ieee754": "3eb0c6f7a0b5ed8d",
+   "jcs": "0.000001"
+  },
+  {
+   "ieee754": "41b3de4355555553",
+   "jcs": "333333333.3333332"
+  },
+  {
+   "ieee754": "41b3de4355555554",
+   "jcs": "333333333.33333325"
+  },
+  {
+   "ieee754": "41b3de4355555555",
+   "jcs": "333333333.3333333"
+  },
+  {
+   "ieee754": "41b3de4355555556",
+   "jcs": "333333333.3333334"
+  },
+  {
+   "ieee754": "41b3de4355555557",
+   "jcs": "333333333.33333343"
+  },
+  {
+   "ieee754": "becbf647612f3696",
+   "jcs": "-0.0000033333333333333333"
+  },
+  {
+   "ieee754": "43143ff3c1cb0959",
+   "jcs": "1424953923781206.2"
+  }
+ ],
+ "objects": [
+  {
+   "input_json": "{\"numbers\":[333333333.33333329,1E30,4.50,2e-3,0.000000000000000000000000001],\"string\":\"\\u20ac$\\u000F\\u000aA'\\u0042\\u0022\\u005c\\\\\\\"\\/\",\"literals\":[null,true,false]}",
+   "jcs": "{\"literals\":[null,true,false],\"numbers\":[333333333.3333333,1e+30,4.5,0.002,1e-27],\"string\":\"\u20ac$\\u000f\\nA'B\\\"\\\\\\\\\\\"/\"}",
+   "name": "rfc8785-3.2.4"
+  },
+  {
+   "input_json": "{\"\\u20ac\":\"Euro Sign\",\"\\r\":\"Carriage Return\",\"\\ufb33\":\"Hebrew Letter Dalet With Dagesh\",\"1\":\"One\",\"\\ud83d\\ude00\":\"Emoji: Grinning Face\",\"\\u0080\":\"Control\",\"\\u00f6\":\"Latin Small Letter O With Diaeresis\"}",
+   "keys_in_order": [
+    "\r",
+    "1",
+    "\u0080",
+    "\u00f6",
+    "\u20ac",
+    "\ud83d\ude00",
+    "\ufb33"
+   ],
+   "name": "rfc8785-3.2.2.3-sorting"
+  }
+ ],
+ "thumbprints": [
+  {
+   "jwk": {
+    "e": "AQAB",
+    "kty": "RSA",
+    "n": "0vx7agoebGcQSuuPiLJXZptN9nndrQmbXEps2aiAFbWhM78LhWx4cbbfAAtVT86zwu1RK7aPFFxuhDR1L6tSoc_BJECPebWKRXjBZCiFV4n3oknjhMstn64tZ_2W-5JsGY4Hc5n9yBXArwl93lqt7_RN5w6Cf0h4QyQ5v-65YGjQR0_FDW2QvzqY368QQMicAtaSqzs8KJZgnYb9c7d0zgdAZHzu6qMQvRL5hajrn1n91CbOpbISD08qNLyrdkt-bFTWhAI4vMQFh6WeZu0fM4lFd2NcRwr3XPksINHaQ-G_xBniIqbw0Ls1jF44-csFCur-kEgU8awapJzKnqDKgw"
+   },
+   "name": "rfc7638-3.1",
+   "thumbprint": "NzbLsXh8uDCcd-6MNwXF4W_7noWXFZAfHkxZsRGC9Xs"
+  },
+  {
+   "jwk": {
+    "crv": "Ed25519",
+    "kty": "OKP",
+    "x": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+   },
+   "name": "rfc8037-A.3",
+   "thumbprint": "kPrK_qmxVWaYVA9wwBF6Iuo3vVzz7TxHCTwXBygrS4k"
+  }
+ ]
+}

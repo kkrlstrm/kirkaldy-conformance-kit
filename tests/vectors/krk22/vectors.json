@@ -1,0 +1,1675 @@
+{
+ "accounts": [
+  {
+   "ceilings": {
+    "cl-00000000000000a1": {
+     "limits": [
+      {
+       "currency": "EUR",
+       "kind": "amount",
+       "minor_units": 2,
+       "value": 1000
+      }
+     ]
+    }
+   },
+   "effects": [
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q1",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 400
+       }
+      }
+     },
+     "t_kit": 1.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q2",
+      "spender": "B2",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 400
+       }
+      }
+     },
+     "t_kit": 2.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q3",
+      "spender": "B3",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 400
+       }
+      }
+     },
+     "t_kit": 3.0
+    }
+   ],
+   "issuance": [
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q1"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q2"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q3"
+    }
+   ],
+   "name": "sum_across_three",
+   "rule": "gross",
+   "totals": {
+    "cl-00000000000000a1": [
+     12000000000000000000
+    ]
+   },
+   "uncountable": []
+  },
+  {
+   "ceilings": {
+    "cl-00000000000000a1": {
+     "limits": [
+      {
+       "currency": "EUR",
+       "kind": "amount",
+       "minor_units": 2,
+       "value": 1000
+      }
+     ]
+    }
+   },
+   "effects": [
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q1",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 600
+       }
+      }
+     },
+     "t_kit": 1.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q2",
+      "spender": "B2",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 0,
+        "value": 6
+       }
+      }
+     },
+     "t_kit": 2.0
+    }
+   ],
+   "issuance": [
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q1"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q2"
+    }
+   ],
+   "name": "units_mixed_minor",
+   "rule": "gross",
+   "totals": {
+    "cl-00000000000000a1": [
+     12000000000000000000
+    ]
+   },
+   "uncountable": []
+  },
+  {
+   "ceilings": {
+    "cl-00000000000000a1": {
+     "limits": [
+      {
+       "currency": "EUR",
+       "kind": "amount",
+       "minor_units": 2,
+       "value": 1000
+      }
+     ]
+    }
+   },
+   "effects": [
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q1",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 500
+       }
+      }
+     },
+     "t_kit": 1.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q2",
+      "spender": "B2",
+      "values": {
+       "amount": {
+        "currency": "USD",
+        "minor_units": 2,
+        "value": 300
+       }
+      }
+     },
+     "t_kit": 2.0
+    }
+   ],
+   "issuance": [
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q1"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q2"
+    }
+   ],
+   "name": "other_currency_uncountable",
+   "rule": "gross",
+   "totals": {
+    "cl-00000000000000a1": [
+     5000000000000000000
+    ]
+   },
+   "uncountable": [
+    "q2"
+   ]
+  },
+  {
+   "ceilings": {
+    "cl-00000000000000a1": {
+     "limits": [
+      {
+       "currency": "EUR",
+       "kind": "amount",
+       "minor_units": 2,
+       "value": 1000
+      }
+     ]
+    }
+   },
+   "effects": [
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q1",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 500
+       }
+      }
+     },
+     "t_kit": 1.0
+    },
+    {
+     "effect": {
+      "kind": "reversal",
+      "ref": "r1",
+      "reverses": "q1",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 400
+       }
+      }
+     },
+     "t_kit": 2.0
+    }
+   ],
+   "issuance": [
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q1"
+    }
+   ],
+   "name": "reversal_gross",
+   "rule": "gross",
+   "totals": {
+    "cl-00000000000000a1": [
+     5000000000000000000
+    ]
+   },
+   "uncountable": []
+  },
+  {
+   "ceilings": {
+    "cl-00000000000000a1": {
+     "limits": [
+      {
+       "currency": "EUR",
+       "kind": "amount",
+       "minor_units": 2,
+       "value": 1000
+      }
+     ]
+    }
+   },
+   "effects": [
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q1",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 500
+       }
+      }
+     },
+     "t_kit": 1.0
+    },
+    {
+     "effect": {
+      "kind": "reversal",
+      "ref": "r1",
+      "reverses": "q1",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 400
+       }
+      }
+     },
+     "t_kit": 2.0
+    }
+   ],
+   "issuance": [
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q1"
+    }
+   ],
+   "name": "reversal_net",
+   "rule": "net-recorded",
+   "totals": {
+    "cl-00000000000000a1": [
+     1000000000000000000
+    ]
+   },
+   "uncountable": []
+  },
+  {
+   "ceilings": {
+    "cl-00000000000000a1": {
+     "limits": [
+      {
+       "currency": "EUR",
+       "kind": "amount",
+       "minor_units": 2,
+       "value": 1000
+      }
+     ]
+    }
+   },
+   "effects": [
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q1",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 600
+       }
+      }
+     },
+     "t_kit": 1.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q2",
+      "spender": "B2",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": -500
+       }
+      }
+     },
+     "t_kit": 2.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q3",
+      "spender": "B3",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 600
+       }
+      }
+     },
+     "t_kit": 3.0
+    }
+   ],
+   "issuance": [
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q1"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q2"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q3"
+    }
+   ],
+   "name": "negative_spend_frees_nothing",
+   "rule": "net-recorded",
+   "totals": {
+    "cl-00000000000000a1": [
+     12000000000000000000
+    ]
+   },
+   "uncountable": []
+  },
+  {
+   "ceilings": {
+    "cl-00000000000000a1": {
+     "limits": [
+      {
+       "currency": "EUR",
+       "kind": "amount",
+       "minor_units": 2,
+       "value": 1000
+      }
+     ]
+    },
+    "cl-00000000000000b2": {
+     "limits": [
+      {
+       "currency": "EUR",
+       "kind": "amount",
+       "minor_units": 2,
+       "value": 1000
+      }
+     ]
+    }
+   },
+   "effects": [
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q1",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 700
+       }
+      }
+     },
+     "t_kit": 1.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q2",
+      "spender": "B2",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 700
+       }
+      }
+     },
+     "t_kit": 2.0
+    }
+   ],
+   "issuance": [
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q1"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1",
+      "cl-00000000000000b2"
+     ],
+     "ref": "q2"
+    }
+   ],
+   "name": "two_hop_chain",
+   "rule": "gross",
+   "totals": {
+    "cl-00000000000000a1": [
+     14000000000000000000
+    ],
+    "cl-00000000000000b2": [
+     7000000000000000000
+    ]
+   },
+   "uncountable": []
+  },
+  {
+   "ceilings": {
+    "cl-00000000000000a1": {
+     "limits": [
+      {
+       "currency": "EUR",
+       "kind": "amount",
+       "minor_units": 2,
+       "value": 1000
+      }
+     ]
+    },
+    "cl-00000000000000b2": {
+     "limits": [
+      {
+       "currency": "EUR",
+       "kind": "amount",
+       "minor_units": 2,
+       "value": 500
+      }
+     ]
+    },
+    "cl-00000000000000c3": {
+     "limits": [
+      {
+       "currency": "EUR",
+       "kind": "amount",
+       "minor_units": 2,
+       "value": 200
+      }
+     ]
+    }
+   },
+   "effects": [
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q1",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 300
+       }
+      }
+     },
+     "t_kit": 1.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q2",
+      "spender": "B2",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 300
+       }
+      }
+     },
+     "t_kit": 2.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q3",
+      "spender": "B3",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 300
+       }
+      }
+     },
+     "t_kit": 3.0
+    }
+   ],
+   "issuance": [
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q1"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1",
+      "cl-00000000000000b2"
+     ],
+     "ref": "q2"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1",
+      "cl-00000000000000b2",
+      "cl-00000000000000c3"
+     ],
+     "ref": "q3"
+    }
+   ],
+   "name": "three_hop_chain",
+   "rule": "gross",
+   "totals": {
+    "cl-00000000000000a1": [
+     9000000000000000000
+    ],
+    "cl-00000000000000b2": [
+     6000000000000000000
+    ],
+    "cl-00000000000000c3": [
+     3000000000000000000
+    ]
+   },
+   "uncountable": []
+  },
+  {
+   "ceilings": {
+    "cl-00000000000000a1": {
+     "limits": [
+      {
+       "currency": "EUR",
+       "kind": "amount",
+       "minor_units": 2,
+       "value": 1000
+      }
+     ]
+    }
+   },
+   "effects": [
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q1",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 700
+       }
+      }
+     },
+     "t_kit": 1.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q2",
+      "spender": "B2",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 700
+       }
+      }
+     },
+     "t_kit": 2.0
+    }
+   ],
+   "issuance": [
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q1"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q2"
+    }
+   ],
+   "name": "holder_hop_inherits",
+   "rule": "gross",
+   "totals": {
+    "cl-00000000000000a1": [
+     14000000000000000000
+    ]
+   },
+   "uncountable": []
+  },
+  {
+   "ceilings": {
+    "cl-00000000000000a1": {
+     "limits": [
+      {
+       "currency": "EUR",
+       "kind": "amount",
+       "minor_units": 2,
+       "value": 1000
+      },
+      {
+       "kind": "count",
+       "unit": "message",
+       "value": 3
+      }
+     ]
+    }
+   },
+   "effects": [
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q0",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 200
+       },
+       "count": {
+        "unit": "message",
+        "value": 1
+       }
+      }
+     },
+     "t_kit": 0.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q1",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 200
+       },
+       "count": {
+        "unit": "message",
+        "value": 1
+       }
+      }
+     },
+     "t_kit": 1.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q2",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 200
+       },
+       "count": {
+        "unit": "message",
+        "value": 1
+       }
+      }
+     },
+     "t_kit": 2.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q3",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 200
+       },
+       "count": {
+        "unit": "message",
+        "value": 1
+       }
+      }
+     },
+     "t_kit": 3.0
+    }
+   ],
+   "issuance": [
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q0"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q1"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q2"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q3"
+    }
+   ],
+   "name": "two_limits",
+   "rule": "gross",
+   "totals": {
+    "cl-00000000000000a1": [
+     8000000000000000000,
+     4
+    ]
+   },
+   "uncountable": []
+  },
+  {
+   "ceilings": {
+    "cl-00000000000000a1": {
+     "limits": [
+      {
+       "currency": "EUR",
+       "kind": "amount",
+       "minor_units": 2,
+       "value": 9007199254740991
+      }
+     ]
+    }
+   },
+   "effects": [
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q1",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 3002399751580330
+       }
+      }
+     },
+     "t_kit": 1.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q2",
+      "spender": "B2",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 3002399751580330
+       }
+      }
+     },
+     "t_kit": 2.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q3",
+      "spender": "B3",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 3002399751580331
+       }
+      }
+     },
+     "t_kit": 3.0
+    },
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "q4",
+      "spender": "B1",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 3,
+        "value": 1
+       }
+      }
+     },
+     "t_kit": 4.0
+    }
+   ],
+   "issuance": [
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q1"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q2"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q3"
+    },
+    {
+     "ceiling_ids": [
+      "cl-00000000000000a1"
+     ],
+     "ref": "q4"
+    }
+   ],
+   "name": "large_integer_exact",
+   "rule": "gross",
+   "totals": {
+    "cl-00000000000000a1": [
+     90071992547409911000000000000000
+    ]
+   },
+   "uncountable": []
+  },
+  {
+   "ceilings": {
+    "cl-00000000000000a1": {
+     "limits": [
+      {
+       "currency": "EUR",
+       "kind": "amount",
+       "minor_units": 2,
+       "value": 1000
+      }
+     ]
+    }
+   },
+   "effects": [
+    {
+     "effect": {
+      "kind": "spend",
+      "ref": "zz",
+      "spender": "B9",
+      "values": {
+       "amount": {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 100
+       }
+      }
+     },
+     "t_kit": 1.0
+    }
+   ],
+   "issuance": [],
+   "name": "unattributed_charged_to_root",
+   "rule": "gross",
+   "totals": {
+    "cl-00000000000000a1": [
+     1000000000000000000
+    ]
+   },
+   "uncountable": []
+  }
+ ],
+ "attribution": [
+  {
+   "confirmations": [
+    [
+     "share",
+     500
+    ]
+   ],
+   "name": "within_share",
+   "over": false,
+   "spends_cents": [
+    300,
+    200
+   ]
+  },
+  {
+   "confirmations": [
+    [
+     "share",
+     500
+    ]
+   ],
+   "name": "over_share",
+   "over": true,
+   "spends_cents": [
+    300,
+    300
+   ]
+  },
+  {
+   "confirmations": [
+    [
+     "reservation",
+     600
+    ],
+    [
+     "release",
+     600
+    ]
+   ],
+   "name": "released_after_commit",
+   "over": true,
+   "spends_cents": [
+    600
+   ]
+  },
+  {
+   "confirmations": [
+    [
+     "reservation",
+     600
+    ],
+    [
+     "expired",
+     600
+    ]
+   ],
+   "name": "expired_then_committed",
+   "over": true,
+   "spends_cents": [
+    600
+   ]
+  },
+  {
+   "confirmations": [
+    [
+     "reservation",
+     300
+    ],
+    [
+     "reservation",
+     300
+    ]
+   ],
+   "name": "two_reservations",
+   "over": false,
+   "spends_cents": [
+    300,
+    300
+   ]
+  }
+ ],
+ "judge": [
+  {
+   "account": "sum_across_three",
+   "name": "three_over",
+   "overshoot": {},
+   "where": [
+    "q3"
+   ],
+   "within": false
+  },
+  {
+   "account": "units_mixed_minor",
+   "name": "mixed_minor_over",
+   "overshoot": {},
+   "where": [
+    "q2"
+   ],
+   "within": false
+  },
+  {
+   "account": "other_currency_uncountable",
+   "name": "uncountable_is_outside",
+   "overshoot": {},
+   "where": [],
+   "within": false
+  },
+  {
+   "account": "reversal_gross",
+   "name": "gross_within",
+   "overshoot": {},
+   "where": [],
+   "within": true
+  },
+  {
+   "account": "two_hop_chain",
+   "name": "two_hop_root_over",
+   "overshoot": {},
+   "where": [
+    "q2"
+   ],
+   "within": false
+  },
+  {
+   "account": "negative_spend_frees_nothing",
+   "name": "negative_over",
+   "overshoot": {},
+   "where": [
+    "q3"
+   ],
+   "within": false
+  },
+  {
+   "account": "two_limits",
+   "name": "count_over",
+   "overshoot": {},
+   "where": [
+    "q3"
+   ],
+   "within": false
+  },
+  {
+   "account": "large_integer_exact",
+   "name": "large_integer_over_by_a_tenth_cent",
+   "overshoot": {},
+   "where": [
+    "q4"
+   ],
+   "within": false
+  },
+  {
+   "account": "sum_across_three",
+   "name": "overshoot_allows",
+   "overshoot": {
+    "cl-00000000000000a1/0": 2000000000000000000
+   },
+   "where": [],
+   "within": true
+  },
+  {
+   "account": "sum_across_three",
+   "name": "overshoot_one_short",
+   "overshoot": {
+    "cl-00000000000000a1/0": 1999999999999999999
+   },
+   "where": [
+    "q3"
+   ],
+   "within": false
+  }
+ ],
+ "kit_units": {
+  "amount": "10^-18 of the currency",
+  "count": "effects"
+ },
+ "note": "written by make_vectors.py; every expected answer by hand",
+ "quantity": [
+  {
+   "expected": 1000000000000000000,
+   "limit": {
+    "currency": "EUR",
+    "kind": "amount",
+    "minor_units": 2,
+    "value": 1000
+   },
+   "values": {
+    "amount": {
+     "currency": "EUR",
+     "minor_units": 2,
+     "value": 100
+    }
+   }
+  },
+  {
+   "expected": 1000000000000000000,
+   "limit": {
+    "currency": "EUR",
+    "kind": "amount",
+    "minor_units": 2,
+    "value": 1000
+   },
+   "values": {
+    "amount": {
+     "currency": "EUR",
+     "minor_units": 0,
+     "value": 1
+    }
+   }
+  },
+  {
+   "expected": 5000000000000000,
+   "limit": {
+    "currency": "EUR",
+    "kind": "amount",
+    "minor_units": 2,
+    "value": 1000
+   },
+   "values": {
+    "amount": {
+     "currency": "EUR",
+     "minor_units": 3,
+     "value": 5
+    }
+   }
+  },
+  {
+   "expected": null,
+   "limit": {
+    "currency": "EUR",
+    "kind": "amount",
+    "minor_units": 2,
+    "value": 1000
+   },
+   "values": {
+    "amount": {
+     "currency": "USD",
+     "minor_units": 2,
+     "value": 100
+    }
+   }
+  },
+  {
+   "expected": null,
+   "limit": {
+    "currency": "EUR",
+    "kind": "amount",
+    "minor_units": 2,
+    "value": 1000
+   },
+   "values": {
+    "amount": {
+     "currency": "EUR",
+     "minor_units": 2,
+     "value": 1.5
+    }
+   }
+  },
+  {
+   "expected": null,
+   "limit": {
+    "currency": "EUR",
+    "kind": "amount",
+    "minor_units": 2,
+    "value": 1000
+   },
+   "values": {
+    "amount": {
+     "currency": "EUR",
+     "minor_units": 2,
+     "value": "100"
+    }
+   }
+  },
+  {
+   "expected": null,
+   "limit": {
+    "currency": "EUR",
+    "kind": "amount",
+    "minor_units": 2,
+    "value": 1000
+   },
+   "values": {
+    "amount": {
+     "currency": "EUR",
+     "minor_units": 2,
+     "value": 9007199254740992
+    }
+   }
+  },
+  {
+   "expected": 90071992547409910000000000000000,
+   "limit": {
+    "currency": "EUR",
+    "kind": "amount",
+    "minor_units": 2,
+    "value": 1000
+   },
+   "values": {
+    "amount": {
+     "currency": "EUR",
+     "minor_units": 2,
+     "value": 9007199254740991
+    }
+   }
+  },
+  {
+   "expected": -500000000000000000,
+   "limit": {
+    "currency": "EUR",
+    "kind": "amount",
+    "minor_units": 2,
+    "value": 1000
+   },
+   "values": {
+    "amount": {
+     "currency": "EUR",
+     "minor_units": 2,
+     "value": -50
+    }
+   }
+  },
+  {
+   "expected": 1,
+   "limit": {
+    "kind": "count",
+    "unit": "message",
+    "value": 3
+   },
+   "values": {
+    "amount": {
+     "currency": "EUR",
+     "minor_units": 2,
+     "value": 100
+    }
+   }
+  },
+  {
+   "expected": 2,
+   "limit": {
+    "kind": "count",
+    "unit": "message",
+    "value": 3
+   },
+   "values": {
+    "amount": {
+     "currency": "EUR",
+     "minor_units": 2,
+     "value": 100
+    },
+    "count": {
+     "unit": "message",
+     "value": 2
+    }
+   }
+  },
+  {
+   "expected": null,
+   "limit": {
+    "kind": "count",
+    "unit": "message",
+    "value": 3
+   },
+   "values": {
+    "amount": {
+     "currency": "EUR",
+     "minor_units": 2,
+     "value": 100
+    },
+    "count": {
+     "unit": "recipient",
+     "value": 1
+    }
+   }
+  },
+  {
+   "expected": null,
+   "limit": {
+    "currency": "EUR",
+    "kind": "amount",
+    "minor_units": 2,
+    "value": 1000
+   },
+   "values": {}
+  },
+  {
+   "expected": null,
+   "limit": {
+    "currency": "EUR",
+    "kind": "amount",
+    "minor_units": 2,
+    "value": 1000
+   },
+   "values": {
+    "amount": {
+     "currency": "EUR",
+     "minor_units": 2,
+     "value": true
+    }
+   }
+  }
+ ],
+ "windows": [
+  {
+   "anchor_kit": 1000.0,
+   "charges": [
+    [
+     1018.0,
+     800
+    ],
+    [
+     1022.0,
+     800
+    ]
+   ],
+   "commit_lag_s": 0.0,
+   "limit_cents": 1000,
+   "name": "boundary_pair_split",
+   "passes": true,
+   "tolerance_s": 1.0,
+   "window": {
+    "anchor_ms": 0,
+    "kind": "fixed",
+    "period_s": 20
+   }
+  },
+  {
+   "anchor_kit": 1000.0,
+   "charges": [
+    [
+     1002.0,
+     800
+    ],
+    [
+     1003.0,
+     300
+    ]
+   ],
+   "commit_lag_s": 0.0,
+   "limit_cents": 1000,
+   "name": "one_window_over",
+   "passes": false,
+   "tolerance_s": 1.0,
+   "window": {
+    "anchor_ms": 0,
+    "kind": "fixed",
+    "period_s": 20
+   }
+  },
+  {
+   "anchor_kit": 1000.0,
+   "charges": [
+    [
+     1019.5,
+     800
+    ],
+    [
+     1020.5,
+     800
+    ]
+   ],
+   "commit_lag_s": 0.0,
+   "limit_cents": 1000,
+   "name": "within_tolerance_either_side",
+   "passes": true,
+   "tolerance_s": 1.0,
+   "window": {
+    "anchor_ms": 0,
+    "kind": "fixed",
+    "period_s": 20
+   }
+  },
+  {
+   "anchor_kit": 1000.0,
+   "charges": [
+    [
+     1019.5,
+     600
+    ],
+    [
+     1020.2,
+     600
+    ],
+    [
+     1020.7,
+     600
+    ]
+   ],
+   "commit_lag_s": 0.0,
+   "limit_cents": 1000,
+   "name": "tolerance_cannot_split_three",
+   "passes": false,
+   "tolerance_s": 1.0,
+   "window": {
+    "anchor_ms": 0,
+    "kind": "fixed",
+    "period_s": 20
+   }
+  },
+  {
+   "anchor_kit": 1000.0,
+   "charges": [
+    [
+     1020.0,
+     800
+    ],
+    [
+     1023.0,
+     300
+    ]
+   ],
+   "commit_lag_s": 0.0,
+   "limit_cents": 1000,
+   "name": "on_the_boundary",
+   "passes": false,
+   "tolerance_s": 0.0,
+   "window": {
+    "anchor_ms": 0,
+    "kind": "fixed",
+    "period_s": 20
+   }
+  },
+  {
+   "anchor_kit": 1000.0,
+   "charges": [
+    [
+     1017.0,
+     800
+    ],
+    [
+     1020.0,
+     300
+    ]
+   ],
+   "commit_lag_s": 0.0,
+   "limit_cents": 1000,
+   "name": "on_the_boundary_other_side",
+   "passes": true,
+   "tolerance_s": 0.0,
+   "window": {
+    "anchor_ms": 0,
+    "kind": "fixed",
+    "period_s": 20
+   }
+  },
+  {
+   "anchor_kit": 1000.0,
+   "charges": [
+    [
+     1008.0,
+     800
+    ],
+    [
+     1012.0,
+     800
+    ]
+   ],
+   "commit_lag_s": 0.0,
+   "limit_cents": 1000,
+   "name": "skew_beyond_tolerance",
+   "passes": false,
+   "tolerance_s": 1.0,
+   "window": {
+    "anchor_ms": 0,
+    "kind": "fixed",
+    "period_s": 20
+   }
+  },
+  {
+   "anchor_kit": 1000.0,
+   "charges": [
+    [
+     1018.0,
+     900
+    ],
+    [
+     1022.0,
+     900
+    ]
+   ],
+   "commit_lag_s": 0.0,
+   "limit_cents": 1000,
+   "name": "rolling_two_in_period",
+   "passes": false,
+   "tolerance_s": 1.0,
+   "window": {
+    "kind": "rolling",
+    "period_s": 20
+   }
+  },
+  {
+   "anchor_kit": 1000.0,
+   "charges": [
+    [
+     1001.0,
+     900
+    ],
+    [
+     1021.0,
+     900
+    ]
+   ],
+   "commit_lag_s": 0.0,
+   "limit_cents": 1000,
+   "name": "rolling_apart",
+   "passes": true,
+   "tolerance_s": 1.0,
+   "window": {
+    "kind": "rolling",
+    "period_s": 20
+   }
+  },
+  {
+   "anchor_kit": 1000.0,
+   "charges": [
+    [
+     1001.0,
+     900
+    ],
+    [
+     1019.5,
+     900
+    ]
+   ],
+   "commit_lag_s": 0.0,
+   "limit_cents": 1000,
+   "name": "rolling_tolerances_shrink",
+   "passes": true,
+   "tolerance_s": 1.0,
+   "window": {
+    "kind": "rolling",
+    "period_s": 20
+   }
+  },
+  {
+   "anchor_kit": 1000.0,
+   "charges": [
+    [
+     1001.0,
+     900
+    ],
+    [
+     1017.5,
+     900
+    ]
+   ],
+   "commit_lag_s": 1.0,
+   "limit_cents": 1000,
+   "name": "rolling_with_lag",
+   "passes": true,
+   "tolerance_s": 1.0,
+   "window": {
+    "kind": "rolling",
+    "period_s": 20
+   }
+  },
+  {
+   "anchor_kit": 1000.0,
+   "charges": [
+    [
+     1001.0,
+     900
+    ],
+    [
+     1014.0,
+     900
+    ]
+   ],
+   "commit_lag_s": 1.0,
+   "limit_cents": 1000,
+   "name": "rolling_with_lag_inside",
+   "passes": false,
+   "tolerance_s": 1.0,
+   "window": {
+    "kind": "rolling",
+    "period_s": 20
+   }
+  }
+ ]
+}

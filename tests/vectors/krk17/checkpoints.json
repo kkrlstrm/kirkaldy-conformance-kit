@@ -1,0 +1,644 @@
+{
+ "covers": [
+  {
+   "breaks": [],
+   "claims": {
+    "head": "sha256:ed1708d0343c7506586e9da0876c09c7a1871a1e65af190ff493887d0b857677",
+    "issued_at": "2026-11-01T13:02:12Z",
+    "issuer": "did:web:b.example",
+    "pair_seq": 3,
+    "peer": "did:web:a.example",
+    "schema": "kirkaldy.checkpoint/0.1"
+   },
+   "entries": [
+    {
+     "answers": null,
+     "body": {
+      "container": "people",
+      "count": 4,
+      "expected_effect_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "items_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "operation": "crm.record.push"
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "request-received",
+     "pair_seq": 1,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": null,
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    },
+    {
+     "answers": null,
+     "body": {
+      "created": 4,
+      "deleted": 0,
+      "failed": 0,
+      "items_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "log_seq": 40177,
+      "updated": 0
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "effect-committed",
+     "pair_seq": 2,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": "sha256:4851cf54dbb7bcbf5624632ae3e2fa82adb0f158a8e5fe967989f48249e4174b",
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    },
+    {
+     "answers": null,
+     "body": {
+      "log_seq": 40177,
+      "outcome": {
+       "created": 4,
+       "deleted": 0,
+       "failed": 0,
+       "updated": 0
+      },
+      "receipt_id": "rcpt-0000000000000001",
+      "token_sha256": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "verdict": "executed"
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "receipt-issued",
+     "pair_seq": 3,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": "sha256:aa77b085f686d7ea2f88545b65e129610e8e7a4e6859970f46f692fb94085b0c",
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    },
+    {
+     "answers": null,
+     "body": {
+      "created": 0,
+      "deleted": 0,
+      "failed": 0,
+      "items_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "log_seq": 40180,
+      "updated": 2
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "effect-committed",
+     "pair_seq": 4,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": "sha256:ed1708d0343c7506586e9da0876c09c7a1871a1e65af190ff493887d0b857677",
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    }
+   ],
+   "name": "reaches"
+  },
+  {
+   "breaks": [],
+   "claims": {
+    "head": "sha256:ed1708d0343c7506586e9da0876c09c7a1871a1e65af190ff493887d0b857677",
+    "issued_at": "2026-11-01T13:02:12Z",
+    "issuer": "did:web:b.example",
+    "pair_seq": 3,
+    "peer": "did:web:a.example",
+    "schema": "kirkaldy.checkpoint/0.1"
+   },
+   "entries": [
+    {
+     "answers": null,
+     "body": {
+      "container": "people",
+      "count": 4,
+      "expected_effect_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "items_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "operation": "crm.record.push"
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "request-received",
+     "pair_seq": 1,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": null,
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    },
+    {
+     "answers": null,
+     "body": {
+      "created": 4,
+      "deleted": 0,
+      "failed": 0,
+      "items_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "log_seq": 40177,
+      "updated": 0
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "effect-committed",
+     "pair_seq": 2,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": "sha256:4851cf54dbb7bcbf5624632ae3e2fa82adb0f158a8e5fe967989f48249e4174b",
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    },
+    {
+     "answers": null,
+     "body": {
+      "log_seq": 40177,
+      "outcome": {
+       "created": 4,
+       "deleted": 0,
+       "failed": 0,
+       "updated": 0
+      },
+      "receipt_id": "rcpt-0000000000000001",
+      "token_sha256": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "verdict": "executed"
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "receipt-issued",
+     "pair_seq": 3,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": "sha256:aa77b085f686d7ea2f88545b65e129610e8e7a4e6859970f46f692fb94085b0c",
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    },
+    {
+     "answers": null,
+     "body": {
+      "created": 0,
+      "deleted": 0,
+      "failed": 0,
+      "items_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "log_seq": 40180,
+      "updated": 2
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "effect-committed",
+     "pair_seq": 4,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": "sha256:ed1708d0343c7506586e9da0876c09c7a1871a1e65af190ff493887d0b857677",
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    },
+    {
+     "answers": null,
+     "body": {
+      "log_seq": 40177,
+      "outcome": {
+       "created": 4,
+       "deleted": 0,
+       "failed": 0,
+       "updated": 0
+      },
+      "receipt_id": "rcpt-0000000000000001",
+      "token_sha256": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "verdict": "executed"
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "receipt-issued",
+     "pair_seq": 5,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": "sha256:7e206eafd410aa628ec45d96f47c0e0cbb9b678e5b1790c4790b194046db80ba",
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    }
+   ],
+   "name": "later-entries-are-fine"
+  },
+  {
+   "breaks": [
+    {
+     "kind": "changed-after-ack",
+     "numbers": [
+      3
+     ]
+    }
+   ],
+   "claims": {
+    "head": "sha256:ed1708d0343c7506586e9da0876c09c7a1871a1e65af190ff493887d0b857677",
+    "issued_at": "2026-11-01T13:02:12Z",
+    "issuer": "did:web:b.example",
+    "pair_seq": 3,
+    "peer": "did:web:a.example",
+    "schema": "kirkaldy.checkpoint/0.1"
+   },
+   "entries": [
+    {
+     "answers": null,
+     "body": {
+      "container": "people",
+      "count": 4,
+      "expected_effect_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "items_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "operation": "crm.record.push"
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "request-received",
+     "pair_seq": 1,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": null,
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    },
+    {
+     "answers": null,
+     "body": {
+      "created": 3,
+      "deleted": 0,
+      "failed": 0,
+      "items_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "log_seq": 40177,
+      "updated": 0
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "effect-committed",
+     "pair_seq": 2,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": "sha256:4851cf54dbb7bcbf5624632ae3e2fa82adb0f158a8e5fe967989f48249e4174b",
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    },
+    {
+     "answers": null,
+     "body": {
+      "log_seq": 40177,
+      "outcome": {
+       "created": 4,
+       "deleted": 0,
+       "failed": 0,
+       "updated": 0
+      },
+      "receipt_id": "rcpt-0000000000000001",
+      "token_sha256": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "verdict": "executed"
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "receipt-issued",
+     "pair_seq": 3,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": "sha256:3a51cdcb385d624b0b55542dda31b9019facb1d835a53f9257642a5f22bb085e",
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    },
+    {
+     "answers": null,
+     "body": {
+      "created": 0,
+      "deleted": 0,
+      "failed": 0,
+      "items_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "log_seq": 40180,
+      "updated": 2
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "effect-committed",
+     "pair_seq": 4,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": "sha256:a3ad2bb1c11227fe43aaa2aac14cd6ff7f4784e23ad4e9669b7177f7791a200c",
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    }
+   ],
+   "name": "edited-and-relinked"
+  },
+  {
+   "breaks": [
+    {
+     "kind": "changed-after-ack",
+     "numbers": [
+      2,
+      3
+     ]
+    }
+   ],
+   "claims": {
+    "head": "sha256:ed1708d0343c7506586e9da0876c09c7a1871a1e65af190ff493887d0b857677",
+    "issued_at": "2026-11-01T13:02:12Z",
+    "issuer": "did:web:b.example",
+    "pair_seq": 3,
+    "peer": "did:web:a.example",
+    "schema": "kirkaldy.checkpoint/0.1"
+   },
+   "entries": [
+    {
+     "answers": null,
+     "body": {
+      "container": "people",
+      "count": 4,
+      "expected_effect_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "items_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "operation": "crm.record.push"
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "request-received",
+     "pair_seq": 1,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": null,
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    },
+    {
+     "answers": null,
+     "body": {
+      "created": 3,
+      "deleted": 0,
+      "failed": 0,
+      "items_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "log_seq": 40177,
+      "updated": 0
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "effect-committed",
+     "pair_seq": 2,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": "sha256:4851cf54dbb7bcbf5624632ae3e2fa82adb0f158a8e5fe967989f48249e4174b",
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    },
+    {
+     "answers": null,
+     "body": {
+      "log_seq": 40177,
+      "outcome": {
+       "created": 4,
+       "deleted": 0,
+       "failed": 0,
+       "updated": 0
+      },
+      "receipt_id": "rcpt-0000000000000001",
+      "token_sha256": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "verdict": "executed"
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "receipt-issued",
+     "pair_seq": 3,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": "sha256:aa77b085f686d7ea2f88545b65e129610e8e7a4e6859970f46f692fb94085b0c",
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    },
+    {
+     "answers": null,
+     "body": {
+      "created": 0,
+      "deleted": 0,
+      "failed": 0,
+      "items_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "log_seq": 40180,
+      "updated": 2
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "effect-committed",
+     "pair_seq": 4,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": "sha256:ed1708d0343c7506586e9da0876c09c7a1871a1e65af190ff493887d0b857677",
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    }
+   ],
+   "name": "edited-not-relinked"
+  },
+  {
+   "breaks": [
+    {
+     "kind": "removed-after-ack",
+     "numbers": [
+      2
+     ]
+    }
+   ],
+   "claims": {
+    "head": "sha256:ed1708d0343c7506586e9da0876c09c7a1871a1e65af190ff493887d0b857677",
+    "issued_at": "2026-11-01T13:02:12Z",
+    "issuer": "did:web:b.example",
+    "pair_seq": 3,
+    "peer": "did:web:a.example",
+    "schema": "kirkaldy.checkpoint/0.1"
+   },
+   "entries": [
+    {
+     "answers": null,
+     "body": {
+      "container": "people",
+      "count": 4,
+      "expected_effect_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "items_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "operation": "crm.record.push"
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "request-received",
+     "pair_seq": 1,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": null,
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    },
+    {
+     "answers": null,
+     "body": {
+      "log_seq": 40177,
+      "outcome": {
+       "created": 4,
+       "deleted": 0,
+       "failed": 0,
+       "updated": 0
+      },
+      "receipt_id": "rcpt-0000000000000001",
+      "token_sha256": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "verdict": "executed"
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "receipt-issued",
+     "pair_seq": 3,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": "sha256:aa77b085f686d7ea2f88545b65e129610e8e7a4e6859970f46f692fb94085b0c",
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    },
+    {
+     "answers": null,
+     "body": {
+      "created": 0,
+      "deleted": 0,
+      "failed": 0,
+      "items_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "log_seq": 40180,
+      "updated": 2
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "effect-committed",
+     "pair_seq": 4,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": "sha256:ed1708d0343c7506586e9da0876c09c7a1871a1e65af190ff493887d0b857677",
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    }
+   ],
+   "name": "removed"
+  },
+  {
+   "breaks": [
+    {
+     "kind": "removed-after-ack",
+     "numbers": [
+      2
+     ]
+    },
+    {
+     "kind": "removed-after-ack",
+     "numbers": [
+      3
+     ]
+    }
+   ],
+   "claims": {
+    "head": "sha256:ed1708d0343c7506586e9da0876c09c7a1871a1e65af190ff493887d0b857677",
+    "issued_at": "2026-11-01T13:02:12Z",
+    "issuer": "did:web:b.example",
+    "pair_seq": 3,
+    "peer": "did:web:a.example",
+    "schema": "kirkaldy.checkpoint/0.1"
+   },
+   "entries": [
+    {
+     "answers": null,
+     "body": {
+      "container": "people",
+      "count": 4,
+      "expected_effect_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "items_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "operation": "crm.record.push"
+     },
+     "correlation_id": "case-17:9f2c41d07a3b6e55",
+     "kind": "request-received",
+     "pair_seq": 1,
+     "party": "did:web:b.example",
+     "peer": "did:web:a.example",
+     "prev_digest": null,
+     "raw_sha256": null,
+     "recorded_at": "2026-11-01T13:02:11Z",
+     "request_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+     "schema": "kirkaldy.record-entry/0.1",
+     "side": "B"
+    }
+   ],
+   "name": "truncated"
+  }
+ ],
+ "pinned": {
+  "b-checkpoints-2026-11": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+ },
+ "verify": [
+  {
+   "name": "honest",
+   "ok": true,
+   "reason": null,
+   "token": "eyJhbGciOiJFZERTQSIsImtpZCI6ImItY2hlY2twb2ludHMtMjAyNi0xMSIsInR5cCI6Imtyay1jaGVja3BvaW50K2p3cyJ9.eyJoZWFkIjoic2hhMjU2OmVkMTcwOGQwMzQzYzc1MDY1ODZlOWRhMDg3NmMwOWM3YTE4NzFhMWU2NWFmMTkwZmY0OTM4ODdkMGI4NTc2NzciLCJpc3N1ZWRfYXQiOiIyMDI2LTExLTAxVDEzOjAyOjEyWiIsImlzc3VlciI6ImRpZDp3ZWI6Yi5leGFtcGxlIiwicGFpcl9zZXEiOjMsInBlZXIiOiJkaWQ6d2ViOmEuZXhhbXBsZSIsInNjaGVtYSI6ImtpcmthbGR5LmNoZWNrcG9pbnQvMC4xIn0.sBRHdsrp21vxAO1iEa2l6b77EyNi5_ENp0EwAVR2dhgyJ67qbMz-4s0_RL7DcEr0HVBIeBE1dJGIoY0KbMQCCg"
+  },
+  {
+   "name": "unsigned",
+   "ok": false,
+   "reason": "unsigned",
+   "token": "eyJhbGciOiJub25lIiwidHlwIjoia3JrLWNoZWNrcG9pbnQrandzIn0.eyJoZWFkIjoic2hhMjU2OmVkMTcwOGQwMzQzYzc1MDY1ODZlOWRhMDg3NmMwOWM3YTE4NzFhMWU2NWFmMTkwZmY0OTM4ODdkMGI4NTc2NzciLCJpc3N1ZWRfYXQiOiIyMDI2LTExLTAxVDEzOjAyOjEyWiIsImlzc3VlciI6ImRpZDp3ZWI6Yi5leGFtcGxlIiwicGFpcl9zZXEiOjMsInBlZXIiOiJkaWQ6d2ViOmEuZXhhbXBsZSIsInNjaGVtYSI6ImtpcmthbGR5LmNoZWNrcG9pbnQvMC4xIn0."
+  },
+  {
+   "name": "unpinned-key",
+   "ok": false,
+   "reason": "unpinned-key",
+   "token": "eyJhbGciOiJFZERTQSIsImtpZCI6ImItY2hlY2twb2ludHMtdW5waW5uZWQiLCJ0eXAiOiJrcmstY2hlY2twb2ludCtqd3MifQ.eyJoZWFkIjoic2hhMjU2OmVkMTcwOGQwMzQzYzc1MDY1ODZlOWRhMDg3NmMwOWM3YTE4NzFhMWU2NWFmMTkwZmY0OTM4ODdkMGI4NTc2NzciLCJpc3N1ZWRfYXQiOiIyMDI2LTExLTAxVDEzOjAyOjEyWiIsImlzc3VlciI6ImRpZDp3ZWI6Yi5leGFtcGxlIiwicGFpcl9zZXEiOjMsInBlZXIiOiJkaWQ6d2ViOmEuZXhhbXBsZSIsInNjaGVtYSI6ImtpcmthbGR5LmNoZWNrcG9pbnQvMC4xIn0.FFG8FreBZ6zSUbz3swHO8Ujm5JBqsZBsFI2wetIk2ZbUkShXHYHG2tvAOP9xKvTN1uXFVm1q7tdrlTj-tFSdDQ"
+  },
+  {
+   "name": "other-key-under-b-kid",
+   "ok": false,
+   "reason": "bad-signature",
+   "token": "eyJhbGciOiJFZERTQSIsImtpZCI6ImItY2hlY2twb2ludHMtMjAyNi0xMSIsInR5cCI6Imtyay1jaGVja3BvaW50K2p3cyJ9.eyJoZWFkIjoic2hhMjU2OmVkMTcwOGQwMzQzYzc1MDY1ODZlOWRhMDg3NmMwOWM3YTE4NzFhMWU2NWFmMTkwZmY0OTM4ODdkMGI4NTc2NzciLCJpc3N1ZWRfYXQiOiIyMDI2LTExLTAxVDEzOjAyOjEyWiIsImlzc3VlciI6ImRpZDp3ZWI6Yi5leGFtcGxlIiwicGFpcl9zZXEiOjMsInBlZXIiOiJkaWQ6d2ViOmEuZXhhbXBsZSIsInNjaGVtYSI6ImtpcmthbGR5LmNoZWNrcG9pbnQvMC4xIn0.fPyjeH4jiBd_ObOZ4hAMjdgeLkwgteoJJrgoEM0SZhsibiRz_Ry8W939I0mgmmlE3itdy9XRDPQIH6f6KTvGBA"
+  },
+  {
+   "name": "receipt-typ",
+   "ok": false,
+   "reason": "malformed",
+   "token": "eyJhbGciOiJFZERTQSIsImtpZCI6ImItY2hlY2twb2ludHMtMjAyNi0xMSIsInR5cCI6Imtyay1yZWNlaXB0K2p3cyJ9.eyJoZWFkIjoic2hhMjU2OmVkMTcwOGQwMzQzYzc1MDY1ODZlOWRhMDg3NmMwOWM3YTE4NzFhMWU2NWFmMTkwZmY0OTM4ODdkMGI4NTc2NzciLCJpc3N1ZWRfYXQiOiIyMDI2LTExLTAxVDEzOjAyOjEyWiIsImlzc3VlciI6ImRpZDp3ZWI6Yi5leGFtcGxlIiwicGFpcl9zZXEiOjMsInBlZXIiOiJkaWQ6d2ViOmEuZXhhbXBsZSIsInNjaGVtYSI6ImtpcmthbGR5LmNoZWNrcG9pbnQvMC4xIn0.uxGzb-upexF2ouLPixNDgB2dqRR0yYUyjAjB-_Ppi5RiYD3cdLIMaCfpmh5H41BI1fpjtDPZZkuwkPTVZj72Bw"
+  },
+  {
+   "name": "missing-member",
+   "ok": false,
+   "reason": "malformed",
+   "token": "eyJhbGciOiJFZERTQSIsImtpZCI6ImItY2hlY2twb2ludHMtMjAyNi0xMSIsInR5cCI6Imtyay1jaGVja3BvaW50K2p3cyJ9.eyJoZWFkIjoic2hhMjU2OmVkMTcwOGQwMzQzYzc1MDY1ODZlOWRhMDg3NmMwOWM3YTE4NzFhMWU2NWFmMTkwZmY0OTM4ODdkMGI4NTc2NzciLCJpc3N1ZXIiOiJkaWQ6d2ViOmIuZXhhbXBsZSIsInBhaXJfc2VxIjozLCJwZWVyIjoiZGlkOndlYjphLmV4YW1wbGUiLCJzY2hlbWEiOiJraXJrYWxkeS5jaGVja3BvaW50LzAuMSJ9.yO8xgUfXPNZHcclCPpP8sr-EtdQVq6e_kkLY3pANlltfNtTBrgRcLuuNvwo3aGidM5n1GE9IxhxNLC30F3krBA"
+  }
+ ]
+}

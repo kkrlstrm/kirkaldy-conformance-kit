@@ -1,0 +1,100 @@
+{
+  "_about": "Hand-written vectors for conformance/terms.py (KRK-24, X2 design section 2.4; KRK-M152). Every expected answer was written from the design's table, not read off the code. fill: null means an exact fill; otherwise the reason. Item ids are bare strings here; the test turns them into {id, quantity}.",
+  "fill": [
+    {"name": "exact, one slot", "items": [["a1", 2]], "slots": [["s1", ["a1", "a2"], 2]], "expected": null},
+    {"name": "exact, two slots", "items": [["a1", 1], ["b2", 3]], "slots": [["s1", ["a1"], 1], ["s2", ["b1", "b2"], 3]], "expected": null},
+    {"name": "exact only by the right assignment (a greedy reader puts x in s1)", "items": [["x", 1], ["y", 1]], "slots": [["s1", ["x", "y"], 1], ["s2", ["x"], 1]], "expected": null},
+    {"name": "two units of one item across two slots", "items": [["x", 2]], "slots": [["s1", ["x"], 1], ["s2", ["x"], 1]], "expected": null},
+    {"name": "partial: a slot left empty", "items": [["a1", 1]], "slots": [["s1", ["a1"], 1], ["s2", ["b1"], 1]], "expected": "less"},
+    {"name": "under_quantity", "items": [["a1", 1]], "slots": [["s1", ["a1"], 2]], "expected": "less"},
+    {"name": "extra_item: every slot filled and one more", "items": [["a1", 1], ["z", 1]], "slots": [["s1", ["a1"], 1]], "expected": "more"},
+    {"name": "over_quantity", "items": [["a1", 3]], "slots": [["s1", ["a1"], 2]], "expected": "more"},
+    {"name": "not_acceptable: s1 filled from s2's list, counts unchanged", "items": [["b1", 2]], "slots": [["s1", ["a1"], 1], ["s2", ["b1"], 1]], "expected": "other"},
+    {"name": "item_reused: one unit cannot count for two slots", "items": [["x", 1]], "slots": [["s1", ["x", "a1"], 1], ["s2", ["x", "b1"], 1]], "expected": "less"},
+    {"name": "empty_slot: an empty list admits no item", "items": [["a1", 1], ["z", 1]], "slots": [["s1", ["a1"], 1], ["e", [], 1]], "expected": "other"},
+    {"name": "no slots, no items", "items": [], "slots": [], "expected": null},
+    {"name": "no slots, one item", "items": [["z", 1]], "slots": [], "expected": "more"}
+  ],
+  "fill_unreadable": [
+    {"name": "quantity zero", "items": [{"id": "a1", "quantity": 0}]},
+    {"name": "no id", "items": [{"sku": "a1", "quantity": 1}]},
+    {"name": "quantity as a string", "items": [{"id": "a1", "quantity": "1"}]},
+    {"name": "not a list", "items": {"id": "a1", "quantity": 1}}
+  ],
+  "purpose": {
+    "map": {"research": {"operations": ["read"], "resources": ["ds-1/*"]},
+            "research-admin": {"operations": ["read", "delete"], "resources": ["ds-1/*"]},
+            "anything": {"operations": ["read", "delete"]}},
+    "cases": [
+      {"code": "research", "operation": "read", "resources": ["ds-1/r1"], "expected": true},
+      {"code": "research", "operation": "delete", "resources": ["ds-1/r1"], "expected": false},
+      {"code": "research-admin", "operation": "delete", "resources": ["ds-1/r1"], "expected": true},
+      {"code": "research admin", "operation": "delete", "resources": ["ds-1/r1"], "expected": false},
+      {"code": "Research-Admin", "operation": "delete", "resources": ["ds-1/r1"], "expected": false},
+      {"code": "research_admin", "operation": "delete", "resources": ["ds-1/r1"], "expected": false},
+      {"code": "research", "operation": "read", "resources": ["ds-2/r1"], "expected": false},
+      {"code": "research", "operation": "read", "resources": ["ds-1/r1", "ds-2/r1"], "expected": false},
+      {"code": "anything", "operation": "delete", "resources": ["ds-9/r1"], "expected": true},
+      {"code": "x-krk-unknown", "operation": "read", "resources": ["ds-1/r1"], "expected": false},
+      {"code": "", "operation": "read", "resources": ["ds-1/r1"], "expected": false}
+    ]
+  },
+  "fixed": [
+    {"name": "equal", "request": {"payee": "m-1"}, "fixed": {"payee": "m-1"}, "expected": null},
+    {"name": "differs", "request": {"payee": "m-2"}, "fixed": {"payee": "m-1"}, "expected": "other"},
+    {"name": "absent is not equal", "request": {}, "fixed": {"payee": "m-1"}, "expected": "other"},
+    {"name": "null is not absent and not equal", "request": {"payee": null}, "fixed": {"payee": "m-1"}, "expected": "other"},
+    {"name": "case differs", "request": {"payee": "CAFÉ 1"}, "fixed": {"payee": "Café 1"}, "expected": "other"},
+    {"name": "composition differs (NFD against NFC)", "request": {"payee": "Café 1"}, "fixed": {"payee": "Café 1"}, "expected": "other"},
+    {"name": "trailing space", "request": {"payee": "m-1 "}, "fixed": {"payee": "m-1"}, "expected": "other"},
+    {"name": "amount lower", "request": {"amount": {"value": 14000, "currency": "EUR", "minor_units": 2}}, "fixed": {"amount": {"value": 15000, "currency": "EUR", "minor_units": 2}}, "expected": "less"},
+    {"name": "amount higher", "request": {"amount": {"value": 16000, "currency": "EUR", "minor_units": 2}}, "fixed": {"amount": {"value": 15000, "currency": "EUR", "minor_units": 2}}, "expected": "more"},
+    {"name": "amount equal in value, written in other minor units, is not byte-equal", "request": {"amount": {"value": 1500, "currency": "EUR", "minor_units": 1}}, "fixed": {"amount": {"value": 15000, "currency": "EUR", "minor_units": 2}}, "expected": "other"},
+    {"name": "amount equal", "request": {"amount": {"value": 15000, "currency": "EUR", "minor_units": 2}}, "fixed": {"amount": {"value": 15000, "currency": "EUR", "minor_units": 2}}, "expected": null},
+    {"name": "amount in another currency", "request": {"amount": {"value": 15000, "currency": "USD", "minor_units": 2}}, "fixed": {"amount": {"value": 15000, "currency": "EUR", "minor_units": 2}}, "expected": "other"},
+    {"name": "a member beyond payee and amount", "request": {"instrument": "card-2", "payee": "m-1"}, "fixed": {"instrument": "card-1"}, "expected": "other"},
+    {"name": "a list compared whole", "request": {"tags": ["b", "a"]}, "fixed": {"tags": ["a", "b"]}, "expected": "other"}
+  ],
+  "floor": [
+    {"name": "equal", "request": {"amount": {"value": 1000, "currency": "EUR", "minor_units": 2}}, "floor": {"amount": {"value": 1000, "currency": "EUR", "minor_units": 2}}, "expected": null},
+    {"name": "one below", "request": {"amount": {"value": 999, "currency": "EUR", "minor_units": 2}}, "floor": {"amount": {"value": 1000, "currency": "EUR", "minor_units": 2}}, "expected": "less"},
+    {"name": "above, other minor units", "request": {"amount": {"value": 101, "currency": "EUR", "minor_units": 1}}, "floor": {"amount": {"value": 1000, "currency": "EUR", "minor_units": 2}}, "expected": null},
+    {"name": "below, other minor units", "request": {"amount": {"value": 99, "currency": "EUR", "minor_units": 1}}, "floor": {"amount": {"value": 1000, "currency": "EUR", "minor_units": 2}}, "expected": "less"},
+    {"name": "another currency cannot be compared", "request": {"amount": {"value": 5000, "currency": "USD", "minor_units": 2}}, "floor": {"amount": {"value": 1000, "currency": "EUR", "minor_units": 2}}, "expected": "unreadable"},
+    {"name": "absent cannot be compared", "request": {}, "floor": {"amount": {"value": 1000, "currency": "EUR", "minor_units": 2}}, "expected": "unreadable"}
+  ],
+  "terms_problem": [
+    {"name": "every kind, well formed", "terms": {"goal_id": "gl-0123456789abcdef", "purpose": {"code": "research"}, "slots": [{"slot": "s1", "acceptable": ["a1"], "quantity": 1}], "fixed": {"payee": "m-1"}, "floor": {"amount": {"value": 1, "currency": "EUR", "minor_units": 2}}, "serves": "gl-fedcba9876543210", "confirm": {"operations": ["op"], "by": "principal"}, "text": "t"}, "expected": null},
+    {"name": "empty terms", "terms": {}, "expected": null},
+    {"name": "an unknown term", "terms": {"x-krk-1": {"limit": 0}}, "expected": "unknown-term"},
+    {"name": "a near name", "terms": {"fixed": {"payee": "m-1"}, "Fixed": {"payee": "m-2"}}, "expected": "unknown-term"},
+    {"name": "an unknown member in a slot", "terms": {"slots": [{"slot": "s1", "acceptable": ["a1"], "quantity": 1, "x-krk-colour": "red"}]}, "expected": "unknown-term"},
+    {"name": "an unknown member in purpose", "terms": {"purpose": {"code": "r", "scope": "all"}}, "expected": "unknown-term"},
+    {"name": "an unknown member in confirm", "terms": {"confirm": {"operations": ["op"], "by": "principal", "within_s": 60}}, "expected": "unknown-term"},
+    {"name": "an empty acceptable list is well formed (it admits nothing)", "terms": {"slots": [{"slot": "e", "acceptable": [], "quantity": 1}]}, "expected": null},
+    {"name": "quantity zero", "terms": {"slots": [{"slot": "s1", "acceptable": ["a1"], "quantity": 0}]}, "expected": "malformed-term"},
+    {"name": "a slot named twice", "terms": {"slots": [{"slot": "s1", "acceptable": ["a1"], "quantity": 1}, {"slot": "s1", "acceptable": ["a2"], "quantity": 1}]}, "expected": "malformed-term"},
+    {"name": "empty fixed", "terms": {"fixed": {}}, "expected": "malformed-term"},
+    {"name": "a floor that is not an amount", "terms": {"floor": {"amount": 1000}}, "expected": "malformed-term"},
+    {"name": "a goal id that is not one", "terms": {"goal_id": "goal-1"}, "expected": "malformed-term"},
+    {"name": "a null term", "terms": {"purpose": null}, "expected": "malformed-term"},
+    {"name": "a sealed purpose", "terms": {"purpose": {"_sealed": "2DgC3HSZ7RmMcPDkVGP6Z7lRSqAUFSuYnN1HWOexILo"}}, "expected": null},
+    {"name": "a seal of the wrong length", "terms": {"purpose": {"_sealed": "abc"}}, "expected": "malformed-term"},
+    {"name": "a sealed goal id", "terms": {"goal_id": {"_sealed": "2DgC3HSZ7RmMcPDkVGP6Z7lRSqAUFSuYnN1HWOexILo"}}, "expected": "malformed-term"}
+  ],
+  "seal": [
+    {"salt": "s-1", "value": {"code": "research"}, "digest": "2DgC3HSZ7RmMcPDkVGP6Z7lRSqAUFSuYnN1HWOexILo"},
+    {"salt": "s-2", "value": "m-0a1b2c", "digest": "VD1bYuf4nFNMHeSpQkllzJwPvMQMBQeqcVH01ZRzRc8"},
+    {"salt": "s-3", "value": ["sku-1", "sku-2"], "digest": "HsyxnFFISkxM09z2NWPmt4VD4QUubOp3STHJipLhkeU"}
+  ],
+  "_seal_about": "Each digest was computed outside the kit: printf '%s' '[salt,value]' (canonical JSON) | openssl dgst -sha256 -binary | base64url without padding.",
+  "open": [
+    {"name": "disclosed", "terms": {"purpose": {"_sealed": "2DgC3HSZ7RmMcPDkVGP6Z7lRSqAUFSuYnN1HWOexILo"}}, "disclosures": [["s-1", "purpose", {"code": "research"}]], "expected": {"purpose": {"code": "research"}}},
+    {"name": "not disclosed", "terms": {"purpose": {"_sealed": "2DgC3HSZ7RmMcPDkVGP6Z7lRSqAUFSuYnN1HWOexILo"}}, "disclosures": [], "expected": {"unreadable": ["purpose"]}},
+    {"name": "disclosed with another value", "terms": {"purpose": {"_sealed": "2DgC3HSZ7RmMcPDkVGP6Z7lRSqAUFSuYnN1HWOexILo"}}, "disclosures": [["s-1", "purpose", {"code": "maintenance"}]], "expected": {"unreadable": ["purpose"]}},
+    {"name": "disclosed at another path", "terms": {"purpose": {"_sealed": "2DgC3HSZ7RmMcPDkVGP6Z7lRSqAUFSuYnN1HWOexILo"}}, "disclosures": [["s-1", "text", {"code": "research"}]], "expected": {"unreadable": ["purpose"]}},
+    {"name": "a sealed fixed value", "terms": {"fixed": {"payee": {"_sealed": "VD1bYuf4nFNMHeSpQkllzJwPvMQMBQeqcVH01ZRzRc8"}}}, "disclosures": [["s-2", "fixed/payee", "m-0a1b2c"]], "expected": {"fixed": {"payee": "m-0a1b2c"}}},
+    {"name": "a sealed acceptable list", "terms": {"slots": [{"slot": "s1", "acceptable": {"_sealed": "HsyxnFFISkxM09z2NWPmt4VD4QUubOp3STHJipLhkeU"}, "quantity": 1}]}, "disclosures": [["s-3", "slots/0/acceptable", ["sku-1", "sku-2"]]], "expected": {"slots": [{"slot": "s1", "acceptable": ["sku-1", "sku-2"], "quantity": 1}]}},
+    {"name": "one of two disclosed", "terms": {"purpose": {"_sealed": "2DgC3HSZ7RmMcPDkVGP6Z7lRSqAUFSuYnN1HWOexILo"}, "fixed": {"payee": {"_sealed": "VD1bYuf4nFNMHeSpQkllzJwPvMQMBQeqcVH01ZRzRc8"}}}, "disclosures": [["s-1", "purpose", {"code": "research"}]], "expected": {"unreadable": ["fixed/payee"]}}
+  ]
+}

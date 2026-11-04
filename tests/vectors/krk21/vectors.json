@@ -1,0 +1,1839 @@
+{
+  "amount_le": [
+    [
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 100
+      },
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 100
+      },
+      true
+    ],
+    [
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 101
+      },
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 100
+      },
+      false
+    ],
+    [
+      {
+        "currency": "EUR",
+        "minor_units": 0,
+        "value": 150
+      },
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 10000
+      },
+      false
+    ],
+    [
+      {
+        "currency": "EUR",
+        "minor_units": 0,
+        "value": 100
+      },
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 10000
+      },
+      true
+    ],
+    [
+      {
+        "currency": "USD",
+        "minor_units": 2,
+        "value": 100
+      },
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 100
+      },
+      null
+    ],
+    [
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 9007199254740992
+      },
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 9007199254740992
+      },
+      null
+    ],
+    [
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 100.5
+      },
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 1000
+      },
+      null
+    ],
+    [
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": "100"
+      },
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 1000
+      },
+      null
+    ],
+    [
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": -1
+      },
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 1000
+      },
+      null
+    ],
+    [
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": true
+      },
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 1000
+      },
+      null
+    ],
+    [
+      {
+        "currency": "EUR",
+        "minor_units": 19,
+        "value": 1
+      },
+      {
+        "currency": "EUR",
+        "minor_units": 2,
+        "value": 1000
+      },
+      null
+    ]
+  ],
+  "chains": {
+    "broken-link": {
+      "chain": [
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000b2",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000c3",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-b2"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000a1",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": null,
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-a1"
+        }
+      ],
+      "refusal": "not-rooted"
+    },
+    "crit-names-unknown": {
+      "chain": [
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "crit": [
+            "x-krk-1"
+          ],
+          "grant_id": "gr-00000000000000b2",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000a1",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-b2"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000a1",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": null,
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-a1"
+        }
+      ],
+      "refusal": "unknown-constraint"
+    },
+    "cycle": {
+      "chain": [
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000b2",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000a1",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-b2"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000a1",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000b2",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-a1"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000b2",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000a1",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-b2"
+        }
+      ],
+      "refusal": "cycle"
+    },
+    "depth-0-has-a-child": {
+      "chain": [
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000b2",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000a1",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-b2"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "delegation": {
+              "max_depth": 0
+            },
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000a1",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": null,
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-a1"
+        }
+      ],
+      "refusal": "depth-exceeded"
+    },
+    "depth-1-two-below": {
+      "chain": [
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000c3",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000b2",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-c3"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000b2",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000a1",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-b2"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "delegation": {
+              "max_depth": 1
+            },
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000a1",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": null,
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-a1"
+        }
+      ],
+      "refusal": "depth-exceeded"
+    },
+    "float-amount": {
+      "chain": [
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 1000.4
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000b2",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000a1",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-b2"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000a1",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": null,
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-a1"
+        }
+      ],
+      "refusal": "malformed"
+    },
+    "glob-resource": {
+      "chain": [
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-*"
+            ]
+          },
+          "grant_id": "gr-00000000000000b2",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000a1",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-b2"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000a1",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": null,
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-a1"
+        }
+      ],
+      "refusal": "malformed"
+    },
+    "honest": {
+      "chain": [
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000b2",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000a1",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-b2"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000a1",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": null,
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-a1"
+        }
+      ],
+      "refusal": null
+    },
+    "no-window-end": {
+      "chain": [
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000b2",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000a1",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-b2"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000a1",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": null,
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-a1"
+        }
+      ],
+      "refusal": "malformed"
+    },
+    "not-rooted": {
+      "chain": [
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000b2",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000a1",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-b2"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000a1",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000c3",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-a1"
+        }
+      ],
+      "refusal": "not-rooted"
+    },
+    "null-member": {
+      "chain": [
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": null
+          },
+          "grant_id": "gr-00000000000000b2",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000a1",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-b2"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000a1",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": null,
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-a1"
+        }
+      ],
+      "refusal": "malformed"
+    },
+    "self-parent": {
+      "chain": [
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000a1",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000a1",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-a1"
+        }
+      ],
+      "refusal": "self-parent"
+    },
+    "two-parents": {
+      "chain": [
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000b2",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": [
+            "gr-00000000000000a1",
+            "gr-00000000000000c3"
+          ],
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-b2"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000a1",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": null,
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-a1"
+        }
+      ],
+      "refusal": "two-parents"
+    },
+    "unknown-member": {
+      "chain": [
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ],
+            "x-krk-1": 1
+          },
+          "grant_id": "gr-00000000000000b2",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000a1",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-b2"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000a1",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": null,
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-a1"
+        }
+      ],
+      "refusal": "unknown-constraint"
+    },
+    "wildcard-operation": {
+      "chain": [
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "*"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000b2",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": "gr-00000000000000a1",
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-b2"
+        },
+        {
+          "agent_key": {
+            "kid": "k",
+            "public_key": "abababababababababababababababababababababababababababababababab"
+          },
+          "constraints": {
+            "audience": [
+              "did:web:b.example"
+            ],
+            "max_amount": {
+              "currency": "EUR",
+              "minor_units": 2,
+              "value": 500000
+            },
+            "operations": [
+              "op.a",
+              "op.b"
+            ],
+            "resources": [
+              "acct-1/*"
+            ]
+          },
+          "grant_id": "gr-00000000000000a1",
+          "issued_at": "2026-11-02T10:00:00.000Z",
+          "issuer": "did:web:a.example",
+          "not_after": "2026-11-02T21:00:00Z",
+          "not_before": "2026-11-02T09:00:00Z",
+          "parent": null,
+          "principal": "alice@a.example",
+          "schema": "kirkaldy.grant/0.2",
+          "status": {
+            "index": 0,
+            "source": "http://127.0.0.1:9/status/list"
+          },
+          "subject": "agent-a1"
+        }
+      ],
+      "refusal": "malformed"
+    }
+  },
+  "covers": [
+    [
+      "acct-1/*",
+      "acct-1/x",
+      true
+    ],
+    [
+      "acct-1/*",
+      "acct-1/x/y",
+      true
+    ],
+    [
+      "acct-1/*",
+      "acct-1/*",
+      true
+    ],
+    [
+      "acct-1/*",
+      "acct-1/sub/*",
+      true
+    ],
+    [
+      "acct-1/*",
+      "acct-12/x",
+      false
+    ],
+    [
+      "acct-1/*",
+      "acct-1",
+      false
+    ],
+    [
+      "acct/1/*",
+      "acct/*",
+      false
+    ],
+    [
+      "acct/*",
+      "acct/1/*",
+      true
+    ],
+    [
+      "acct-1/x",
+      "acct-1/x",
+      true
+    ],
+    [
+      "acct-1/x",
+      "acct-1/x/y",
+      false
+    ],
+    [
+      "acct-*",
+      "acct-1",
+      false
+    ],
+    [
+      "acct-1/*",
+      "acct-*",
+      false
+    ],
+    [
+      "*",
+      "x",
+      false
+    ]
+  ],
+  "inside": [
+    {
+      "at": "2026-11-02T12:00:00Z",
+      "chain": "honest",
+      "expected": null,
+      "request": {
+        "amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 300000
+        },
+        "operation": "op.a",
+        "resources": [
+          "acct-1/x"
+        ]
+      }
+    },
+    {
+      "at": "2026-11-02T12:00:00Z",
+      "chain": "honest",
+      "expected": "operation",
+      "request": {
+        "amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 300000
+        },
+        "operation": "op.c",
+        "resources": [
+          "acct-1/x"
+        ]
+      }
+    },
+    {
+      "at": "2026-11-02T12:00:00Z",
+      "chain": "honest",
+      "expected": "above",
+      "request": {
+        "amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 500001
+        },
+        "operation": "op.a",
+        "resources": [
+          "acct-1/x"
+        ]
+      }
+    },
+    {
+      "at": "2026-11-02T12:00:00Z",
+      "chain": "honest",
+      "expected": null,
+      "request": {
+        "amount": {
+          "currency": "EUR",
+          "minor_units": 0,
+          "value": 3000
+        },
+        "operation": "op.a",
+        "resources": [
+          "acct-1/x"
+        ]
+      }
+    },
+    {
+      "at": "2026-11-02T12:00:00Z",
+      "chain": "honest",
+      "expected": "currency",
+      "request": {
+        "amount": {
+          "currency": "USD",
+          "minor_units": 2,
+          "value": 3000
+        },
+        "operation": "op.a",
+        "resources": [
+          "acct-1/x"
+        ]
+      }
+    },
+    {
+      "at": "2026-11-02T12:00:00Z",
+      "chain": "honest",
+      "expected": "exactly",
+      "request": {
+        "amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": -1
+        },
+        "operation": "op.a",
+        "resources": [
+          "acct-1/x"
+        ]
+      }
+    },
+    {
+      "at": "2026-11-02T12:00:00Z",
+      "chain": "honest",
+      "expected": "covered",
+      "request": {
+        "amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 1
+        },
+        "operation": "op.a",
+        "resources": [
+          "acct-2/x"
+        ]
+      }
+    },
+    {
+      "at": "2026-11-02T12:00:00Z",
+      "chain": "honest",
+      "expected": "exact id",
+      "request": {
+        "amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 1
+        },
+        "operation": "op.a",
+        "resources": [
+          "acct-1/*"
+        ]
+      }
+    },
+    {
+      "at": "2026-11-02T21:00:06Z",
+      "chain": "honest",
+      "expected": "window",
+      "request": {
+        "amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 1
+        },
+        "operation": "op.a",
+        "resources": [
+          "acct-1/x"
+        ]
+      }
+    },
+    {
+      "at": "2026-11-02T21:00:05Z",
+      "chain": "honest",
+      "expected": null,
+      "request": {
+        "amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 1
+        },
+        "operation": "op.a",
+        "resources": [
+          "acct-1/x"
+        ]
+      }
+    }
+  ],
+  "party": "did:web:b.example",
+  "standing": [
+    {
+      "chain": "honest",
+      "classes": {
+        "op.a": {
+          "max_amount": {
+            "currency": "EUR",
+            "minor_units": 2,
+            "value": 1000
+          }
+        }
+      },
+      "expected": "standing",
+      "request": {
+        "amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 3000
+        },
+        "operation": "op.a",
+        "resources": [
+          "acct-1/x"
+        ]
+      }
+    },
+    {
+      "chain": "honest",
+      "classes": {
+        "op.a": null
+      },
+      "expected": null,
+      "request": {
+        "amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 3000
+        },
+        "operation": "op.a",
+        "resources": [
+          "acct-1/x"
+        ]
+      }
+    },
+    {
+      "chain": "honest",
+      "classes": {
+        "op.b": null
+      },
+      "expected": "standing",
+      "request": {
+        "amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 3000
+        },
+        "operation": "op.a",
+        "resources": [
+          "acct-1/x"
+        ]
+      }
+    }
+  ],
+  "tolerance_s": 5,
+  "wider": [
+    [
+      {
+        "max_amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 5000
+        }
+      },
+      {
+        "max_amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 1000
+        }
+      },
+      [
+        "max_amount"
+      ]
+    ],
+    [
+      {
+        "max_amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 1000
+        }
+      },
+      {
+        "max_amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 5000
+        }
+      },
+      []
+    ],
+    [
+      {},
+      {
+        "max_amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 1000
+        }
+      },
+      []
+    ],
+    [
+      {
+        "operations": [
+          "a",
+          "b"
+        ]
+      },
+      {
+        "operations": [
+          "a"
+        ]
+      },
+      [
+        "operations"
+      ]
+    ],
+    [
+      {
+        "operations": []
+      },
+      {
+        "operations": [
+          "a"
+        ]
+      },
+      []
+    ],
+    [
+      {
+        "resources": [
+          "acct/*"
+        ]
+      },
+      {
+        "resources": [
+          "acct/1/*"
+        ]
+      },
+      [
+        "resources"
+      ]
+    ],
+    [
+      {
+        "resources": [
+          "acct/1/x"
+        ]
+      },
+      {
+        "resources": [
+          "acct/*"
+        ]
+      },
+      []
+    ],
+    [
+      {
+        "audience": [
+          "b",
+          "c"
+        ]
+      },
+      {
+        "audience": [
+          "b"
+        ]
+      },
+      [
+        "audience"
+      ]
+    ],
+    [
+      {
+        "delegation": {
+          "max_depth": 2
+        }
+      },
+      {
+        "delegation": {
+          "max_depth": 2
+        }
+      },
+      [
+        "delegation"
+      ]
+    ],
+    [
+      {
+        "delegation": {
+          "max_depth": 1
+        }
+      },
+      {
+        "delegation": {
+          "max_depth": 2
+        }
+      },
+      []
+    ],
+    [
+      {},
+      {
+        "delegation": {
+          "max_depth": 0
+        }
+      },
+      [
+        "delegation"
+      ]
+    ],
+    [
+      {
+        "max_amount": {
+          "currency": "USD",
+          "minor_units": 2,
+          "value": 5000
+        }
+      },
+      {
+        "max_amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 5000
+        }
+      },
+      [
+        "max_amount"
+      ]
+    ],
+    [
+      {
+        "max_amount": {
+          "currency": "EUR",
+          "minor_units": 0,
+          "value": 150
+        }
+      },
+      {
+        "max_amount": {
+          "currency": "EUR",
+          "minor_units": 2,
+          "value": 10000
+        }
+      },
+      [
+        "max_amount"
+      ]
+    ]
+  ]
+}

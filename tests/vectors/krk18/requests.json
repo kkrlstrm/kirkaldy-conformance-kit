@@ -1,0 +1,107 @@
+{
+  "canonical.json": {
+    "ambiguous": null,
+    "canonical_bytes": "{\"amount\":100,\"items\":[\"sku-1\",\"sku-2\"],\"operation\":\"crm.record.push\",\"recipient\":\"acct-1234@example.test\",\"ref\":\"r-0001\"}",
+    "canonical_digest": "sha256:3bb5f81cdebfacc28ab92029b2fb4be77cfa6aaf52ee59f88bb50627f102db36",
+    "lenient_digest": "sha256:3bb5f81cdebfacc28ab92029b2fb4be77cfa6aaf52ee59f88bb50627f102db36",
+    "raw_sha256": "sha256:3bb5f81cdebfacc28ab92029b2fb4be77cfa6aaf52ee59f88bb50627f102db36"
+  },
+  "duplicate-and-float.json": {
+    "ambiguous": "duplicate-key",
+    "canonical_bytes": null,
+    "canonical_digest": null,
+    "lenient_digest": "sha256:7e8059f495589fcd981232cc11d00b00da3802c01d688fa1cf1f6bed6e5bb33c",
+    "raw_sha256": "sha256:c4ecffdb9ed3aa4a3789e17a5144c871ed8ecbf7b5e6b58654918f90b0862878"
+  },
+  "duplicate-key.json": {
+    "ambiguous": "duplicate-key",
+    "canonical_bytes": null,
+    "canonical_digest": null,
+    "lenient_digest": "sha256:ac10d3ad2d9f8779d762384a0b3106d5b867acb9d7f11eb5375f260be1f9a563",
+    "raw_sha256": "sha256:9f5abbc12f24479dba2853688ec3784c0b329ba6c201dcc83b97ed26d6ea0937"
+  },
+  "escaped.json": {
+    "ambiguous": null,
+    "canonical_bytes": "{\"amount\":100,\"items\":[\"sku-1\",\"sku-2\"],\"operation\":\"crm.record.push\",\"recipient\":\"acct-1234@example.test\",\"ref\":\"r-0001\"}",
+    "canonical_digest": "sha256:3bb5f81cdebfacc28ab92029b2fb4be77cfa6aaf52ee59f88bb50627f102db36",
+    "lenient_digest": "sha256:3bb5f81cdebfacc28ab92029b2fb4be77cfa6aaf52ee59f88bb50627f102db36",
+    "raw_sha256": "sha256:0442c849a32763782725461560073e683996d59f6b7e7ff3d3771f9657970115"
+  },
+  "exponent.json": {
+    "ambiguous": "float",
+    "canonical_bytes": null,
+    "canonical_digest": null,
+    "lenient_digest": "sha256:d60dbe2bafb440ace3ae369c3f546516bb20f2442b5fd684e1904bb44348902b",
+    "raw_sha256": "sha256:035eeb2d9f33a335be9960b4a32822669cf5ab1e8cbb39a483162d3a3f4c4b33"
+  },
+  "float.json": {
+    "ambiguous": "float",
+    "canonical_bytes": null,
+    "canonical_digest": null,
+    "lenient_digest": "sha256:d60dbe2bafb440ace3ae369c3f546516bb20f2442b5fd684e1904bb44348902b",
+    "raw_sha256": "sha256:d60dbe2bafb440ace3ae369c3f546516bb20f2442b5fd684e1904bb44348902b"
+  },
+  "fullwidth.json": {
+    "ambiguous": null,
+    "canonical_bytes": "{\"amount\":100,\"items\":[\"sku-1\"],\"operation\":\"crm.record.push\",\"recipient\":\"ａｃｃｔ-1234@example.test\",\"ref\":\"r-0007\"}",
+    "canonical_digest": "sha256:55b7602ce9c14d86e3a957094274d69843260c60d29a8b29016d29acbd5e357c",
+    "lenient_digest": "sha256:55b7602ce9c14d86e3a957094274d69843260c60d29a8b29016d29acbd5e357c",
+    "raw_sha256": "sha256:55b7602ce9c14d86e3a957094274d69843260c60d29a8b29016d29acbd5e357c"
+  },
+  "nan.json": {
+    "ambiguous": "not-json",
+    "canonical_bytes": null,
+    "canonical_digest": null,
+    "lenient_digest": null,
+    "raw_sha256": "sha256:247077c8abd29a68bd4aa12870b689d78d30acfd57ae861c773af089a8e8ac83"
+  },
+  "negative-unsafe.json": {
+    "ambiguous": "unsafe-integer",
+    "canonical_bytes": null,
+    "canonical_digest": null,
+    "lenient_digest": "sha256:cbf1209220e6b7d9dbecb324ec087f54103750d633bffd414b2f285efde6c8a0",
+    "raw_sha256": "sha256:cbf1209220e6b7d9dbecb324ec087f54103750d633bffd414b2f285efde6c8a0"
+  },
+  "nested-duplicate.json": {
+    "ambiguous": "duplicate-key",
+    "canonical_bytes": null,
+    "canonical_digest": null,
+    "lenient_digest": "sha256:c2693084432815444840d89db130d67c166864cbe645be401631061a965dd0d8",
+    "raw_sha256": "sha256:da871c7130d1e85465e22e56df4800a708b2a563e9ca487c7018750906c67385"
+  },
+  "not-utf8.bin": {
+    "ambiguous": "not-json",
+    "canonical_bytes": null,
+    "canonical_digest": null,
+    "lenient_digest": null,
+    "raw_sha256": "sha256:de6965d319b4a7191d467ef71bc74c218f2ad6813e11149b9b4a7c19b95191f9"
+  },
+  "safe-max.json": {
+    "ambiguous": null,
+    "canonical_bytes": "{\"amount\":9007199254740991,\"ref\":\"r-0004\"}",
+    "canonical_digest": "sha256:3bb2ce013fab2c709dbbb51d22d5603a421529fc8411ba61d52ded3d6d6d51fc",
+    "lenient_digest": "sha256:3bb2ce013fab2c709dbbb51d22d5603a421529fc8411ba61d52ded3d6d6d51fc",
+    "raw_sha256": "sha256:3bb2ce013fab2c709dbbb51d22d5603a421529fc8411ba61d52ded3d6d6d51fc"
+  },
+  "trailing-comma.json": {
+    "ambiguous": "not-json",
+    "canonical_bytes": null,
+    "canonical_digest": null,
+    "lenient_digest": null,
+    "raw_sha256": "sha256:5f708c8416b2f2786a2d20a6ac60df62939077b42224691e23c40e99114722a8"
+  },
+  "unsafe-integer.json": {
+    "ambiguous": "unsafe-integer",
+    "canonical_bytes": null,
+    "canonical_digest": null,
+    "lenient_digest": "sha256:898dc09f7cf9d6248c7aab9c2ce3a35236f7f2986b0d04c1fcf6953cd381269f",
+    "raw_sha256": "sha256:898dc09f7cf9d6248c7aab9c2ce3a35236f7f2986b0d04c1fcf6953cd381269f"
+  },
+  "whitespace.json": {
+    "ambiguous": null,
+    "canonical_bytes": "{\"amount\":100,\"items\":[\"sku-1\",\"sku-2\"],\"operation\":\"crm.record.push\",\"recipient\":\"acct-1234@example.test\",\"ref\":\"r-0001\"}",
+    "canonical_digest": "sha256:3bb5f81cdebfacc28ab92029b2fb4be77cfa6aaf52ee59f88bb50627f102db36",
+    "lenient_digest": "sha256:3bb5f81cdebfacc28ab92029b2fb4be77cfa6aaf52ee59f88bb50627f102db36",
+    "raw_sha256": "sha256:23a088b3af31c4a17c773d2578011f2f67a1f344a219d0e17dee6569604c9b95"
+  }
+}

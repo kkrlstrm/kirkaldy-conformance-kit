@@ -1,0 +1,134 @@
+{
+ "_comment": "KRK-26 (P26) vectors for conformance/translation.py. Every expected value was computed by hand from the rule in X11-TRANSLATION-DESIGN.md §2.3–2.4 (floor a maximum, ceil a minimum, end earlier, start later; rates are target major units per source major unit), not by running the module. Exact rationals are written n/d.",
+ "pairs": {
+  "USD-USD": {"source": {"currency": "USD", "minor_units": 2}, "target": {"currency": "USD", "minor_units": 2}, "rate": {"num": 1, "den": 1}},
+  "EUR-USD": {"source": {"currency": "EUR", "minor_units": 2}, "target": {"currency": "USD", "minor_units": 2}, "rate": {"num": 108, "den": 100}},
+  "CHF-USD": {"source": {"currency": "CHF", "minor_units": 2}, "target": {"currency": "USD", "minor_units": 2}, "rate": {"num": 7, "den": 10}},
+  "KWD-USD": {"source": {"currency": "KWD", "minor_units": 3}, "target": {"currency": "USD", "minor_units": 2}, "rate": {"num": 33, "den": 10}},
+  "GBP-JPY": {"source": {"currency": "GBP", "minor_units": 2}, "target": {"currency": "JPY", "minor_units": 0}, "rate": {"num": 190, "den": 1}},
+  "DAI-USD": {"source": {"currency": "DAI", "minor_units": 18}, "target": {"currency": "USD", "minor_units": 2}, "rate": {"num": 1, "den": 1}},
+  "SGD-USD": {"source": {"currency": "SGD", "minor_units": 2}, "target": {"currency": "USD", "minor_units": 2}, "rate": {"num": 6305039478318693, "den": 9007199254740991}}
+ },
+ "convert": [
+  {"pair": "USD-USD", "value": "555", "max": 555, "min": 555},
+  {"pair": "EUR-USD", "value": "1001", "max": 1081, "min": 1082, "note": "1001 x 1.08 = 1081.08"},
+  {"pair": "EUR-USD", "value": "2500", "max": 2700, "min": 2700, "note": "exact"},
+  {"pair": "EUR-USD", "value": "1006", "max": 1086, "min": 1087, "note": "1086.48: nearest would also give 1086"},
+  {"pair": "EUR-USD", "value": "1007", "max": 1087, "min": 1088, "note": "1087.56: nearest would give 1088, one cent wider"},
+  {"pair": "CHF-USD", "value": "1234", "max": 863, "min": 864, "note": "863.8"},
+  {"pair": "KWD-USD", "value": "12345", "max": 4073, "min": 4074, "note": "12.345 KWD x 3.3 = 40.7385 USD; assuming two minor units would give 40738"},
+  {"pair": "GBP-JPY", "value": "1001", "max": 1901, "min": 1902, "note": "10.01 GBP x 190 = 1901.9 JPY, no minor units"},
+  {"pair": "DAI-USD", "value": "1234567890123456789", "max": 123, "min": 124, "note": "1.234567890123456789 DAI = 123.4567890123456789 cents"},
+  {"pair": "SGD-USD", "value": "10", "max": 6, "min": 7, "double_floor": 7, "note": "63050394783186930 / 9007199254740991 is 7 less 7/9007199254740991; a double-precision product reads 7"},
+  {"pair": "SGD-USD", "value": "15", "max": 10, "min": 11, "double_floor": 10, "note": "10.4999...: exact and double agree on the floor"}
+ ],
+ "refuse": [
+  {"pair": null, "amount": {"value": "1000", "currency": "SEK", "minor_units": 2}, "reason": "rate-undeclared"},
+  {"pair": "EUR-USD", "amount": {"value": "1000", "currency": "EUR", "minor_units": 3}, "reason": "incomparable", "note": "minor units come from the profile, never rescaled (KRK-M195)"},
+  {"pair": "EUR-USD", "amount": {"value": "1000", "currency": "CHF", "minor_units": 2}, "reason": "incomparable"}
+ ],
+ "back": [
+  {"pair": "EUR-USD", "target_value": 1081, "exact": "27025/27", "max": 1000, "min": 1001, "note": "1081 / 1.08 = 1000.925..."},
+  {"pair": "EUR-USD", "target_value": 2700, "exact": "2500", "max": 2500, "min": 2500},
+  {"pair": "GBP-JPY", "target_value": 1901, "exact": "19010/19", "max": 1000, "min": 1001, "note": "1901 JPY / 190 = 10.00526 GBP = 190100/190 = 1000.526 pence"}
+ ],
+ "direction": [
+  {"pair": "EUR-USD", "value": "1001", "forward_max": 1081, "backwards_max": 926, "note": "the rate applied as source per target: 1001 / 1.08 = 926.85 (KRK-M206)"},
+  {"pair": "CHF-USD", "value": "1000", "forward_max": 700, "backwards_max": 1428, "note": "1000 / 0.7 = 1428.57: backwards widens for a rate below 1"}
+ ],
+ "time": [
+  {"n": 1900000123456, "from": "ms", "to": "s", "end": 1900000123, "start": 1900000124},
+  {"n": 1900000000500, "from": "ms", "to": "s", "end": 1900000000, "start": 1900000001},
+  {"n": 1900000123, "from": "s", "to": "ms", "end": 1900000123000, "start": 1900000123000},
+  {"n": 1900000123, "from": "s", "to": "s", "end": 1900000123, "start": 1900000123}
+ ],
+ "profile": {
+  "schema": "kirkaldy.translation-profile/0.1", "source": "kirkaldy.authority/0.1", "target": "vector-target",
+  "fields": {"limit": "max_amount", "floor": "min_amount", "quota": "max_count", "scope": "operations", "paths": "resources", "aud": "audience", "pay_to": "payee", "nbf": "not_before", "exp": "not_after", "regions_hint": "regions"},
+  "values": {"operations": {"contacts:read": ["read"], "contacts:update": ["update"], "contacts:delete": ["delete"], "contacts:write": ["update", "delete"], "contacts:archive": ["delete"]}},
+  "amounts": [
+   {"source": {"currency": "EUR", "minor_units": 2}, "target": {"currency": "USD", "minor_units": 2}, "rate": {"num": 108, "den": 100}},
+   {"source": {"currency": "GBP", "minor_units": 2}, "target": {"currency": "JPY", "minor_units": 0}, "rate": {"num": 190, "den": 1}}
+  ],
+  "counts": [{"source": "message", "target": "batch", "rate": {"num": 1, "den": 10}}, {"source": "batch", "target": "batch", "rate": {"num": 1, "den": 1}}],
+  "time": {"target_unit": "s", "basis": "absolute"},
+  "unmapped": "refuse"
+ },
+ "semantics": {
+  "limit": {"semantics": "enforced", "absent": "unbounded", "quote": "v"},
+  "floor": {"semantics": "enforced", "absent": "unbounded", "quote": "v"},
+  "quota": {"semantics": "enforced", "absent": "unbounded", "quote": "v"},
+  "scope": {"semantics": "enforced", "absent": "unbounded", "quote": "v"},
+  "paths": {"semantics": "enforced", "absent": "unbounded", "quote": "v"},
+  "aud": {"semantics": "enforced", "absent": "unbounded", "quote": "v"},
+  "pay_to": {"semantics": "enforced", "absent": "unbounded", "quote": "v"},
+  "nbf": {"semantics": "enforced", "absent": "unbounded", "quote": "v"},
+  "exp": {"semantics": "enforced", "absent": "unbounded", "quote": "v"},
+  "regions_hint": {"semantics": "informational", "quote": "v"},
+  "ext": {"semantics": "ignorable_extension", "quote": "v"}
+ },
+ "image": [
+  {"name": "amount and window", "original": {"constraints": {"max_amount": {"value": "1001", "currency": "EUR", "minor_units": 2}}, "not_before": 1900000000, "not_after": 1900000300, "time_unit": "s"},
+   "expect": {"limit": {"value": 1081, "currency": "USD", "minor_units": 2}, "nbf": 1900000000, "exp": 1900000300}},
+  {"name": "minimum ceiled", "original": {"constraints": {"min_amount": {"value": "1001", "currency": "EUR", "minor_units": 2}}, "not_after": 1900000300, "time_unit": "s"},
+   "expect": {"floor": {"value": 1082, "currency": "USD", "minor_units": 2}, "exp": 1900000300}},
+  {"name": "window in milliseconds", "original": {"constraints": {}, "not_before": 1900000000500, "not_after": 1900000123456, "time_unit": "ms"},
+   "expect": {"nbf": 1900000001, "exp": 1900000123}},
+  {"name": "one-to-many, update only", "original": {"constraints": {"operations": ["update"]}, "not_after": 1900000300, "time_unit": "s"},
+   "expect": {"scope": ["contacts:update"], "exp": 1900000300}},
+  {"name": "update and delete", "original": {"constraints": {"operations": ["update", "delete"]}, "not_after": 1900000300, "time_unit": "s"},
+   "expect": {"scope": ["contacts:archive", "contacts:delete", "contacts:update", "contacts:write"], "exp": 1900000300}},
+  {"name": "count in a coarser unit", "original": {"constraints": {"max_count": {"value": 45, "unit": "message"}}, "not_after": 1900000300, "time_unit": "s"},
+   "expect": {"quota": {"value": 4, "unit": "batch"}, "exp": 1900000300}},
+  {"name": "resources, audience, payee copied", "original": {"constraints": {"resources": ["crm/contacts/acct-1/*"], "audience": ["did:web:r.example"], "payee": "acct-9"}, "not_after": 1900000300, "time_unit": "s"},
+   "expect": {"paths": ["crm/contacts/acct-1/*"], "aud": ["did:web:r.example"], "pay_to": "acct-9", "exp": 1900000300}}
+ ],
+ "image_refused": [
+  {"name": "unmapped value", "original": {"constraints": {"operations": ["merge"]}, "not_after": 1900000300}, "reason": "unmapped-value"},
+  {"name": "a name like a target value is still unmapped", "original": {"constraints": {"operations": ["archive"]}, "not_after": 1900000300}, "reason": "unmapped-value"},
+  {"name": "no counterpart", "original": {"constraints": {"categories": ["5734"]}, "not_after": 1900000300}, "reason": "cannot-carry"},
+  {"name": "only an informational member", "original": {"constraints": {"regions": ["DE"]}, "not_after": 1900000300}, "reason": "cannot-carry"},
+  {"name": "only an ignorable extension", "original": {"constraints": {"channels": ["web"]}, "not_after": 1900000300, "crit": ["channels"]}, "reason": "cannot-carry"},
+  {"name": "no rate", "original": {"constraints": {"max_amount": {"value": "1000", "currency": "SEK", "minor_units": 2}}, "not_after": 1900000300}, "reason": "rate-undeclared"},
+  {"name": "count unit not related", "original": {"constraints": {"max_count": {"value": 3, "unit": "page"}}, "not_after": 1900000300}, "reason": "unit-undeclared"}
+ ],
+ "no_wider": [
+  {"original": {"constraints": {"max_amount": {"value": "1001", "currency": "EUR", "minor_units": 2}}}, "translated": {"limit": {"value": 1081, "currency": "USD", "minor_units": 2}}, "wider": []},
+  {"original": {"constraints": {"max_amount": {"value": "1001", "currency": "EUR", "minor_units": 2}}}, "translated": {"limit": {"value": 1082, "currency": "USD", "minor_units": 2}}, "wider": ["max_amount"]},
+  {"original": {"constraints": {"max_amount": {"value": "1001", "currency": "EUR", "minor_units": 2}}}, "translated": {"limit": {"value": 1081, "currency": "JPY", "minor_units": 0}}, "wider": ["max_amount"]},
+  {"original": {"constraints": {"max_amount": {"value": "1001", "currency": "EUR", "minor_units": 2}}}, "translated": {}, "wider": ["max_amount"]},
+  {"original": {"constraints": {"operations": ["update"]}}, "translated": {"scope": ["contacts:write"]}, "wider": ["operations"]},
+  {"original": {"constraints": {"operations": ["update"]}}, "translated": {"scope": ["update"]}, "wider": ["operations"]},
+  {"original": {"constraints": {"resources": ["crm/contacts/acct-1/*"]}}, "translated": {"paths": ["crm/contacts/*"]}, "wider": ["resources"]},
+  {"original": {"constraints": {"resources": ["crm/contacts/*"]}}, "translated": {"paths": ["crm/contacts/acct-1/*"]}, "wider": []},
+  {"original": {"constraints": {}, "not_after": 1900000300, "time_unit": "s"}, "translated": {"exp": 1900000301}, "wider": ["not_after"]},
+  {"original": {"constraints": {}, "not_after": 1900000300123, "time_unit": "ms"}, "translated": {"exp": 1900000300}, "wider": []},
+  {"original": {"constraints": {"max_count": {"value": 45, "unit": "message"}}}, "translated": {"quota": {"value": 5, "unit": "batch"}}, "wider": ["max_count"]},
+  {"original": {"constraints": {"regions": ["DE"]}}, "translated": {"regions_hint": ["DE"]}, "wider": ["regions"]}
+ ],
+ "effect_outside": [
+  {"original": {"constraints": {"max_amount": {"value": "1001", "currency": "EUR", "minor_units": 2}}}, "effect": {"amount": {"value": 1081, "currency": "USD", "minor_units": 2}}, "outside": []},
+  {"original": {"constraints": {"max_amount": {"value": "1001", "currency": "EUR", "minor_units": 2}}}, "effect": {"amount": {"value": 1082, "currency": "USD", "minor_units": 2}}, "outside": ["max_amount"]},
+  {"original": {"constraints": {"max_amount": {"value": "1001", "currency": "EUR", "minor_units": 2}}}, "effect": {"amount": {"value": 1001, "currency": "EUR", "minor_units": 2}}, "outside": ["currency"], "note": "EUR to EUR is not a declared pair; the same number in the original's own currency is not read as inside without one"},
+  {"original": {"constraints": {"max_amount": {"value": "1001", "currency": "EUR", "minor_units": 2}}}, "effect": {"amount": {"value": 1081, "currency": "USD", "minor_units": 3}}, "outside": ["currency"], "note": "minor units are stored with the effect (KRK-M200)"},
+  {"original": {"constraints": {"max_amount": {"value": "1001", "currency": "GBP", "minor_units": 2}}}, "effect": {"amount": {"value": 1901, "currency": "JPY", "minor_units": 0}}, "outside": []},
+  {"original": {"constraints": {"max_amount": {"value": "1001", "currency": "GBP", "minor_units": 2}}}, "effect": {"amount": {"value": 1902, "currency": "JPY", "minor_units": 0}}, "outside": ["max_amount"]},
+  {"original": {"constraints": {}, "not_after": 1900000123456, "time_unit": "ms"}, "effect": {"at": 1900000123}, "outside": []},
+  {"original": {"constraints": {}, "not_after": 1900000123456, "time_unit": "ms"}, "effect": {"at": 1900000124}, "outside": ["not_after"]},
+  {"original": {"constraints": {}, "not_after": 1900000123456, "time_unit": "ms"}, "effect": {"at": 1900000125}, "tolerance": 2, "outside": []},
+  {"original": {"constraints": {}, "not_after": 1900000123456, "time_unit": "ms"}, "effect": {"at": 1900000126}, "tolerance": 2, "outside": ["not_after"]},
+  {"original": {"constraints": {}, "not_before": 1900000000, "not_after": 1900000300, "time_unit": "s"}, "effect": {"at": 1899999999}, "outside": ["not_before"]},
+  {"original": {"constraints": {"max_count": {"value": 45, "unit": "message"}}}, "effect": {"count": {"value": 4, "unit": "batch"}}, "outside": []},
+  {"original": {"constraints": {"max_count": {"value": 45, "unit": "message"}}}, "effect": {"count": {"value": 5, "unit": "batch"}}, "outside": ["max_count"]},
+  {"original": {"constraints": {"operations": ["update"]}}, "effect": {"operation": "contacts:update"}, "outside": []},
+  {"original": {"constraints": {"operations": ["update"]}}, "effect": {"operation": "contacts:write"}, "outside": ["operations"]},
+  {"original": {"constraints": {"operations": ["merge"]}}, "effect": {"operation": "merge"}, "outside": ["operations"], "note": "an unmapped target value cannot be shown inside"},
+  {"original": {"constraints": {"resources": ["crm/contacts/acct-1/*"]}}, "effect": {"resource": "crm/contacts/acct-1/r1"}, "outside": []},
+  {"original": {"constraints": {"resources": ["crm/contacts/acct-1/*"]}}, "effect": {"resource": "crm/contacts/acct-2/r1"}, "outside": ["resources"]},
+  {"original": {"constraints": {"payee": "acct-9"}}, "effect": {"payee": "acct-8"}, "outside": ["payee"]}
+ ],
+ "source_effect_outside": [
+  {"original": {"constraints": {"max_amount": {"value": "1001", "currency": "EUR", "minor_units": 2}}}, "effect": {"amount": {"value": 1100, "currency": "EUR", "minor_units": 2}}, "outside": ["max_amount"], "note": "O′ compared with O, never with the intermediate form (KRK-M204)"},
+  {"original": {"constraints": {"max_amount": {"value": "1001", "currency": "EUR", "minor_units": 2}}}, "effect": {"amount": {"value": 1000, "currency": "EUR", "minor_units": 2}}, "outside": []}
+ ]
+}

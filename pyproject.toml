@@ -1,0 +1,22 @@
+[project]
+name = "kirkaldy-conformance-kit"
+version = "0.1.0"
+description = "Tests whether agent infrastructure keeps the authority, isolation and record guarantees it documents."
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+dependencies = ["cryptography>=42", "pyjwt[crypto]>=2.8"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: needs a real target runtime (usually Docker; some targets are native)"]
+addopts = "-m 'not integration'"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["conformance*", "known_bad*", "targets*"]

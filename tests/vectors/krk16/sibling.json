@@ -1,0 +1,65 @@
+{
+  "pinned": {
+    "b-receipts-2026-11": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+  },
+  "salt": "00112233445566778899aabbccddeeff",
+  "expected_effect": {
+    "operation": "crm.record.push",
+    "counterparty": "did:web:b.example",
+    "container": "people",
+    "verbs": [
+      "upsert"
+    ],
+    "count": 4,
+    "items_digest": "sha256:1438f0cac284f63506ed68bb4cabf3f4fe7dddbddae4735c23a541ae179204f5"
+  },
+  "envelopes": {
+    "earlier": {
+      "schema": "kirkaldy.effect-request/0.1",
+      "correlation_id": "case-16:4b1d0e93c2a75f10",
+      "operation": "crm.record.push",
+      "counterparty": "did:web:b.example",
+      "container": "people",
+      "items": [
+        "ada@a.example",
+        "bo@a.example",
+        "cy@a.example",
+        "dé@a.example"
+      ],
+      "expected_effect_digest": "sha256:88a5ed7ce71ce420535d10c0ccf965cd5b0e8d9023191e4914cf3b4c2dc7219b"
+    },
+    "current": {
+      "schema": "kirkaldy.effect-request/0.1",
+      "correlation_id": "case-17:9f2c41d07a3b6e55",
+      "operation": "crm.record.push",
+      "counterparty": "did:web:b.example",
+      "container": "people",
+      "items": [
+        "ada@a.example",
+        "bo@a.example",
+        "cy@a.example",
+        "dé@a.example"
+      ],
+      "expected_effect_digest": "sha256:88a5ed7ce71ce420535d10c0ccf965cd5b0e8d9023191e4914cf3b4c2dc7219b"
+    }
+  },
+  "request_digests": {
+    "earlier": "sha256:b433ea69237f2efe84fe7643b37915bd424bf65c0e2d1c3faac70b2b032276ec",
+    "current": "sha256:3aff0d43532026e286a99630d03dfbfbf86807cc4411012a49aeb6d6b111867f"
+  },
+  "token": "eyJhbGciOiJFZERTQSIsImtpZCI6ImItcmVjZWlwdHMtMjAyNi0xMSIsInR5cCI6Imtyay1yZWNlaXB0K2p3cyJ9.eyJjb3JyZWxhdGlvbl9pZCI6ImNhc2UtMTY6NGIxZDBlOTNjMmE3NWYxMCIsImNvdW50ZXJwYXJ0eSI6ImRpZDp3ZWI6Yi5leGFtcGxlIiwiZXhlY3V0ZWRfYXQiOiIyMDI2LTExLTAxVDEzOjAyOjExWiIsImV4cGVjdGVkX2VmZmVjdF9kaWdlc3QiOiJzaGEyNTY6ODhhNWVkN2NlNzFjZTQyMDUzNWQxMGMwY2NmOTY1Y2Q1YjBlOGQ5MDIzMTkxZTQ5MTRjZjNiNGMyZGM3MjE5YiIsIml0ZW1zX2RpZ2VzdCI6InNoYTI1NjoxNDM4ZjBjYWMyODRmNjM1MDZlZDY4YmI0Y2FiZjNmNGZlN2RkZGJkZGFlNDczNWMyM2E1NDFhZTE3OTIwNGY1IiwibG9nX3NlcSI6NDAxNzYsIm91dGNvbWUiOnsiY3JlYXRlZCI6NCwiZGVsZXRlZCI6MCwiZmFpbGVkIjowLCJ1cGRhdGVkIjowfSwicmVjZWlwdF9pZCI6InJjcHQtMDAwMDAwMDAwMDAwMDAwMCIsInJlZnVzYWxfcmVhc29uIjpudWxsLCJyZXF1ZXN0X2RpZ2VzdCI6InNoYTI1NjpiNDMzZWE2OTIzN2YyZWZlODRmZTc2NDNiMzc5MTViZDQyNGJmNjVjMGUyZDFjM2ZhYWM3MGIyYjAzMjI3NmVjIiwidmVyZGljdCI6ImV4ZWN1dGVkIn0.B46L2KROT8B7GyDSVQAteHU5etuH62AtCptaUbFqoVwhERnCbpTfttpks_tK1TNB0mmRHQufflqCetjesN-DAQ",
+  "expect": {
+    "earlier": {
+      "accept": true,
+      "status": "done",
+      "grade": "signed-by-B",
+      "reason": null
+    },
+    "current": {
+      "accept": false,
+      "status": "blocked",
+      "grade": null,
+      "reason": "wrong-request"
+    }
+  }
+}

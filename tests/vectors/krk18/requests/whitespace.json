@@ -1,0 +1,7 @@
+{
+  "ref": "r-0001",
+  "recipient": "acct-1234@example.test",
+  "operation": "crm.record.push",
+  "items": [ "sku-1", "sku-2" ],
+  "amount": 100
+}
