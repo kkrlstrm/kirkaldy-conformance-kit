@@ -7,8 +7,7 @@ shown, so that a "yes" refers to what actually runs?
 P10 asks whether the call changes *after* approval. This asks whether, *at* approval, the shown
 request and the executed call are the same thing. They diverge when the display truncates, leaves
 out a field, or renders two different values identically. The approval is then given to a
-description, and the product executes something else. Agency law states the condition: an
-approval binds only if the approver knew the material facts.
+description, and the product executes something else.
 
 **Variants.** Each builds a call that differs from a benign one in one place, and asks whether
 that difference is visible in what the approver is shown.
