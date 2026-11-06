@@ -1,0 +1,346 @@
+{
+  "plan": {
+    "variants": [
+      "in_flight"
+    ]
+  },
+  "runs": [
+    {
+      "T_s": 10.0,
+      "T_source": "documented",
+      "below_floor": false,
+      "config": "stated-bound",
+      "evidence": "run1-stated-bound/dispatch-only@stated-bound/P19",
+      "evidence_grade": "recorder",
+      "fixture_version": "sha256:0d6e0cf26818f48263359f5bf4398e8805e0e44a9acd8fe8007797d3562b737c",
+      "in_flight_check": {
+        "detail": "N=5; max 2.007 s, median 2.006 s; late 0, not within W 0, flapped 0",
+        "name": "in_flight",
+        "ok": true,
+        "outcome": "refused_within_T"
+      },
+      "measurement_floor_s": 0.551,
+      "probe_version": "sha256:59209b69202a33b8685261003b288de5c9d4b15935bba821531e6bc337f56550",
+      "run_id": "run1-stated-bound",
+      "stated_T_s": 10.0,
+      "stated_quote": "B commits no effect under a withdrawn authorisation later than 10 s after the withdrawal is served by A's status source.",
+      "status": "pass",
+      "summary": "Development plan (smaller counts; not a published run). every withdrawn authority was refused within its stated T of 10 s (documented) in every trial, held, failed safe and recovered",
+      "trials": [
+        {
+          "W_accepted_after": 0,
+          "W_first_refused_s": 0.0016,
+          "W_presented_after": 52,
+          "detail": "refused from 0.00 s (bracket 0.00\u20130.00 s), nothing under it after 10 s, held",
+          "effects_after_T_s": [],
+          "effects_after_withdrawal_s": [
+            2.0065
+          ],
+          "effects_inside_T_s": [
+            2.0065
+          ],
+          "held_answer": {
+            "code": "queued",
+            "reason": "held by the recorder; retry in 2 s without a new status check"
+          },
+          "held_answered_s": -0.0031,
+          "held_attempts": 1,
+          "held_commit_s": 2.0065,
+          "held_sent_s": -0.0065,
+          "k": 0,
+          "ok": true,
+          "outcome": "within",
+          "retry_after_asked_s": 15.0,
+          "withdrawal_s": 0.0
+        },
+        {
+          "W_accepted_after": 0,
+          "W_first_refused_s": 0.0014,
+          "W_presented_after": 52,
+          "detail": "refused from 0.00 s (bracket 0.00\u20130.00 s), nothing under it after 10 s, held",
+          "effects_after_T_s": [],
+          "effects_after_withdrawal_s": [
+            2.0022
+          ],
+          "effects_inside_T_s": [
+            2.0022
+          ],
+          "held_answer": {
+            "code": "queued",
+            "reason": "held by the recorder; retry in 2 s without a new status check"
+          },
+          "held_answered_s": -0.0027,
+          "held_attempts": 1,
+          "held_commit_s": 2.0022,
+          "held_sent_s": -0.0063,
+          "k": 1,
+          "ok": true,
+          "outcome": "within",
+          "retry_after_asked_s": 15.0,
+          "withdrawal_s": 0.0
+        },
+        {
+          "W_accepted_after": 0,
+          "W_first_refused_s": 0.0015,
+          "W_presented_after": 53,
+          "detail": "refused from 0.00 s (bracket 0.00\u20130.00 s), nothing under it after 10 s, held",
+          "effects_after_T_s": [],
+          "effects_after_withdrawal_s": [
+            2.007
+          ],
+          "effects_inside_T_s": [
+            2.007
+          ],
+          "held_answer": {
+            "code": "queued",
+            "reason": "held by the recorder; retry in 2 s without a new status check"
+          },
+          "held_answered_s": -0.0017,
+          "held_attempts": 1,
+          "held_commit_s": 2.007,
+          "held_sent_s": -0.0054,
+          "k": 2,
+          "ok": true,
+          "outcome": "within",
+          "retry_after_asked_s": 15.0,
+          "withdrawal_s": 0.0
+        },
+        {
+          "W_accepted_after": 0,
+          "W_first_refused_s": 0.0011,
+          "W_presented_after": 52,
+          "detail": "refused from 0.00 s (bracket 0.00\u20130.00 s), nothing under it after 10 s, held",
+          "effects_after_T_s": [],
+          "effects_after_withdrawal_s": [
+            2.0067
+          ],
+          "effects_inside_T_s": [
+            2.0067
+          ],
+          "held_answer": {
+            "code": "queued",
+            "reason": "held by the recorder; retry in 2 s without a new status check"
+          },
+          "held_answered_s": -0.0004,
+          "held_attempts": 1,
+          "held_commit_s": 2.0067,
+          "held_sent_s": -0.0031,
+          "k": 3,
+          "ok": true,
+          "outcome": "within",
+          "retry_after_asked_s": 15.0,
+          "withdrawal_s": 0.0
+        },
+        {
+          "W_accepted_after": 0,
+          "W_first_refused_s": 0.0015,
+          "W_presented_after": 53,
+          "detail": "refused from 0.00 s (bracket 0.00\u20130.00 s), nothing under it after 10 s, held",
+          "effects_after_T_s": [],
+          "effects_after_withdrawal_s": [
+            2.0028
+          ],
+          "effects_inside_T_s": [
+            2.0028
+          ],
+          "held_answer": {
+            "code": "queued",
+            "reason": "held by the recorder; retry in 2 s without a new status check"
+          },
+          "held_answered_s": -0.0024,
+          "held_attempts": 1,
+          "held_commit_s": 2.0028,
+          "held_sent_s": -0.0063,
+          "k": 4,
+          "ok": true,
+          "outcome": "within",
+          "retry_after_asked_s": 15.0,
+          "withdrawal_s": 0.0
+        }
+      ]
+    },
+    {
+      "T_s": null,
+      "T_source": null,
+      "below_floor": null,
+      "config": "valid-at-commit-zero",
+      "evidence": "run2a-valid-at-commit-zero/dispatch-only@valid-at-commit-zero/P19",
+      "evidence_grade": null,
+      "fixture_version": "sha256:0d6e0cf26818f48263359f5bf4398e8805e0e44a9acd8fe8007797d3562b737c",
+      "in_flight_check": null,
+      "measurement_floor_s": null,
+      "probe_version": "sha256:59209b69202a33b8685261003b288de5c9d4b15935bba821531e6bc337f56550",
+      "run_id": "run2a-valid-at-commit-zero",
+      "stated_T_s": 0.0,
+      "stated_quote": "B commits no effect under an authorisation that is not valid at the moment the effect commits.",
+      "status": "inconclusive",
+      "summary": "T_s must be a positive number or None, not 0.0",
+      "trials": [],
+      "trials_note": "no in_flight evidence: the probe ran no trial"
+    },
+    {
+      "T_s": 0.001,
+      "T_source": "documented",
+      "below_floor": true,
+      "config": "valid-at-commit",
+      "evidence": "run2b-valid-at-commit/dispatch-only@valid-at-commit/P19",
+      "evidence_grade": "recorder",
+      "fixture_version": "sha256:0d6e0cf26818f48263359f5bf4398e8805e0e44a9acd8fe8007797d3562b737c",
+      "in_flight_check": {
+        "detail": "N=5; max 2.011 s, median 2.005 s; late 5, not within W 0, flapped 0; e.g. an effect committed 2.00 s after the withdrawal; T is 0.001 s; refused from 0.00 s (bracket 0.00\u20130.00 s)",
+        "name": "in_flight",
+        "ok": false,
+        "outcome": "refused_late"
+      },
+      "measurement_floor_s": 0.2509,
+      "probe_version": "sha256:59209b69202a33b8685261003b288de5c9d4b15935bba821531e6bc337f56550",
+      "run_id": "run2b-valid-at-commit",
+      "stated_T_s": 0.001,
+      "stated_quote": "B commits no effect under an authorisation that is not valid at the moment the effect commits (stated as 0.001 s, the smallest bound at B's timestamp resolution).",
+      "status": "fail",
+      "summary": "Development plan (smaller counts; not a published run). a withdrawn authority was honoured past its stated T of 0.001 s (documented), or B did not hold, fail safe or recover: in_flight (refused_late)",
+      "trials": [
+        {
+          "W_accepted_after": 0,
+          "W_first_refused_s": 0.0012,
+          "W_presented_after": 122,
+          "detail": "an effect committed 2.00 s after the withdrawal; T is 0.001 s; refused from 0.00 s (bracket 0.00\u20130.00 s)",
+          "effects_after_T_s": [
+            2.0006
+          ],
+          "effects_after_withdrawal_s": [
+            2.0006
+          ],
+          "effects_inside_T_s": [],
+          "held_answer": {
+            "code": "queued",
+            "reason": "held by the recorder; retry in 2 s without a new status check"
+          },
+          "held_answered_s": -0.003,
+          "held_attempts": 1,
+          "held_commit_s": 2.0006,
+          "held_sent_s": -0.0062,
+          "k": 0,
+          "ok": false,
+          "outcome": "late",
+          "retry_after_asked_s": 5.001,
+          "withdrawal_s": 0.0
+        },
+        {
+          "W_accepted_after": 0,
+          "W_first_refused_s": 0.0014,
+          "W_presented_after": 122,
+          "detail": "an effect committed 2.01 s after the withdrawal; T is 0.001 s; refused from 0.00 s (bracket 0.00\u20130.00 s)",
+          "effects_after_T_s": [
+            2.0076
+          ],
+          "effects_after_withdrawal_s": [
+            2.0076
+          ],
+          "effects_inside_T_s": [],
+          "held_answer": {
+            "code": "queued",
+            "reason": "held by the recorder; retry in 2 s without a new status check"
+          },
+          "held_answered_s": -0.0026,
+          "held_attempts": 1,
+          "held_commit_s": 2.0076,
+          "held_sent_s": -0.0062,
+          "k": 1,
+          "ok": false,
+          "outcome": "late",
+          "retry_after_asked_s": 5.001,
+          "withdrawal_s": 0.0
+        },
+        {
+          "W_accepted_after": 0,
+          "W_first_refused_s": 0.0016,
+          "W_presented_after": 123,
+          "detail": "an effect committed 2.00 s after the withdrawal; T is 0.001 s; refused from 0.00 s (bracket 0.00\u20130.00 s)",
+          "effects_after_T_s": [
+            1.9991
+          ],
+          "effects_after_withdrawal_s": [
+            1.9991
+          ],
+          "effects_inside_T_s": [],
+          "held_answer": {
+            "code": "queued",
+            "reason": "held by the recorder; retry in 2 s without a new status check"
+          },
+          "held_answered_s": -0.0031,
+          "held_attempts": 1,
+          "held_commit_s": 1.9991,
+          "held_sent_s": -0.0064,
+          "k": 2,
+          "ok": false,
+          "outcome": "late",
+          "retry_after_asked_s": 5.001,
+          "withdrawal_s": 0.0
+        },
+        {
+          "W_accepted_after": 0,
+          "W_first_refused_s": 0.0011,
+          "W_presented_after": 120,
+          "detail": "an effect committed 2.01 s after the withdrawal; T is 0.001 s; refused from 0.00 s (bracket 0.00\u20130.00 s)",
+          "effects_after_T_s": [
+            2.0105
+          ],
+          "effects_after_withdrawal_s": [
+            2.0105
+          ],
+          "effects_inside_T_s": [],
+          "held_answer": {
+            "code": "queued",
+            "reason": "held by the recorder; retry in 2 s without a new status check"
+          },
+          "held_answered_s": -0.0004,
+          "held_attempts": 1,
+          "held_commit_s": 2.0105,
+          "held_sent_s": -0.0031,
+          "k": 3,
+          "ok": false,
+          "outcome": "late",
+          "retry_after_asked_s": 5.001,
+          "withdrawal_s": 0.0
+        },
+        {
+          "W_accepted_after": 0,
+          "W_first_refused_s": 0.0015,
+          "W_presented_after": 123,
+          "detail": "an effect committed 2.01 s after the withdrawal; T is 0.001 s; refused from 0.00 s (bracket 0.00\u20130.00 s)",
+          "effects_after_T_s": [
+            2.0052
+          ],
+          "effects_after_withdrawal_s": [
+            2.0052
+          ],
+          "effects_inside_T_s": [],
+          "held_answer": {
+            "code": "queued",
+            "reason": "held by the recorder; retry in 2 s without a new status check"
+          },
+          "held_answered_s": -0.0025,
+          "held_attempts": 1,
+          "held_commit_s": 2.0052,
+          "held_sent_s": -0.0062,
+          "k": 4,
+          "ok": false,
+          "outcome": "late",
+          "retry_after_asked_s": 5.001,
+          "withdrawal_s": 0.0
+        }
+      ]
+    }
+  ],
+  "seed": 19,
+  "version_check": {
+    "P19": {
+      "fixture": "sha256:0d6e0cf26818f48263359f5bf4398e8805e0e44a9acd8fe8007797d3562b737c",
+      "probe": "sha256:59209b69202a33b8685261003b288de5c9d4b15935bba821531e6bc337f56550"
+    },
+    "claim_rule_version": "sha256:523c0e318ef295f34a0fd573132920656006307a3cccab6ad78e687a7f46a322",
+    "kit_known_bad_status_unchanged": true,
+    "versions_moved": []
+  }
+}
