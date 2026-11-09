@@ -38,7 +38,10 @@ without a fresh check would commit after T and fail. This receiver caps its wait
 that hold.
 
 **The configurations** differ only in the bound the receiver states. Its mechanism, constants
-and code path are the same in each, so the three runs see the same receiver.
+and code path are the same in each. The example records one run, under ``stated-bound``, and
+grades that saved trace against the ``stated-bound`` claim and against the commit-time claim
+quoted in ``valid-at-commit-zero``. ``valid-at-commit`` remains for running P19 itself against
+a near-zero bound.
 
 | Configuration | Stated T | What it states |
 |---|---|---|
@@ -49,8 +52,8 @@ and code path are the same in each, so the three runs see the same receiver.
 Evidence grade: ``recorder`` (spec §3.8, the highest of KRK-19's four grades): every effect is
 the recorder's commit, timed on the kit's clock.
 
-This adapter states no claim basis (`not_claimed`, `claim_basis`): the runs are development
-runs of one variant, and the bound the probe grades is the one `withdrawal_bound` states.
+This adapter states no claim basis (`not_claimed`, `claim_basis`): the run is a development
+run of one variant, and the bound the probe grades is the one `withdrawal_bound` states.
 """
 from __future__ import annotations
 

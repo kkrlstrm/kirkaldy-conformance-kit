@@ -1,0 +1,349 @@
+{
+ "control_held": true,
+ "evidence_grade": "recorder",
+ "recorder_note": "The recorder is a controlled stand-in for the real mutation. It is the kit's own HTTP endpoint, placed where B's effect lands, and an effect's time is when the recorder wrote it, on the kit's clock. In a deployed integration the consequential mutation is whatever B's call changes downstream (a row, a message, a file), and it can sit behind further queues, retries or services and commit later than the call that requested it. The `recorder` grade means the effect was timed at this stand-in, downstream of B and outside B's own account of itself. It is not the time of a mutation in another organisation's system. In this example both ends are synthetic: the receiver is written for it, and the recorder is the kit's.",
+ "trace": "one-trace.json",
+ "trace_sha256": "sha256:b474af8897fa2bbecddb449ff22c8e7d26a937c1849d727d2d6567349eea2039",
+ "verdicts": [
+  {
+   "claim": {
+    "bound_s": 10.0,
+    "id": "stated-bound",
+    "quote": "B commits no effect under a withdrawn authorisation later than 10 s after the withdrawal is served by A's status source.",
+    "rule": "P19's own trial rule (conformance.timing.classify_trial) and variant rule (conformance.timing.aggregate), applied to the saved trace with T = 10 s"
+   },
+   "does_not_show": [
+    "It does not show the receiver's worst case. Its constants allow an effect up to 7 s after the dispatch check; this trace exercised a hold of about 2 s, because the receiver caps its wait at 2 s and the recorder accepted the retry.",
+    "It covers one variant under a development plan of 5 trials. It is not a published run and says nothing about the other KRK-19 variants.",
+    "The commit time is the recorder's (see the recorder note)."
+   ],
+   "effects_after_bound": [],
+   "effects_inside_bound": [
+    {
+     "committed_s": 2.0035,
+     "grade": "recorder",
+     "ref": "r-88d7113af0ce93c7",
+     "sent_s": -0.0048,
+     "tag": "in-flight",
+     "trial": 0,
+     "where": "inside_bound"
+    },
+    {
+     "committed_s": 2.0037,
+     "grade": "recorder",
+     "ref": "r-09e95654ce79617e",
+     "sent_s": -0.0053,
+     "tag": "in-flight",
+     "trial": 1,
+     "where": "inside_bound"
+    },
+    {
+     "committed_s": 1.9987,
+     "grade": "recorder",
+     "ref": "r-344a405c41f79a6d",
+     "sent_s": -0.0053,
+     "tag": "in-flight",
+     "trial": 2,
+     "where": "inside_bound"
+    },
+    {
+     "committed_s": 2.005,
+     "grade": "recorder",
+     "ref": "r-fbbb2595db5e801d",
+     "sent_s": -0.0026,
+     "tag": "in-flight",
+     "trial": 3,
+     "where": "inside_bound"
+    },
+    {
+     "committed_s": 2.0033,
+     "grade": "recorder",
+     "ref": "r-8d4fd73928de6ed5",
+     "sent_s": -0.0052,
+     "tag": "in-flight",
+     "trial": 4,
+     "where": "inside_bound"
+    }
+   ],
+   "effects_unresolved": [],
+   "ok": true,
+   "reading": "refused_within_T",
+   "shows": [
+    "The receiver refused every new request under the withdrawn authorisation from 0.001 to 0.002 s after the withdrawal. The one request it had accepted for dispatch just before the withdrawal committed 1.999 to 2.005 s after it, inside 10 s, in each of 5 trials. KRK-19 as written allows that effect, so the claim reads pass.",
+    "The verdict is P19's own trial and variant rule applied to the saved file. It agrees, trial by trial, with the reading the probe wrote when it ran.",
+    "The effect inside T is listed with its time. P19's result today carries it only as the trial's time (the larger of the refusal onset and the latest effect), not as an effect committed after the withdrawal."
+   ],
+   "trace_sha256": "sha256:b474af8897fa2bbecddb449ff22c8e7d26a937c1849d727d2d6567349eea2039",
+   "trials": [
+    {
+     "detail": "refused from 0.00 s (bracket 0.00\u20130.00 s), nothing under it after 10 s, held",
+     "effects_after_withdrawal": [
+      {
+       "committed_s": 2.0035,
+       "grade": "recorder",
+       "ref": "r-88d7113af0ce93c7",
+       "sent_s": -0.0048,
+       "tag": "in-flight",
+       "trial": 0,
+       "where": "inside_bound"
+      }
+     ],
+     "k": 0,
+     "ok": true,
+     "outcome": "within",
+     "refused_from_s": 0.001,
+     "same_as_probe_at_run_time": true
+    },
+    {
+     "detail": "refused from 0.00 s (bracket 0.00\u20130.00 s), nothing under it after 10 s, held",
+     "effects_after_withdrawal": [
+      {
+       "committed_s": 2.0037,
+       "grade": "recorder",
+       "ref": "r-09e95654ce79617e",
+       "sent_s": -0.0053,
+       "tag": "in-flight",
+       "trial": 1,
+       "where": "inside_bound"
+      }
+     ],
+     "k": 1,
+     "ok": true,
+     "outcome": "within",
+     "refused_from_s": 0.0016,
+     "same_as_probe_at_run_time": true
+    },
+    {
+     "detail": "refused from 0.00 s (bracket 0.00\u20130.00 s), nothing under it after 10 s, held",
+     "effects_after_withdrawal": [
+      {
+       "committed_s": 1.9987,
+       "grade": "recorder",
+       "ref": "r-344a405c41f79a6d",
+       "sent_s": -0.0053,
+       "tag": "in-flight",
+       "trial": 2,
+       "where": "inside_bound"
+      }
+     ],
+     "k": 2,
+     "ok": true,
+     "outcome": "within",
+     "refused_from_s": 0.0013,
+     "same_as_probe_at_run_time": true
+    },
+    {
+     "detail": "refused from 0.00 s (bracket 0.00\u20130.00 s), nothing under it after 10 s, held",
+     "effects_after_withdrawal": [
+      {
+       "committed_s": 2.005,
+       "grade": "recorder",
+       "ref": "r-fbbb2595db5e801d",
+       "sent_s": -0.0026,
+       "tag": "in-flight",
+       "trial": 3,
+       "where": "inside_bound"
+      }
+     ],
+     "k": 3,
+     "ok": true,
+     "outcome": "within",
+     "refused_from_s": 0.0009,
+     "same_as_probe_at_run_time": true
+    },
+    {
+     "detail": "refused from 0.00 s (bracket 0.00\u20130.00 s), nothing under it after 10 s, held",
+     "effects_after_withdrawal": [
+      {
+       "committed_s": 2.0033,
+       "grade": "recorder",
+       "ref": "r-8d4fd73928de6ed5",
+       "sent_s": -0.0052,
+       "tag": "in-flight",
+       "trial": 4,
+       "where": "inside_bound"
+      }
+     ],
+     "k": 4,
+     "ok": true,
+     "outcome": "within",
+     "refused_from_s": 0.0015,
+     "same_as_probe_at_run_time": true
+    }
+   ],
+   "verdict": "pass"
+  },
+  {
+   "claim": {
+    "bound_s": 0.0,
+    "id": "commit-time",
+    "quote": "B commits no effect under an authorisation that is not valid at the moment the effect commits.",
+    "rule": "this example's rule (grade_commit_time): every effect under the withdrawn authorisation committed at the recorder more than the method's resolution after the withdrawal is a violation; one inside that resolution is unresolved"
+   },
+   "does_not_show": [
+    "The rule is this example's, not a kit property. P19 refuses a zero bound, and the spec does not yet say how a commit-time claim is read; version 0.3 is planned to.",
+    "The trace was recorded under the stated-bound configuration, so the probe held the in-flight effect with Retry-After 15 s (T + 5 s) and spaced its presentations for T = 10 s. For this receiver that does not change the effect's time, since it waits at most 2 s whatever Retry-After asks. For a receiver that honours Retry-After, a trace recorded under one bound is not the trace another bound would produce.",
+    "It does not show what a downstream system would do if it checked authority again before applying the effect. The recorder applies everything it is sent."
+   ],
+   "effects_after_bound": [
+    {
+     "committed_s": 2.0035,
+     "grade": "recorder",
+     "ref": "r-88d7113af0ce93c7",
+     "sent_s": -0.0048,
+     "tag": "in-flight",
+     "trial": 0,
+     "where": "after_bound"
+    },
+    {
+     "committed_s": 2.0037,
+     "grade": "recorder",
+     "ref": "r-09e95654ce79617e",
+     "sent_s": -0.0053,
+     "tag": "in-flight",
+     "trial": 1,
+     "where": "after_bound"
+    },
+    {
+     "committed_s": 1.9987,
+     "grade": "recorder",
+     "ref": "r-344a405c41f79a6d",
+     "sent_s": -0.0053,
+     "tag": "in-flight",
+     "trial": 2,
+     "where": "after_bound"
+    },
+    {
+     "committed_s": 2.005,
+     "grade": "recorder",
+     "ref": "r-fbbb2595db5e801d",
+     "sent_s": -0.0026,
+     "tag": "in-flight",
+     "trial": 3,
+     "where": "after_bound"
+    },
+    {
+     "committed_s": 2.0033,
+     "grade": "recorder",
+     "ref": "r-8d4fd73928de6ed5",
+     "sent_s": -0.0052,
+     "tag": "in-flight",
+     "trial": 4,
+     "where": "after_bound"
+    }
+   ],
+   "effects_inside_bound": [],
+   "effects_unresolved": [],
+   "ok": false,
+   "reading": "refused_late",
+   "resolution_s": 0.05,
+   "shows": [
+    "The same bytes fail a commit-time claim: the effect accepted for dispatch before the withdrawal committed 1.999 to 2.005 s after it, when the authorisation was no longer valid. Nothing in the receiver or the trace changed between the two verdicts; only the claim did.",
+    "The violation is far from the method's resolution: about 2.0 s after the withdrawal, against 0.05 s. No effect fell inside that resolution."
+   ],
+   "trace_sha256": "sha256:b474af8897fa2bbecddb449ff22c8e7d26a937c1849d727d2d6567349eea2039",
+   "trials": [
+    {
+     "detail": "an effect under the withdrawn authorisation committed 2.003 s after the withdrawal; the claim allows none after it (resolution 0.05 s)",
+     "effects_after_withdrawal": [
+      {
+       "committed_s": 2.0035,
+       "grade": "recorder",
+       "ref": "r-88d7113af0ce93c7",
+       "sent_s": -0.0048,
+       "tag": "in-flight",
+       "trial": 0,
+       "where": "after_bound"
+      }
+     ],
+     "k": 0,
+     "ok": false,
+     "outcome": "late",
+     "refused_from_s": 0.001
+    },
+    {
+     "detail": "an effect under the withdrawn authorisation committed 2.004 s after the withdrawal; the claim allows none after it (resolution 0.05 s)",
+     "effects_after_withdrawal": [
+      {
+       "committed_s": 2.0037,
+       "grade": "recorder",
+       "ref": "r-09e95654ce79617e",
+       "sent_s": -0.0053,
+       "tag": "in-flight",
+       "trial": 1,
+       "where": "after_bound"
+      }
+     ],
+     "k": 1,
+     "ok": false,
+     "outcome": "late",
+     "refused_from_s": 0.0016
+    },
+    {
+     "detail": "an effect under the withdrawn authorisation committed 1.999 s after the withdrawal; the claim allows none after it (resolution 0.05 s)",
+     "effects_after_withdrawal": [
+      {
+       "committed_s": 1.9987,
+       "grade": "recorder",
+       "ref": "r-344a405c41f79a6d",
+       "sent_s": -0.0053,
+       "tag": "in-flight",
+       "trial": 2,
+       "where": "after_bound"
+      }
+     ],
+     "k": 2,
+     "ok": false,
+     "outcome": "late",
+     "refused_from_s": 0.0013
+    },
+    {
+     "detail": "an effect under the withdrawn authorisation committed 2.005 s after the withdrawal; the claim allows none after it (resolution 0.05 s)",
+     "effects_after_withdrawal": [
+      {
+       "committed_s": 2.005,
+       "grade": "recorder",
+       "ref": "r-fbbb2595db5e801d",
+       "sent_s": -0.0026,
+       "tag": "in-flight",
+       "trial": 3,
+       "where": "after_bound"
+      }
+     ],
+     "k": 3,
+     "ok": false,
+     "outcome": "late",
+     "refused_from_s": 0.0009
+    },
+    {
+     "detail": "an effect under the withdrawn authorisation committed 2.003 s after the withdrawal; the claim allows none after it (resolution 0.05 s)",
+     "effects_after_withdrawal": [
+      {
+       "committed_s": 2.0033,
+       "grade": "recorder",
+       "ref": "r-8d4fd73928de6ed5",
+       "sent_s": -0.0052,
+       "tag": "in-flight",
+       "trial": 4,
+       "where": "after_bound"
+      }
+     ],
+     "k": 4,
+     "ok": false,
+     "outcome": "late",
+     "refused_from_s": 0.0015
+    }
+   ],
+   "verdict": "fail"
+  }
+ ],
+ "version_check": {
+  "P19": {
+   "fixture": "sha256:0d6e0cf26818f48263359f5bf4398e8805e0e44a9acd8fe8007797d3562b737c",
+   "probe": "sha256:59209b69202a33b8685261003b288de5c9d4b15935bba821531e6bc337f56550"
+  },
+  "claim_rule_version": "sha256:523c0e318ef295f34a0fd573132920656006307a3cccab6ad78e687a7f46a322",
+  "kit_known_bad_status_unchanged": true,
+  "versions_moved": []
+ }
+}

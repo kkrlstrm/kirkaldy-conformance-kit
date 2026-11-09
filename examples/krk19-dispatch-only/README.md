@@ -1,14 +1,20 @@
-# Worked example: a dispatch-only receiver under KRK-19
+# Worked example: one trace, two claims, a dispatch-only receiver under KRK-19
 
-This example runs P19 (KRK-19, withdrawal within T) against a synthetic receiver that checks an
-authorisation's status once, when it accepts a request for dispatch, and never again before the
-effect commits. It runs the in-flight variant twice, under two claims:
+This example records **one execution** of P19's in-flight variant (KRK-19, withdrawal within T)
+against a synthetic receiver that checks an authorisation's status once, when it accepts a
+request for dispatch, and never again before the effect commits. It saves that execution as a
+trace, then grades **the same saved trace** against two claims:
 
-- **Stated bound** (KRK-19 as written): B commits no effect under a withdrawn authorisation later
-  than T after the withdrawal was served, T being the bound B states. An effect inside T is
+- **Stated bound** (KRK-19 as written): "B commits no effect under a withdrawn authorisation
+  later than 10 s after the withdrawal is served by A's status source." An effect inside T is
   allowed.
-- **Valid at commit**: no effect commits under an authorisation that is no longer valid at the
-  moment it commits.
+- **Commit time**: "B commits no effect under an authorisation that is not valid at the moment
+  the effect commits."
+
+The probe runs once. Both verdicts read the same file and carry its SHA-256, so they cannot
+differ because two runs differed. In the trace, authority is valid when the held request is
+dispatched, the withdrawal reaches the receiver, and the in-flight operation commits about 2 s
+later. That trace passes the first claim and fails the second.
 
 No product is tested. Nothing is added to `targets/`, `conformance/` or `known_bad/`, and no
 probe, fixture or claim-rule version moves (checked by the script, below).
@@ -17,9 +23,10 @@ probe, fixture or claim-rule version moves (checked by the script, below).
 
 | Path | What it is |
 |---|---|
-| `adapters/dispatch_only/adapter.py` | The receiver and its P19 adapter. Its docstring states the mechanism, the bound and the reason for it. |
-| `run_example.py` | Records P19's known-bad gate, runs the probe, reads the evidence into the in-flight timeline, and checks that no version moved. |
-| `results/readings.json` | The readings of the runs reported below (seed 19). Raw evidence is written beside it and not committed. |
+| `adapters/dispatch_only/adapter.py` | The receiver and its P19 adapter. Its docstring states the mechanism, the bound and the reason for it. Both claims are quoted from its `BOUNDS`. |
+| `run_example.py` | Records P19's known-bad gate, runs the probe once, saves the trace, grades it against both claims, and checks that no version moved. `--grade-only` grades the saved trace without running anything. |
+| `results/one-trace.json` | The recorded execution: P19's own in-flight evidence file, unchanged, with the run's header (seed, bound as stated, evidence grade, control, the probe's own reading, probe and fixture versions). SHA-256 `b474af8897fa2bbecddb449ff22c8e7d26a937c1849d727d2d6567349eea2039`. |
+| `results/verdicts.json` | The two verdicts, each with the trace's SHA-256, every effect after the withdrawal with its time, position against the bound and evidence grade, and the notes below. |
 
 ## The receiver
 
@@ -33,118 +40,151 @@ Its bound: an effect can commit at most 1 s (status fetch) + 2 x 2 s (attempts) 
 = 7 s after the dispatch check that allowed it. It states T = 10 s.
 
 P19's in-flight variant presents a request just before the withdrawal and has the recorder hold
-its effect with 503 and `Retry-After` T + 5 s. That hold is longer than T by design, so a
-receiver that waited out the full `Retry-After` and then committed without a fresh check would
-fail under any T. This receiver caps its wait at 2 s. The request is held in flight for about
-2 s, and the stated T of 10 s is longer than that hold.
-
-The three configurations differ only in the bound stated; the receiver's code and constants are
-the same.
-
-| Configuration | Stated T |
-|---|---|
-| `stated-bound` | 10 s |
-| `valid-at-commit-zero` | 0 s, the commit-time claim written as a zero bound |
-| `valid-at-commit` | 0.001 s, the smallest positive bound at the receiver's stated 1 ms resolution |
+its effect with 503 and `Retry-After` T + 5 s (15 s here). That hold is longer than T by design,
+so a receiver that waited out the full `Retry-After` and then committed without a fresh check
+would fail under any T. This receiver caps its wait at 2 s, so the request is held in flight for
+about 2 s.
 
 ## Running it
 
 From the kit's root, with the kit's virtual environment (`make setup`):
 
 ```bash
-.venv/bin/python examples/krk19-dispatch-only/run_example.py
+.venv/bin/python examples/krk19-dispatch-only/run_example.py               # record once, then grade
+.venv/bin/python examples/krk19-dispatch-only/run_example.py --grade-only  # grade the saved trace
 ```
 
-It takes about ten minutes: about two for P19's known-bad gate, which `run` requires and which is
-recorded in this example's own store, and three to four for each timed run on the real clock. It
-sets `KIRKALDY_TARGETS_PATH` to `adapters/` and `KIRKALDY_RESULTS_DIR` to `results/`, and runs
-P19 with the development plan `{"variants": ["in_flight"]}` at the method's 5 trials for that
-variant. `--seed` and `--results` change the seed and the results root.
+Recording takes about five minutes: about two for P19's known-bad gate, which `run` requires
+and which is recorded in this example's own store, and three to four for the timed run on the
+real clock. It sets `KIRKALDY_TARGETS_PATH` to `adapters/` and `KIRKALDY_RESULTS_DIR` to
+`results/`, and runs P19 on `dispatch_only@stated-bound` with the development plan
+`{"variants": ["in_flight"]}` at the method's 5 trials for that variant, seed 19. A new
+recording replaces `one-trace.json`, and its times will differ by milliseconds.
 
-## Results
+`--grade-only` reads only `results/one-trace.json` and takes about a second.
+
+## The trace
 
 Every time is seconds on the kit's one clock, measured from `t_w`, the stub A's commit of the
 snapshot that shows the withdrawal (t_w = 0). The held request's dispatch check happened between
-its send and B's `queued` answer. The commit is the recorder's.
+its send and B's `queued` answer, so authority was valid at dispatch. The commit is the
+recorder's. The control held.
 
-### Run 1: stated bound, T = 10 s
-
-**pass** on `in_flight` (development plan: one variant, 5 trials): `refused_within_T`, N = 5,
-max 2.007 s, median 2.006 s, 0 late.
-
-| Trial | Held request sent | B answered `queued` | Withdrawal served | Held effect committed | Inside T | After T | New requests under W refused from |
+| Trial | Held request sent | B answered `queued` | Withdrawal served | Held effect committed | New requests under W after t_w | Refused | Refused from |
 |---|---|---|---|---|---|---|---|
-| 0 | -0.006 | -0.003 | 0 | 2.006 | 2.006 | none | 0.002 |
-| 1 | -0.006 | -0.003 | 0 | 2.002 | 2.002 | none | 0.001 |
-| 2 | -0.005 | -0.002 | 0 | 2.007 | 2.007 | none | 0.002 |
-| 3 | -0.003 | -0.000 | 0 | 2.007 | 2.007 | none | 0.001 |
-| 4 | -0.006 | -0.002 | 0 | 2.003 | 2.003 | none | 0.002 |
+| 0 | -0.0048 | -0.0021 | 0 | 2.0035 | 52 | 52 | 0.0010 |
+| 1 | -0.0053 | -0.0017 | 0 | 2.0037 | 52 | 52 | 0.0016 |
+| 2 | -0.0053 | -0.0022 | 0 | 1.9987 | 53 | 53 | 0.0013 |
+| 3 | -0.0026 | -0.0005 | 0 | 2.0050 | 52 | 52 | 0.0009 |
+| 4 | -0.0052 | -0.0020 | 0 | 2.0033 | 53 | 53 | 0.0015 |
 
-In every trial one effect under the withdrawn authorisation committed after the withdrawal and
-inside T: the held request, about 2.0 s after `t_w`. Every new request under it (52 or 53 per
-trial) was refused, the first within 2 ms. (A time shown as -0.000 is a few tenths of a
-millisecond before the withdrawal.)
+In each trial the receiver made one attempt that the recorder held, then retried 2 s later
+without a new status check, and the retry committed. That held effect is the only effect under
+the withdrawn authorisation after `t_w`. All 262 new requests under it were refused.
 
-The result does carry the 2 s, but not as its own reading. P19 records each trial's latest effect
-after the withdrawal (`last_effect_s`) and takes the trial's time as the larger of that and the
-refusal onset, so the check reads "max 2.007 s" while B refused new requests from 0.001 s. It
-does not say that 2.007 s is an effect committed after the withdrawal, and it keeps only the
-latest such effect per trial.
+## Verdict 1: stated bound, T = 10 s: pass
 
-### Run 2: valid at commit
+Graded with P19's own trial rule (`conformance.timing.classify_trial`) and variant rule
+(`conformance.timing.aggregate`), applied read-only to the saved trace. Reading:
+`refused_within_T`. Every trial reads `within`, the same outcome and latest effect that the
+probe wrote when it ran.
 
-**T = 0 s: inconclusive, before any trial.** P19 refuses the bound as input: "T_s must be a
-positive number or None, not 0.0". The control does not run, no trial runs, and no evidence
-grade is read. P19 as written cannot take a zero bound.
+Effects under the withdrawn authorisation after `t_w`:
 
-**T = 0.001 s: fail** on `in_flight`: `refused_late`, N = 5, max 2.011 s, median 2.005 s, 5 of
-5 trials late.
+| Trial | Effect | Committed | Against T = 10 s | Evidence grade |
+|---|---|---|---|---|
+| 0 | held request | 2.0035 | inside | `recorder` |
+| 1 | held request | 2.0037 | inside | `recorder` |
+| 2 | held request | 1.9987 | inside | `recorder` |
+| 3 | held request | 2.0050 | inside | `recorder` |
+| 4 | held request | 2.0033 | inside | `recorder` |
 
-| Trial | Held request sent | B answered `queued` | Withdrawal served | Held effect committed | Inside T | After T | New requests under W refused from |
-|---|---|---|---|---|---|---|---|
-| 0 | -0.006 | -0.003 | 0 | 2.001 | none | 2.001 | 0.001 |
-| 1 | -0.006 | -0.003 | 0 | 2.008 | none | 2.008 | 0.001 |
-| 2 | -0.006 | -0.003 | 0 | 1.999 | none | 1.999 | 0.002 |
-| 3 | -0.003 | -0.000 | 0 | 2.010 | none | 2.010 | 0.001 |
-| 4 | -0.006 | -0.003 | 0 | 2.005 | none | 2.005 | 0.002 |
+**What this shows.** The receiver refused every new request under the withdrawn authorisation
+within 2 ms of the withdrawal. The one request it had accepted for dispatch just before
+the withdrawal committed about 2.0 s after it, inside 10 s, in all 5 trials. KRK-19 as written
+allows that effect, so the claim passes. P19's result today carries the 2 s only as the trial's
+time (the larger of the refusal onset and the latest effect), not as an effect committed after
+the withdrawal. The list above is that reading.
 
-The trace has the same shape as run 1: the held effect commits about 2 s after the withdrawal,
-and every new request under W is refused. Only the stated bound changed, and the same commit is
-now late. The result also reports the bound as below what the method can measure (`below_floor`
-true, measurement floor 0.251 s).
+**What it does not show.** It does not show the receiver's worst case: its constants allow an
+effect up to 7 s after the dispatch check, and this trace exercised a hold of about 2 s. It
+covers one variant under a development plan of 5 trials; it is not a published run and says
+nothing about the other KRK-19 variants. The commit time is the recorder's (see below).
 
-### Evidence grade
+## Verdict 2: commit time: fail
 
-Both graded readings are at the `recorder` grade, the highest of KRK-19's four (§3.8): each
-effect is the commit at the kit's recorder, downstream of B, timed on the kit's clock. The zero
-bound was refused before any grade was read. The disclosure class of the failing run is
-`conformance`.
+P19 cannot take this claim: it refuses a zero bound before any trial ("T_s must be a positive
+number or None"). The trace is graded by this example's own rule (`grade_commit_time` in
+`run_example.py`): the authorisation is no longer valid from `t_w`, so every effect under it that
+the recorder committed more than the method's resolution after `t_w` is a violation, and one
+inside that resolution is unresolved and gets no verdict. The resolution is 0.05 s, the larger of
+50 ms and the receiver's stated 1 ms. Reading: `refused_late`, all 5 trials `late`.
 
-### Versions
+Effects under the withdrawn authorisation after `t_w`:
+
+| Trial | Effect | Committed | Against a bound of 0 | Evidence grade |
+|---|---|---|---|---|
+| 0 | held request | 2.0035 | after | `recorder` |
+| 1 | held request | 2.0037 | after | `recorder` |
+| 2 | held request | 1.9987 | after | `recorder` |
+| 3 | held request | 2.0050 | after | `recorder` |
+| 4 | held request | 2.0033 | after | `recorder` |
+
+No effect is inside the bound, and none falls within the 0.05 s resolution.
+
+**What this shows.** The same bytes fail a commit-time claim. The effect accepted for dispatch
+before the withdrawal committed about 2.0 s after it, when the authorisation was no longer
+valid. Nothing in the receiver or the trace changed between the two verdicts; only the claim
+did. The violation is about 40 times the method's resolution.
+
+**What it does not show.** The rule is this example's, not a kit property, and the spec does not
+yet say how a commit-time claim is read. The trace was recorded under the stated-bound
+configuration, so the probe held the effect with `Retry-After` 15 s and spaced its presentations
+for T = 10 s. For this receiver that does not change the effect's time, because it waits at
+most 2 s whatever `Retry-After` asks; for a receiver that honours `Retry-After`, a trace
+recorded under one bound is not the trace another bound would produce. It does not show what a
+downstream system would do if it checked authority again before applying the effect: the
+recorder applies everything it is sent.
+
+## The recorder is a stand-in
+
+Both verdicts are at the `recorder` grade, the highest of KRK-19's four (spec §3.8). That grade
+says where the effect was timed, and it is worth being exact about what that point is.
+
+The recorder is a controlled stand-in for the real mutation. It is the kit's own HTTP endpoint,
+placed where B's effect lands, and an effect's time is when the recorder wrote it, on the kit's
+clock. In a deployed integration the consequential mutation is whatever B's call changes
+downstream (a row, a message, a file). It can sit behind further queues, retries or services,
+and commit later than the call that requested it. The `recorder` grade means the effect was timed
+at this stand-in, downstream of B and outside B's own account of itself. It is not the time of a
+mutation in another organisation's system. In this example both ends are synthetic: the receiver
+is written for it, and the recorder is the kit's.
+
+## Versions
 
 The script hashes every property's probe and fixture versions and the claim-basis rule before
 and after, and reads the kit's own `known-bad --status` before and after. Nothing moved and the
 status read the same. P19's probe version is
 `sha256:59209b69202a33b8685261003b288de5c9d4b15935bba821531e6bc337f56550`, its fixture version
 `sha256:0d6e0cf26818f48263359f5bf4398e8805e0e44a9acd8fe8007797d3562b737c`, and the claim-basis
-rule `sha256:523c0e318ef295f34a0fd573132920656006307a3cccab6ad78e687a7f46a322`.
+rule `sha256:523c0e318ef295f34a0fd573132920656006307a3cccab6ad78e687a7f46a322`. The trace records
+the same probe and fixture versions.
 
-## What it shows
+## What it shows for the spec
 
 1. **Effects inside T are a separate reading.** Under the stated bound, the dispatch-only
    receiver passes while one effect per trial commits about 2 s after the withdrawal. That is
-   what KRK-19 as written allows, and a reader of the result should see it directly. The script
-   reads it from the evidence files: per trial, every effect under the withdrawn authorisation
-   that committed after `t_w`, with its time, split into inside T and after T. Version 0.3 is
-   planned to report this reading in the result itself.
-2. **A commit-time bound needs its own reading rule.** §3.7 rule 4 asks for presentations spaced
-   at most T/20 apart, with one just before the bound and one just after it. At T = 0 neither can
-   be placed, and P19 refuses the bound. At T = 0.001 s the spacing stays at its 0.2 s minimum,
-   the presentation just before the bound would fall before the withdrawal and is not sent, and
-   the result reports the bound as below what the method can measure. The in-flight variant does
-   not depend on that spacing: it compares the recorder's commit time with T directly (§3.7 rule
-   2), and here it decides the reading. Version 0.3 is planned to state how a commit-time bound
-   is read against rule 4.
+   what KRK-19 as written allows, and a reader of the result should see it directly, with its
+   time. Version 0.3 is planned to report this reading in the result itself.
+2. **A commit-time claim needs its own reading rule.** P19 refuses a zero bound, and §3.7 rule 4
+   (presentations spaced at most T/20 apart, one just before the bound and one just after it)
+   cannot be applied at zero. The in-flight variant does not depend on that spacing: it compares
+   the recorder's commit time with the bound directly (§3.7 rule 2), and it decides this trace.
+   Version 0.3 is planned to state how a commit-time claim is read.
 
 This example changes no probe. A development plan of one variant is not a published run, and
-the pass in run 1 covers only the in-flight variant.
+the pass covers only the in-flight variant.
+
+An earlier version of this example ran P19 three times, under T = 10 s, T = 0 and T = 0.001 s
+([`685bc3b`](https://github.com/kkrlstrm/kirkaldy-conformance-kit/tree/685bc3bd3115a0c7b9893572bf5351083b74e9bc/examples/krk19-dispatch-only)).
+This version records once and grades the one trace twice.

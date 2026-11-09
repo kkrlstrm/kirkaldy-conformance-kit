@@ -1,2 +1,3 @@
 results/*
-!results/readings.json
+!results/one-trace.json
+!results/verdicts.json
