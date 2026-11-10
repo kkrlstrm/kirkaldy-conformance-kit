@@ -56,7 +56,7 @@ fixture version moves; the rule's own version is `rule_version`, and a result th
    property's form inventory (`inventory`), and refuses with `ClaimBasisIncomplete`. A form the
    inventory did not foresee that is still claimed without a basis after the probe makes the
    published result inconclusive. A development run only flags such forms, in
-   ``claimed_without_stated_basis``. The inventory covers P20 to P26 (P24 to P26
+   ``claimed_without_stated_basis``. The inventory covers P20 to P26 and P28 (P24 to P26
    folded in from the former ``claim_forms.py``); a check-level property needs a
    default basis ``*``.
 
@@ -86,14 +86,14 @@ RENEWAL_FIELD = "claim_rule_version"
 SOURCES = ("documentation", "specification", "README", "interface", "standard")
 SHOWN = 5
 """At most this many unclaimed form ids are named in a summary."""
-FORM_LEVEL = ("P20", "P21", "P22", "P23", "P24", "P25", "P26")
+FORM_LEVEL = ("P20", "P21", "P22", "P23", "P24", "P25", "P26", "P28")
 """Properties whose results carry ``extra["forms"]``: their forms are ``<variant>/<form>``. Every
 other property's forms are its checks. P24 to P26 were folded in from ``claim_forms.py``."""
 CONTROL_CHECK = "control"
 """A check of this name is the property's control (P25 and P26 write one), never a form."""
 MUST_LAND_FIELD = "must_land_missed"
-"""``extra`` field where a probe lists the forms that must land and did not. P21, P24
-and P26 write it; P18, P18B, P19, P20, P22, P23 and P25 will at their next probe change."""
+"""``extra`` field where a probe lists the forms that must land and did not. P19, P21,
+P24, P26 and P28 write it; P18, P18B, P20, P22, P23 and P25 will at their next probe change."""
 EXTRA_CHECKS = {"P20": ("recovery",)}
 """Checks a form-level property writes beside its variants (P20 judges recovery after each outage
 as its own check). `tests/test_claim_basis.py` runs each form-level property's toys and fails if

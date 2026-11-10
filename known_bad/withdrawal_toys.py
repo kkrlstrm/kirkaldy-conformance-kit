@@ -60,6 +60,14 @@ next poll, within T/4.
 the kit's `deliver` after the toy's answer delay, through the clock's own scheduler, so the kit
 reads the answer time from its clock as it would from a real B. On the real clock `present`
 sleeps for the delay instead.
+
+**A commit-time bound** (`COMMIT_CASES`). ``commit-good`` states T and a commit-time bound;
+``commit-only-good`` states the commit-time bound alone. Both are the correct toy, and also fetch
+A's status afresh before every decision and before retrying a held effect, refusing when the
+fetch fails, so nothing commits under an authority that is not valid at that moment; each MUST
+pass. ``commit-bad`` and ``commit-only-bad`` state the same bounds, check status when a request
+arrives, and retry a held effect after at most `DISPATCH_ONLY_WAIT_S` without checking again: the
+retry commits inside T, so every T reading holds, and the commit-time row fails; each MUST fail.
 """
 from __future__ import annotations
 
@@ -99,6 +107,13 @@ LATE_BY = 1.2
 """``slow_and_late`` acts on a withdrawal only this many T after it first sees it."""
 RECOVERY_HOLD = 0.75
 """``recovers_late`` keeps refusing this many T after the source is back."""
+COMMIT_CASES = {"commit-good": "pass", "commit-only-good": "pass", "commit-bad": "fail",
+                "commit-only-bad": "fail"}
+"""The commit-time configurations and the outcome each must give (module docstring)."""
+DISPATCH_ONLY_WAIT_S = 2.0
+"""``commit-bad`` waits at most this long before retrying a held effect, unchecked."""
+COMMIT_QUOTE = ("toy: 'no effect commits under an authorisation that is not valid at the moment "
+                "it commits'")
 
 
 class ToyWithdrawal:
@@ -117,6 +132,12 @@ class ToyWithdrawal:
         self.delays = SLOW if config == "slow-good" else SLOW_LATE if flaw == "slow_and_late" \
             else {}
         self.no_control = config == "no-control"
+        if config.startswith("commit") and config not in COMMIT_CASES:
+            raise ValueError(f"unknown commit-time configuration {config!r}")
+        self.commit = config in COMMIT_CASES
+        """States a commit-time bound; fetches status afresh before every decision."""
+        self.commit_only = config.startswith("commit-only")
+        self.dispatch_only = self.commit and config.endswith("-bad")
         self.T = float(T)
         self.clock = clock
         self._clock: Any = None
@@ -158,10 +179,16 @@ class ToyWithdrawal:
         return "B"
 
     def withdrawal_bound(self) -> Dict[str, Any]:
-        return {"T_s": self.T, "statistic": "max", "source": "documented",
-                "quote": f"toy: 'a withdrawal takes effect within {self.T:g} seconds'",
-                "url": "known_bad/withdrawal_toys.py", "setting": "", "recovery_s": self.T / 2,
-                "clock_tolerance_s": 5.0, "resolution_s": 0.001}
+        b = {"T_s": self.T, "statistic": "max", "source": "documented",
+             "quote": f"toy: 'a withdrawal takes effect within {self.T:g} seconds'",
+             "url": "known_bad/withdrawal_toys.py", "setting": "", "recovery_s": self.T / 2,
+             "clock_tolerance_s": 5.0, "resolution_s": 0.001}
+        if self.commit:
+            b["commit_time"] = {"source": "documented", "quote": COMMIT_QUOTE,
+                                "url": "known_bad/withdrawal_toys.py"}
+        if self.commit_only:
+            b.update(T_s=None, statistic=None, source="unstated", quote="not stated")
+        return b
 
     def channels(self) -> List[str]:
         return ["pull-list"]
@@ -499,6 +526,8 @@ class ToyWithdrawal:
             skip = True
         if self.flaw == "signature_and_expiry_only" and a_signed:
             skip = True
+        if self.commit and not self._fresh():
+            return _answer("refused", "status-unavailable at commit")
         if not skip:
             why = self._status(chain, values, p.headers.get(requester.STAPLE_HEADER))
             if why:
@@ -517,6 +546,8 @@ class ToyWithdrawal:
             return _answer("refused", f"effect failed: {type(e).__name__}")
         if code == 503:
             wait = float(headers.get("retry-after") or 5)
+            if self.dispatch_only:
+                wait = min(wait, DISPATCH_ONLY_WAIT_S)
             c = self._c()
             c.call_at(c.now() + wait, lambda: self._retry(chain, values))
             return _answer("queued", f"held; retry in {wait:g} s")
@@ -525,9 +556,20 @@ class ToyWithdrawal:
         return _answer("executed", "performed")
 
     def _retry(self, chain: List[Dict[str, Any]], values: Dict[str, Any]) -> None:
+        if self.dispatch_only:
+            self._effect(chain, values, retry=True)              # checked at arrival only
+            return
+        if self.commit and not self._fresh():
+            return                                               # no status at commit: dropped
         if self.flaw != "checks_on_arrival_only" and self._status(chain, values, None):
             return                                               # withdrawn since: dropped
         self._effect(chain, values, retry=True)
+
+    def _fresh(self) -> bool:
+        """The commit-time toys: fetch A's status now; False when the fetch failed."""
+        before = self.fetch_errors
+        self._fetch()
+        return self.fetch_errors == before
 
 
 class _KeepAlive:

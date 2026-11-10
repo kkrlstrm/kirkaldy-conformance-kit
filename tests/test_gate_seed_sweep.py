@@ -40,6 +40,7 @@ REGRESSION = (103, 128, 1556072351281476649)
 SEEDS_PER_PROPERTY = {
     **{f"P{i}": 3 for i in range(1, 16)},      # no seed reaches the probe: repeats only
     "P16": 50, "P17": 50, "P18": 50, "P19": 30, "P23": 50, "P24": 50, "P25": 50, "P26": 50,
+    "P28": 50,
     "P18B": 50,
     "P20": 50, "P21": 50,                      # about ten minutes per seed each
     "P22": 24,

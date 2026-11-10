@@ -21,7 +21,7 @@ keywords:
 references:
   - type: report
     title: "Kirkaldy Conformance Properties for Agent Infrastructure"
-    version: "0.2"
+    version: "0.3"
     doi: "10.5281/zenodo.23962761"
     authors:
       - family-names: Karlstrom

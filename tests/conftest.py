@@ -89,8 +89,21 @@ def _register_x11_toys() -> None:
     toys.TOYS.setdefault("P26", _translation)
 
 
+def _register_x13_toys() -> None:
+    """P28's toys (`known_bad.stop_toys`), registered here for the same reason as P20's to
+    P23's: this file is in no property's hashed set."""
+    from known_bad import toys
+
+    def _stop(config: str):
+        from known_bad.stop_toys import toy
+        return toy(config)
+
+    toys.TOYS.setdefault("P28", _stop)
+
+
 _register_x1x5_toys()
 _register_x9_toys()
 _register_x2_toys()
 _register_x6_toys()
 _register_x11_toys()
+_register_x13_toys()

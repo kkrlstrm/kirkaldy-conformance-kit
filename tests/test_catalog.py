@@ -19,9 +19,10 @@ def test_the_catalog_parses():
     assert len(SECTIONS) >= 10
 
 
-RESERVED = {49, 149} | {135, 136, 137, 138, 144, 146}
+RESERVED = {49, 149} | {135, 136, 137, 138, 144, 146} | set(range(211, 220)) | set(range(230, 240))
 """Numbers the catalog may skip. 49 and 149: no design has named them. 135 to 138, 144 and 146:
-the B-issuer design's modes for P19B, P20B and P16B, pinned when those are built."""
+the B-issuer design's modes for P19B, P20B and P16B, pinned when those are built. 211 to 219 and
+230 to 239: reserved, as the specification reserves them (`docs/FAILURE-MODES.md`)."""
 
 
 def test_ids_are_contiguous():

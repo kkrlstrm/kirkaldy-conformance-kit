@@ -1,6 +1,6 @@
 # Measurement failure modes
 
-Two hundred and two ways a probe in this kit produced, or could produce, a wrong reading. They
+Two hundred and twelve ways a probe in this kit produced, or could produce, a wrong reading. They
 share one shape: **the measurement agreed with the mistake.** A blocked request that was never
 sent through a real failure, a "refusal" caused by something unrelated, a timestamp that happened
 to separate two actors.
@@ -15,14 +15,16 @@ KRK-M48 and KRK-M50 to KRK-M65 to P19, KRK-M67 to KRK-M79, KRK-M93 and KRK-M94 t
 KRK-M92 to P21, KRK-M95 to P20 and P21, KRK-M96 to KRK-M112 and KRK-M210 to P22, KRK-M113 to KRK-M129 to P23,
 KRK-M130 to KRK-M134, KRK-M139 to KRK-M143, KRK-M145 and KRK-M147 to the
 B-issuer profile (P18B), KRK-M150 to KRK-M169 to P24, KRK-M170 to
-KRK-M189 to P25, KRK-M190 to KRK-M209 to P26, and KRK-M148 to every property. Where an entry also
-applies to other properties, the table says so. No entry names a target or describes an
-unpublished product finding.
+KRK-M189 to P25, KRK-M190 to KRK-M209 to P26, KRK-M220 to KRK-M229 to P28, and KRK-M148 to
+every property. Where an entry also applies to other properties, the table says so. No entry names
+a target or describes an unpublished product finding.
 
 The numbers are the specification's (`KRK-Mn`, spec §5). Entries KRK-M1 to KRK-M66 are written
 as the specification states them: there, `KRK-n` is the property this kit calls `Pn`, and a
 section sign refers to the specification. The numbers 49 and 149 are not used. KRK-M135 to
-KRK-M138, KRK-M144 and KRK-M146 are reserved for B-issuer phases not yet built (at the end).
+KRK-M138, KRK-M144 and KRK-M146 are reserved for B-issuer phases not yet built, and KRK-M211 to
+KRK-M219 and KRK-M230 to KRK-M239 are reserved. KRK-M240 to KRK-M249 have no entry here yet. All
+three are explained at the end.
 
 Each mode states what happened or could happen, why nothing noticed, and the check that now
 prevents it, and is pinned to a test that shows the failure and its fix. `tests/test_catalog.py`
@@ -237,6 +239,16 @@ which a control could not hold for a target it should have judged.
 | `KRK-M208` | A pricing sheet cached at start | P26 |
 | `KRK-M209` | A stale original read as a translation fault | P26 |
 | `KRK-M210` | A seeded draw that never reached the flaw | P22 |
+| `KRK-M220` | Read before the late effect | P28 |
+| `KRK-M221` | The race that never happened | P28 |
+| `KRK-M222` | The wrong surface | P28 |
+| `KRK-M223` | The recorder's own idempotence | P28 |
+| `KRK-M224` | Driven through the wrong entry point (a stop) | P28 |
+| `KRK-M225` | A refused stop, read as an answer | P28 |
+| `KRK-M226` | A placeholder result, read as the kept result | P28 |
+| `KRK-M227` | A cut drawn by the seed | P28 |
+| `KRK-M228` | A correction read as the first answer | P28 |
+| `KRK-M229` | A stop that prevented nothing, read as a wrong answer | P28 |
 
 ---
 
@@ -3295,6 +3307,194 @@ seeds. This moved P22's probe version.
 
 ---
 
+## KRK-M220 — Read before the late effect
+
+**Anticipated**, while designing P28. Not observed.
+
+**What could happen.** The tester reads the target's record right after the stop, before the
+in-flight effect lands, and scores "not run" as correct. A target that writes "cancelled" and
+drops the call passes, although the effect lands a moment later.
+
+**Why nothing would notice.** At the moment of the read the record and the recorder agree: nothing
+has landed yet. The disagreement appears only after the read.
+
+**The fix.** After a trial's last scripted step the probe waits out the settle: the larger of the
+target's stated stop grace and call timeout, plus a margin (`p28_stop_answer.MARGIN_S`). Only then
+does it read the recorder, the record and what the target tells the requester, and the final read
+decides. A read right after the stop is kept, and is graded only for KRK-M228.
+
+> `test_failure_modes_x13.py::test_KRK_M220_the_final_read_waits_out_the_grace_and_the_effect`
+
+---
+
+## KRK-M221 — The race that never happened
+
+**Anticipated**, while designing P28. Not observed.
+
+**What could happen.** A trial meant to stop an action before it was dispatched stops it after the
+call already left, or a trial meant to stop an effect in flight stops it after the effect and the
+result. The reading is credited to a form the trial never tested: a correct "ran" passes the
+before-dispatch form.
+
+**Why nothing would notice.** Each reading is genuine and correctly graded; only the order of
+events is wrong, and the target's record does not show that order.
+
+**The fix.** Every trial checks its shape from the recorder's own sequence numbers (and, for the
+late result, its times): the call had not reached the executor when the stop was sent; the call had
+started before the stop and its effect landed after it; the result left after the stop, or before
+it and was delivered after it; the late result came after the stated grace. A trial that fails its
+shape reads `race_missed`, which is information, and a form with no counted trial does not land.
+
+> `test_failure_modes_x13.py::test_KRK_M221_a_stop_before_dispatch_that_came_after_it_is_not_a_reading`
+
+---
+
+## KRK-M222 — The wrong surface
+
+**Anticipated**, while designing P28. Not observed.
+
+**What could happen.** The target's internal record holds the result of a stopped call, while what
+it tells the model says the call was cancelled with no result. Grading the record passes a target
+that misleads the model into doing the action again.
+
+**Why nothing would notice.** The record is the natural thing to read and it is correct.
+
+**The fix.** Every trial reads both surfaces, the record (`record`) and what the target tells
+whoever acts next (`told`), and grades each against the recorder. The trial passes only if both
+pass; a failure names its surface.
+
+> `test_failure_modes_x13.py::test_KRK_M222_the_requesters_surface_is_read_beside_the_record`
+
+---
+
+## KRK-M223 — The recorder's own idempotence
+
+**Anticipated**, while designing P28. Not observed.
+
+**What could happen.** A target re-sends a stopped call (a retry policy, or a model told nothing
+happened), and a recorder that merges repeated effects by item counts one effect. The repeat is
+invisible.
+
+**Why nothing would notice.** The merged count matches what the target records.
+
+**The fix.** The kit's recorder (`conformance.stop_executor.Recorder`) is append-only and keeps one
+event per item per attempt and one `received` event per dispatch. What landed is read from those
+events; a call dispatched more than once is reported (`repeated_dispatch`).
+
+> `test_failure_modes_x13.py::test_KRK_M223_the_recorder_counts_every_attempt`
+
+---
+
+## KRK-M224 — Driven through the wrong entry point (a stop)
+
+**Anticipated**, while designing P28; the same error as KRK-M13 for a stop. Not observed.
+
+**What could happen.** A target has more than one way to stop (an interface control, an API call,
+a signal), and they behave differently. A result obtained through one is reported as the target's.
+
+**Why nothing would notice.** Each entry point answers; nothing in the trial says which was used.
+
+**The fix.** The adapter must name the entry point it drives (`stop_entry_point`); without it the
+probe gives no verdict. The result and its summary carry the name.
+
+> `test_failure_modes_x13.py::test_KRK_M224_a_stop_with_no_named_entry_point_gives_no_verdict`
+
+---
+
+## KRK-M225 — A refused stop, read as an answer
+
+**Anticipated**, while designing P28. Not observed.
+
+**What could happen.** The target refuses the stop (or never acknowledges it), runs the call to
+completion and records "ran". The trial reads as a stop answered truthfully, though no stop was
+taken.
+
+**Why nothing would notice.** The record matches the recorder, and a refusal looks like any other
+reply from the stop call.
+
+**The fix.** A trial counts only when the target accepts the stop (`accepted: true`). Otherwise it
+reads `stop_not_accepted`, information; a form with no accepted stop does not land, and the result
+is inconclusive.
+
+> `test_failure_modes_x13.py::test_KRK_M225_a_refused_stop_is_not_read_as_an_answer_to_a_stop`
+
+---
+
+## KRK-M226 — A placeholder result, read as the kept result
+
+**Anticipated**, while designing P28. Not observed.
+
+**What could happen.** After a stop the target records the call as ran with a generic result
+("completed") of its own, not the result the tool returned. A grader that checks only the state
+passes a target that discarded the result.
+
+**Why nothing would notice.** The state is right; only the value is invented.
+
+**The fix.** Every result the kit's executor returns carries a fresh random token from the operating
+system, never the seed. Where a result was offered, a reading of `ran` or `partial` must carry that
+token; any other value is `result_discarded`.
+
+> `test_failure_modes_x13.py::test_KRK_M226_a_placeholder_result_is_not_the_result_kept`
+
+---
+
+## KRK-M227 — A cut drawn by the seed
+
+**Anticipated**, while designing P28, from KRK-M210. Not observed.
+
+**What could happen.** The items that land before a partial stop are drawn by the seed. Under some
+seeds they are always the first items in the planned order, and a target that assumes the executor
+works in plan order (it records the first k planned items as done) passes.
+
+**Why nothing would notice.** Every trial is genuine and correctly graded; the flaw is reached only
+under some seeds.
+
+**The fix.** `partial` has two forms that run in every run: `prefix` (the first items) and
+`not_prefix`, whose landed items never include the first planned item, so they are never a prefix
+whatever the seed draws. The seed chooses counts and items within a form, never which forms run.
+
+> `test_failure_modes_x13.py::test_KRK_M227_a_cut_that_is_not_a_prefix_is_judged_on_every_seed`
+
+---
+
+## KRK-M228 — A correction read as the first answer
+
+**Anticipated**, while designing P28. Not observed.
+
+**What could happen.** At the stop the target tells the model the call was cancelled with no result,
+then corrects both its record and the model's view when the result arrives. Read only at the end,
+it passes; but the model acted on the first answer in between.
+
+**Why nothing would notice.** The final reads are all correct.
+
+**The fix.** The probe reads what the target tells the requester right after the stop is accepted,
+as well as at the end. If that first answer says "not run" and an effect then landed, the trial
+fails (`ran_recorded_as_stopped`, or `partial_recorded_as_none`). Other early answers (pending,
+unknown) are not graded.
+
+> `test_failure_modes_x13.py::test_KRK_M228_an_answer_corrected_later_fails_on_the_first_read`
+
+---
+
+## KRK-M229 — A stop that prevented nothing, read as a wrong answer
+
+**Anticipated**, while designing P28. Not observed.
+
+**What could happen.** A target accepts a stop and does not act on it: a held action is dispatched
+anyway and its effect lands. A grader that counts the effect against P28 fails a target whose
+record and answer are true, and mixes P28 with KRK-9 and KRK-19.
+
+**Why nothing would notice.** An effect after a stop looks like the failure a stop property should
+catch.
+
+**The fix.** P28 grades only the record and the answer against the recorder. Effects of calls that
+reached the executor after the stop are counted as information (`extra.effect_after_stop`); a
+known-good toy that accepts every stop and acts on none (`good-unstoppable`) must pass.
+
+> `test_failure_modes_x13.py::test_KRK_M229_a_stop_that_prevented_nothing_is_not_a_wrong_answer`
+
+---
+
 ## Reserved for later B-issuer phases
 
 KRK-M135 (the revocation route's own latency, charged as propagation; P19B), KRK-M136 (one
@@ -3303,3 +3503,12 @@ withdrawn; P19B, P20B), KRK-M138 (a sibling under the same consent; P19B), KRK-M
 re-encoding, read as B's answer; P16B) and KRK-M146 (a store read's time, read as the commit time;
 P19B, P20B) are named in the B-issuer design and get their entries, with pins, when
 P19B, P20B and P16B are built.
+
+## Reserved numbers, and entries to come
+
+KRK-M211 to KRK-M219 and KRK-M230 to KRK-M239 are reserved for properties not in version 0.3 of
+the specification.
+
+KRK-M240 to KRK-M249 are KRK-30's measurement errors, stated in version 0.3 of the specification.
+They enter this catalogue, under the same numbers and with their pins, with KRK-30's test code in
+a later release. Until then this catalogue carries 212 of the specification's 222 entries.

@@ -429,3 +429,154 @@ def test_the_dispatcher_on_the_real_clock_bounds_what_is_in_flight_and_times_out
     finally:
         d.close()
         run.clock.close()
+
+
+# --------------------------------------------------------------- effects inside T; commit time
+
+def _held_effect_retried_unchecked():
+    """The dispatch-only receiver: it checks status when a request arrives, and retries a held
+    effect after 2 s without checking again. It states T only."""
+    toy = ToyWithdrawal("commit-bad")
+    bound = toy.withdrawal_bound()
+    bound.pop("commit_time")
+    toy.withdrawal_bound = lambda: dict(bound)
+    return toy
+
+
+def test_every_effect_inside_t_is_a_reading_of_its_own_with_its_origin_and_time():
+    """An effect committed after the withdrawal and within T passes, and is listed, every one,
+    with the request it came from, its time and its grade, not only as a trial's time."""
+    r = _run(_held_effect_retried_unchecked(), "in", plan={"variants": ["in_flight"]})
+    assert r.status is Status.PASS, r.summary
+    assert _checks(r)["in_flight"] == ("refused_within_T", True)
+    got = r.extra["effects_inside_T"]
+    assert got["n"] == len(got["effects"]) == p19.TRIALS["*"]
+    assert got["by_variant"]["in_flight"]["trials_with"] == p19.TRIALS["*"]
+    for e in got["effects"]:
+        assert e["variant"] == "in_flight" and e["origin"] == "in_flight"
+        assert e["grade"] == "recorder" and e["time_from"] == "recorder"
+        assert e["against_T"] == "inside" and 1.9 <= e["committed_s"] <= 2.1
+        assert e["sent_s"] <= 0
+    assert "within T" in r.summary and "extra.effects_inside_T" in r.summary
+    assert r.extra["bound_kinds"] == ["T"] and COMMIT not in _checks(r)
+
+
+COMMIT = p19.COMMIT_CHECK
+
+
+def test_every_effect_is_listed_not_only_the_latest_in_a_trial():
+    r = _run(make(), "all", plan={"trials": {"withdrawn": 5}, "variants": ["withdrawn"]})
+    v = r.extra["effects_inside_T"]["by_variant"]["withdrawn"]
+    assert v["n"] > v["trials_with"], v           # several effects in one trial, each listed
+    origins = {e["origin"] for e in r.extra["effects_inside_T"]["effects"]}
+    assert origins <= set(p19.ORIGINS) and "new" in origins
+
+
+@pytest.mark.parametrize("config,status,commit_ok,t_rows", [
+    ("commit-good", Status.PASS, True, True), ("commit-bad", Status.FAIL, False, True),
+    ("commit-only-good", Status.PASS, True, None), ("commit-only-bad", Status.FAIL, False, None)])
+def test_a_commit_time_bound_is_its_own_row_decided_by_the_in_flight_variant(
+        config, status, commit_ok, t_rows):
+    r = _run(ToyWithdrawal(config), config, plan={"trials": "dev"})
+    assert r.status is status, r.summary
+    ch = _checks(r)
+    assert ch[COMMIT][1] is commit_ok, ch[COMMIT]
+    others = {v: ok for v, (_o, ok) in ch.items() if v != COMMIT and ok is not None}
+    if t_rows:                 # T stated too: every variant judged against it, and all hold
+        assert others and all(others.values()), others
+        assert r.extra["bound_kinds"] == ["T", "commit_time"]
+    else:                      # alone: the variants are information, only its row decides
+        assert others == {}, others
+        assert r.extra["bound_kinds"] == ["commit_time"] and "finding" not in r.extra
+        assert r.summary.startswith("Development plan") and "commit-time bound" in r.summary
+    assert r.extra["commit_time"]["decided_by"] == "in_flight"
+    if commit_ok is False:
+        assert ch[COMMIT][0] == "committed_after_withdrawal"
+        assert r.extra["disclosure_forms"] == {COMMIT: {"class": "conformance",
+                                                        "reading": "committed_after_withdrawal"}}
+        assert r.extra["disclosure"] == "conformance"
+
+
+def test_t_zero_is_refused_and_a_commit_time_claim_has_its_own_statement():
+    toy = make()
+    toy.withdrawal_bound = lambda: {"T_s": 0, "source": "documented"}
+    r = _run(toy, "z")
+    assert r.status is Status.INCONCLUSIVE and "commit_time" in r.summary
+    toy = make()
+    toy.withdrawal_bound = lambda: {"T_s": 60.0, "source": "documented",
+                                    "commit_time": {"source": "assumed"}}
+    assert "commit-time bound is stated as a mapping" in _run(toy, "bad-src").summary
+
+
+def test_a_commit_time_bound_carried_in_protocol_data_never_decides_bs_verdict():
+    toy = ToyWithdrawal("commit-bad")
+    bound = dict(toy.withdrawal_bound(), commit_time={"source": "carried", "quote": "x"})
+    toy.withdrawal_bound = lambda: dict(bound)
+    r = _run(toy, "cc", plan={"variants": ["in_flight"]})
+    assert r.status is Status.PASS and COMMIT not in _checks(r)
+    assert r.extra["bound"]["carried_commit_time"]["source"] == "carried"
+
+
+def test_the_in_flight_variant_cannot_be_declared_not_applicable_under_a_commit_time_bound():
+    toy = ToyWithdrawal("commit-good")
+    toy.variants_not_applicable = lambda: {"in_flight": "we never hold an effect"}
+    r = _run(toy, "na-if")
+    assert r.status is Status.INCONCLUSIVE and "may not be" in r.summary
+    toy = make()
+    toy.variants_not_applicable = lambda: {"in_flight": "we never hold an effect"}
+    assert _checks(_run(toy, "na-if-t", plan={"trials": "dev", "variants": [
+        "withdrawn", "in_flight"]}))["in_flight"][0] == "not_applicable"
+
+
+def test_an_effect_within_the_resolution_is_unresolved_and_withholds_the_row():
+    """§3.7 rule 9: more than ε after the withdrawal fails, within ε gives no reading; no
+    spacing of presentations enters."""
+    from types import SimpleNamespace
+    from conformance.timing import TrialOutcome
+    ok = TrialOutcome("within", True)
+
+    def log(*ts):
+        return SimpleNamespace(form="", effects=[{"committed_s": t, "origin": "in_flight"}
+                                                 for t in ts])
+    assert p19._commit_trial(log(), ok, 0.05).outcome == "valid_at_commit"
+    assert p19._commit_trial(log(0.03), ok, 0.05).outcome == "unresolved"
+    assert p19._commit_trial(log(0.03, 0.2), ok, 0.05).ok is False
+    crossing = TrialOutcome("inconclusive", None)          # T's spacing rule: not this row's
+    assert p19._commit_trial(log(), crossing, 0.05).ok is True
+    info = TrialOutcome("collateral_refusal", None, detail="L refused")
+    assert p19._commit_trial(log(0.2), info, 0.05).outcome == "collateral_refusal"
+    c = {"source": "documented"}
+    outs = [p19._commit_trial(log(), ok, 0.05)] * 4 + [p19._commit_trial(log(0.03), ok, 0.05)]
+    assert p19._commit_check(outs, 5, 0.05, c).outcome == "unresolved"
+    assert p19._commit_check(outs, 4, 0.05, c).ok is True
+    outs.append(p19._commit_trial(log(1.0), ok, 0.05))
+    assert p19._commit_check(outs, 5, 0.05, c).ok is False
+
+
+def test_the_checks_that_must_land_and_each_failing_checks_class_are_in_the_result():
+    r = _run(make("leaf_only"), "ml", plan={"trials": "dev",
+                                            "variants": ["withdrawn", "parent_withdrawn"]})
+    assert r.status is Status.FAIL
+    assert r.extra["disclosure_forms"]["parent_withdrawn"]["class"] == "vulnerability"
+    assert r.extra["disclosure"] == "vulnerability"
+    assert r.extra["must_land_missed"] == []
+    r = _run(make(), "ml2", plan={"trials": "dev", "variants": ["withdrawn"]})
+    assert r.extra["must_land_missed"] == [] and r.extra["disclosure_forms"] == {}
+
+
+def test_the_commit_time_toys_are_registered_with_the_known_bad_gate():
+    from conformance import knownbad
+    from known_bad.withdrawal_toys import COMMIT_CASES
+    cases = dict(knownbad.cases("P19"))
+    for c, s in COMMIT_CASES.items():
+        assert cases[c] is Status(s)
+        assert knownbad._toy("P19", c).commit
+
+
+def test_below_the_recorder_grade_a_commit_time_bound_has_no_reading():
+    """§3.7 rule 9 reads the recorder's commit; B's own answer is not a commit time (§3.8)."""
+    toy = ToyWithdrawal("commit-good")
+    toy.evidence_grade = lambda: "b-response"
+    r = _run(toy, "grade", plan={"trials": "dev", "variants": ["withdrawn", "in_flight"]})
+    assert _checks(r)[COMMIT] == ("grade_below_recorder", None)
+    assert r.status is Status.INCONCLUSIVE and COMMIT in r.extra["must_land_missed"]

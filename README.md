@@ -19,8 +19,11 @@ guarantees, raw evidence behind every verdict.
 The properties are defined in the Kirkaldy specification (`KRK-n`; this code calls KRK-n `Pn`),
 published on Zenodo: *Kirkaldy Conformance Properties for Agent Infrastructure*,
 doi:[10.5281/zenodo.23962761](https://doi.org/10.5281/zenodo.23962761) (all versions; it opens the newest).
-Version 0.2 (doi:10.5281/zenodo.23966843) defines KRK-1 to KRK-26 and the B-issuer profile; the
-properties marked *provisional* below are provisional in it.
+Version 0.2 (doi:10.5281/zenodo.23966843) defines KRK-1 to KRK-26 and the B-issuer profile.
+Version 0.3 adds KRK-28, KRK-30 and KRK-32 to KRK-39, all provisional; the properties marked
+*provisional* below are provisional in it. This code tests KRK-28 as P28. The test code for KRK-30
+follows in a later release, and KRK-32 to KRK-39 are stated without tests. KRK-27, KRK-29 and
+KRK-31 are reserved.
 Where the code and the specification differ, the specification is the statement of the property
 and the difference is a defect in one of them.
 
@@ -48,7 +51,7 @@ and the difference is a defect in one of them.
 | P16 | Effect receipt (KRK-16) | Does the product record an approved action that changes another organisation's system as done only on a receipt that organisation signed with a key the product pinned, naming this exact request and reporting the effect expected at approval? When the receipt is about another request, unsigned, signed by an unpinned key, reports a different or partial effect, is missing, is replaced by the executor's own report, or is a signed refusal or a signed "no record of this request", is the action left not done, and is a disputed "no record" left for a person to decide? Graded on the requesting side; it does not test the other organisation's honesty. |
 | P17 | Reconcilable two-sided record (KRK-17) | Can the product's record of its actions with another organisation be joined with that organisation's record, and is every difference between them (missing, contradicting, changed or removed after acknowledgement, renumbered, repeated) found, with both originals kept, nothing settled by overwriting either side, and no disagreement about an effect closed without a person's outcome? |
 | P18 | Payload bound, single use (KRK-18) | Does the receiving organisation perform an effect only for the exact request the requesting organisation authorised, addressed to it and still valid, and at most as often as that authorisation allows across every presentation, restart, endpoint and tenant; and does it answer a repeated presentation truthfully, without a second effect? Graded on the receiving side; a secondary family of five checks reads the requesting side. |
-| P19 | Withdrawal within T (KRK-19) | After the issuing organisation withdraws an authorisation, does the receiving organisation stop committing effects under it within the time it states, in every trial and at the worst phase, and does it keep refusing through retries, restarts, stale signed status and an unreachable status source, while still accepting what was not withdrawn? Graded on the receiving side; reported as a worst case over repeated trials, never a mean, and with no stated bound as the measured worst case. |
+| P19 | Withdrawal within T (KRK-19) | After the issuing organisation withdraws an authorisation, does the receiving organisation stop committing effects under it within the time it states, in every trial and at the worst phase, and does it keep refusing through retries, restarts, stale signed status and an unreachable status source, while still accepting what was not withdrawn? Graded on the receiving side; reported as a worst case over repeated trials, never a mean, and with no stated bound as the measured worst case. Every effect committed after the withdrawal and within T is listed as a reading of its own, with the request it came from and its time. A claim that no effect commits under an authority that is not valid when it commits is a bound kind of its own, decided by the in-flight variant alone, never a T of zero. |
 | P20 | Standing verifiable offline (provisional, KRK-20) | When the receiving organisation commits an effect for another organisation's agent, does it rest on evidence it checked itself that a principal at that organisation holds standing for this action, signed by a key the organisation still names, no older than the bound it states, including when the organisation cannot be reached, through a delegation chain and a hop into a third organisation? Graded on the receiving side, against the bound P19 reads; offline refusal is reported with the offline window, and a link the receiver's format cannot carry is a finding, never a pass. |
 | P21 | No widening along a delegation chain (provisional, KRK-21) | Does the receiving organisation commit an effect only inside the intersection of every grant in the presented chain, in amount (with currency and unit), operations, resources, audience, time and delegation depth, including across a hop into a third organisation, whatever form a hop takes and when a parent is narrowed after its child was issued? Refusing a chain with a wider hop and enforcing the intersection both pass, and the result says which; a dimension the receiver's format cannot carry is a finding. |
 | P22 | Cumulative ceiling across counterparties (provisional, KRK-22) | Does the total effect committed under a root and under every authority delegated from it, counted where the effects land at every counterparty, stay within the root's cumulative ceiling in every limit and window, however the agent spreads, races, retries, reverses or re-delegates its spending, and when a counterparty cannot reach the party that keeps the account? Graded per role, each in its own run: the holder that keeps the account (role A) and a spender (role B); the holder's own account is information, never the verdict. |
@@ -56,6 +59,7 @@ and the difference is a defect in one of them.
 | P24 | Purpose and terms bound (provisional, KRK-24) | Does the receiving organisation commit an effect only when it meets every term of the mandate it acts under (the purpose's declared coverage, required items as an exact fill, fixed values byte for byte, floors, the link to the action's own goal, and conditions such as the principal's confirmation, as well as its limits), never reading a term it cannot evaluate (unknown, sealed and not disclosed, or free text) as met? Graded on the receiving side, judged on the effect at the recorder; refusing, holding and performing only the part inside the terms all pass, and the result says which. |
 | P25 | Counterparty disclosure (provisional, KRK-25) | When the receiving organisation commits an effect for another organisation's agent, does its own record of it show that an agent acted, which one, and for whom, at the level the two agreed, taken only from evidence bound to that request by a party entitled to state it, with nothing more about the principal in its records or answers to other agents and organisations; does the record keep naming the principal after the delegation ends; and does it refuse an undisclosed request where it says it requires disclosure? Graded on the receiving side, read by value from the receiver's own record and store, in two profiles (the requesting organisation states the principal, or the receiver holds the person's consent); five clauses reported apart. |
 | P26 | The ceiling survives translation (provisional, KRK-26) | When an authority stated in one format is translated into another (a currency, a unit, a vocabulary, a token), does every effect committed under the translated form lie inside the original, read in the original's own terms through a mapping the target declared in advance: converted only through a declared rate and rounded toward the original's bound, with no constraint dropped, no value mapped without an entry, no member filled from a local default or a fallback, no wider validity, and nothing widened by a second translation; and does a receiver that holds both forms act only where both allow? Graded per topology, each in its own run: the translator alone (T, enacted by the kit's faithful receiver, never reported end to end), the receiver of both forms (R), and the system that maps and acts (TR). |
+| P28 | The stop's answer names what landed (provisional, KRK-28) | When a stop reaches the system that runs an agent's action (a runtime, a durable engine, a tool-calling harness) while the action is in flight, do its record of that action and what it tells whoever acts next match what landed at the kit's recorder: not run; ran, with the result it returned; ran in part, naming which part; or unknown, raised to a person or to the calling code, through the channel the adapter states before the run? Variants stop before dispatch (released at once, and released once the record shows the stop), while the effect executes, after the effect and before the result, part way through a multi-item action, and before a late result; the record must also tell a stop from a crash or a timeout. Graded on the record and the answer only: whether the stop prevented any effect is P9's and P19's question, and effects after a stop are reported as information. |
 
 The protocol for each is the docstring of its module in
 [`conformance/properties/`](conformance/properties/).
@@ -69,11 +73,11 @@ shapes (`revision`, `consent-id`, `rar-token`). It is kept in its own registry
 rows: its results are never compared with P18's. The interface is
 [`docs/KRK-BISSUER-INTERFACE.md`](docs/KRK-BISSUER-INTERFACE.md).
 
-**Design names.** Comments and some identifiers use the design names of the cross-organisation
-properties: X1 is P20, X2 is P24, X3 is P18, X4 is P19, X5 is P21, X6 is P25, X7 is P16, X8 is
-P17, X9 is P22, X10 is P23 and X11 is P26. The design documents themselves are not part of this
-repository; each property's module docstring and its interface file in [`docs/`](docs/) state
-what the code does.
+**Design names.** Comments and some identifiers use the design names of the properties built
+after P15: X1 is P20, X2 is P24, X3 is P18, X4 is P19, X5 is P21, X6 is P25, X7 is P16, X8 is
+P17, X9 is P22, X10 is P23, X11 is P26 and X13 is P28. The design documents themselves are not
+part of this repository; each property's module docstring and its interface file in
+[`docs/`](docs/) state what the code does.
 
 ## No valid control, no verdict
 
@@ -123,8 +127,8 @@ is under `results/`, which is not committed: a record made in another checkout d
 ## Why the controls matter
 
 The kit's own catalogue of how its measurements were wrong is
-[`docs/FAILURE-MODES.md`](docs/FAILURE-MODES.md): two hundred and two entries, numbered as the
-specification numbers them (KRK-M1 to KRK-M210, with gaps), each pinned to a test that shows the
+[`docs/FAILURE-MODES.md`](docs/FAILURE-MODES.md): two hundred and twelve entries, numbered as the
+specification numbers them (KRK-M1 to KRK-M229, with gaps), each pinned to a test that shows the
 failure and its fix. The first seventeen were observed while the probes ran against real
 products, and none raised an error. Three examples:
 
@@ -162,7 +166,7 @@ and no network beyond loopback.
 ```bash
 make setup                         # .venv with pytest, cryptography and pyjwt
 make test                          # the probes against their fixtures and the failure-mode pins
-make known-bad                     # record the known-bad gate for P1 to P26, then P18B
+make known-bad                     # record the known-bad gate for P1 to P26 and P28, then P18B
 make status                        # current, stale, failed or missing, per property
 make run TARGET=toys@P1-bad PROPS=P1      # drive one toy through the runner: P1 must fail
 make run TARGET=toys@P16-good PROPS=P16   # the correct receipt handler: P16 passes

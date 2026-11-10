@@ -1,5 +1,5 @@
 """The B-issuer registry `ALL_BISSUER` beside `ALL`. `ALL` is exactly
-P1 to P26; lookups by id read both; the full known-bad gate is P1 to P26; P18B is gated when named;
+P1 to P26 and P28; lookups by id read both; the full known-bad gate is `ALL`; P18B is gated when named;
 the runner routes by stated authority; and the matrix keeps B-issuer results in rows of their own,
 never in a column beside P18 (design §5.3)."""
 import json
@@ -18,11 +18,14 @@ def _results(tmp_path, monkeypatch):
     monkeypatch.setattr("conformance.evidence.RESULTS", tmp_path)
 
 
-def test_all_is_exactly_p1_to_p26():
-    assert list(ALL) == [f"P{i}" for i in range(1, 27)]
+BUILT = [f"P{i}" for i in range(1, 27)] + ["P28"]
+
+
+def test_all_is_exactly_p1_to_p26_and_p28():
+    assert list(ALL) == BUILT
     assert list(ALL_BISSUER) == ["P18B"]
     assert not set(ALL) & set(ALL_BISSUER)
-    assert known("P18B") and known("P18") and known("P26") and not known("P27")
+    assert known("P18B") and known("P18") and known("P26") and known("P28")
     assert module("P18B").ID == "P18B"
     with pytest.raises(KeyError):
         module("P99")
@@ -55,7 +58,7 @@ def test_the_gate_names_p18b_cases_and_the_full_gate_skips_it():
     assert got["rar-token:bad:writes_unaccepted"] is Status.FAIL
     assert "revision:bad:accepts_subset" not in got
     assert len(got) == 3 * 5 + 3 * 25 - 3
-    assert ordered(list(ALL)) == [f"P{i}" for i in range(1, 27)]
+    assert ordered(list(ALL)) == BUILT
 
 
 def test_the_gate_records_p18b_only_when_named(tmp_path, monkeypatch):

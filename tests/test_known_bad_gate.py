@@ -44,7 +44,7 @@ def _edit(monkeypatch, path_fragment):
 def test_record_runs_every_toy_of_every_property_and_appends_one_record_each(tmp_path, capsys):
     assert runner.main(["known-bad", "--record"]) == 0
     recs = _records(tmp_path)
-    assert [r["property_id"] for r in recs] == [f"P{i}" for i in range(1, 27)]
+    assert [r["property_id"] for r in recs] == [f"P{i}" for i in range(1, 27)] + ["P28"]
     for r in recs:
         assert r["schema"] == "kirkaldy.known-bad/0.1" and r["ok"] is True, r
         assert (r["probe_version"], r["fixture_version"]) == knownbad.current_versions(
@@ -68,9 +68,10 @@ def test_record_runs_every_toy_of_every_property_and_appends_one_record_each(tmp
         ({"good", "bad", "no-control", "a-good", "a-no-control"}
          | {f"bad:{f}" for f in BINDING_FLAWS} | {f"a-bad:{f}" for f in A_FLAWS})
     p19 = next(r for r in recs if r["property_id"] == "P19")
-    from known_bad.withdrawal_toys import FLAWS as WITHDRAWAL_FLAWS
+    from known_bad.withdrawal_toys import COMMIT_CASES, FLAWS as WITHDRAWAL_FLAWS
     assert _toys(p19) == \
-        {"good", "bad", "no-control", "slow-good"} | {f"bad:{f}" for f in WITHDRAWAL_FLAWS}
+        {"good", "bad", "no-control", "slow-good"} | {f"bad:{f}" for f in WITHDRAWAL_FLAWS} \
+        | set(COMMIT_CASES)
     p20 = next(r for r in recs if r["property_id"] == "P20")
     from known_bad.standing_toys import FLAWS as STANDING_FLAWS
     assert _toys(p20) == \
@@ -95,6 +96,9 @@ def test_record_runs_every_toy_of_every_property_and_appends_one_record_each(tmp
     p26 = next(r for r in recs if r["property_id"] == "P26")
     from known_bad.translation_toys import cases as translation_cases
     assert _toys(p26) == {c for c, _ in translation_cases()}
+    p28 = next(r for r in recs if r["property_id"] == "P28")
+    from known_bad.stop_toys import cases as stop_cases
+    assert _toys(p28) == {c for c, _ in stop_cases()}
     assert {c["config"]: c["required"] for c in recs[0]["cases"]
             if not c["config"].startswith("claims:")} == \
         {"good": "pass", "bad": "fail", "no-control": "inconclusive"}

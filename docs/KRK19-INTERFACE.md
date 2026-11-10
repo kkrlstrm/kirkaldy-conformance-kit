@@ -25,6 +25,18 @@ docstring are what the code does.
   the published state back in B's profile (KRK-M26, KRK-M50).
 - **Effects count where they land**: an effect committed at the recorder after `t_w + T`, or a
   presentation sent after `t_w + T` and accepted, is late, whenever the request arrived.
+- **Effects inside T are a reading of their own.** Every effect under the withdrawn authority
+  committed after `t_w` and within T is listed in `extra.effects_inside_T`, every one, not only the
+  latest in a trial, with the request it came from (`ORIGINS`), its time and its grade. They are
+  within the promise and never fail. Reason: a pass under a stated T allows them, and a reader
+  should see them directly rather than as one trial's time.
+- **A commit-time bound is a bound kind of its own.** A claim that B commits no effect under an
+  authority that is not valid when the effect commits is stated as `commit_time`, never as T = 0
+  (which is still refused). It is decided by `in_flight` alone, in a row of its own
+  (`commit_time`): an effect committed more than ε after `t_w` fails, one within ε is
+  `unresolved` (no reading). The spacing of presentations (§3.7, rule 4) plays no part. With T
+  stated too, both are judged; with no T, the other variants are information. Reason: no spacing
+  resolves a bound of zero, and the in-flight variant times a commit directly.
 - **A refusal counts only if it is about the withdrawal**: each trial pairs W with a live sibling
   L; L refused is `collateral_refusal` except where refusing L is the fail-safe
   (`source_unreachable`, `stale_signed_snapshot` served or rolled back).
@@ -270,6 +282,37 @@ lower grades read B's answers); `max_rate()` is not read. `presentation_forms` i
 takes only A-signed requests is presented, after the withdrawal, only requests A signed before it
 (a pool signed per trial), since an honest A signs nothing under a withdrawn grant.
 
+**Effects inside T** (`extra.effects_inside_T`): `n`, `by_variant` (`n`, `trials_with`,
+`max_s`), and `effects`, one entry per effect: `variant`, `form`, `trial`, `ref`, `origin`
+(`ORIGINS`: `new`, `session_opened_earlier`, `signed_before_withdrawal`, `queued`, `in_flight`),
+`tag`, `sent_s`, `committed_s` (the recorder's time after `t_w`, or B's answer time below the
+recorder grade, `time_from`), `judged_s` where the network allowance moves it, `grade`, and
+`against_T`. Every trial's document lists every effect after `t_w` as
+`effects_after_withdrawal`, with `against_T` and, under a commit-time bound,
+`against_commit_time` (`after` or `unresolved`). For `narrowed` the effects are those of the part
+outside the new ceiling; for `regrant/reinstated`, those before the reinstatement.
+
+**A commit-time bound.** `withdrawal_bound()` may carry `commit_time`: `{"source": one of
+COMMIT_SOURCES ("documented", "configured", "carried"), "quote", "url"}`. A `carried` one is kept
+as `bound.carried_commit_time` and never decides B's verdict. Where one is stated, `in_flight`
+may not be declared not applicable, and the probe adds the check `commit_time`
+(`COMMIT_CHECK`): `valid_at_commit` (pass), `committed_after_withdrawal` (fail), `unresolved`
+(no reading, while unresolved trials leave fewer clean trials than the plan asks for),
+`grade_below_recorder` (no reading: below the recorder grade the commit is B's own account), or the
+trials' commonest information outcome. Per trial (`_commit_trial`): an information outcome of the
+T reading other than a crossing of T stays information; otherwise every effect under W after
+`t_w` is read against ε (`timing.epsilon_s` of the stated resolution). With no T, every variant's
+check is information (`ok` null, "read as pass" or "fail" in its detail), only `commit_time`
+must land, the summary leads with "commit-time bound, decided by the in_flight variant", and no
+`finding` is written. `extra.commit_time` holds the bound, the rule, ε and each trial's reading;
+`extra.bound_kinds` lists `T` and `commit_time` as stated. A commit-time failure is conformance
+class.
+
+**What every result now carries** (pending since the claim-basis change): `extra.must_land_missed`,
+the checks that must land and did not, also when a check failed; and `extra.disclosure_forms`,
+each failing check's class (`vulnerability` where the bound is documented or configured and the
+check is in `VULNERABLE` or `VULNERABLE_VARIANTS`, otherwise `conformance`).
+
 `NA_FORBIDDEN`: the control, `withdrawn`, `source_unreachable`, `recovery`;
 `presigned_after_withdrawal` where B takes A-signed requests; `stale_signed_snapshot` for a pull
 B; `worst_phase` for a pull-list B. The probe itself reads `worst_phase` not applicable without a
@@ -290,5 +333,17 @@ fails `withdrawn`, KRK-M48) and `recovers_late` (fails `recovery` as
 `recovered_late`). `slow-good` is the correct toy answering 0.6 T after an acceptance and 0.1 T after a
 refusal, through `present_deferred`; it must pass. Every toy states a recovery bound of T/2. The
 known-bad gate runs `good`, `bad` (`no_check`), `no-control`, `slow-good` and one `bad:<flaw>` per
-flaw, at the published trial counts on a virtual clock. Every toy that checks status reads its snapshot through
+flaw, at the published trial counts on a virtual clock. `COMMIT_CASES`: `commit-good` (T and a
+commit-time bound) and `commit-only-good` (the commit-time bound alone) fetch status afresh before
+every decision and before retrying a held effect, refusing when the fetch fails (MUST pass);
+`commit-bad` and `commit-only-bad` retry a held effect after at most 2 s without checking again,
+inside T (MUST fail, on `commit_time` only). Every toy that checks status reads its snapshot through
 `status.chain_state`, so an absent grant reads by the table in Module 1.
+
+## Probe change log
+
+| # | Change | Reason | Run that prompted it |
+|---|---|---|---|
+| 1 | Every effect committed after the withdrawal and within T is a reading of its own (`extra.effects_inside_T`), with its origin, time and grade; every trial lists every effect after the withdrawal. | A pass under a stated T allows effects inside T, and the result showed them only as one trial's time (the larger of the refusal onset and the latest effect). | A worked example run against a synthetic receiver; no target. |
+| 2 | A commit-time bound (`commit_time`), a bound kind of its own, decided by `in_flight` alone, in the row `commit_time`; T = 0 is still refused, with the message naming the commit-time statement. | No spacing of presentations resolves a bound of zero; the in-flight variant times a commit directly. | The same worked example. |
+| 3 | `extra.must_land_missed` and `extra.disclosure_forms` in every result. | Waiting since the claim-basis change for this property's next probe change. | none |

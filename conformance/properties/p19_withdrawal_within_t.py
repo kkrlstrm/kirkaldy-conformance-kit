@@ -19,7 +19,8 @@ commit times on the kit's clock. Role A (how fast A publishes) is version 2; an 
 `role()` is ``"A"`` reads inconclusive.
 
 **Decisions that bind the probe:** B's own stated T decides the verdict, a shorter limit A sets
-is information; with no stated T, W replaces T, the measured worst case is reported as the
+is information; a commit-time claim is a bound kind of its own, decided by the in-flight variant
+alone, never a T of zero; with no stated T, W replaces T, the measured worst case is reported as the
 effective bound and the missing bound as a finding; the configured value counts where the
 documentation ties it to withdrawal; a bound with no statistic is a maximum, a percentile is
 checked only with enough trials; 30 random-phase trials and 5 worst-phase for the main variant
@@ -111,12 +112,38 @@ Every presentation is a fresh request, so single use (X3) never explains a refus
 withdrawal" are not used: not refused by `t_w + W` is ``not_refused_within_W``, reported with W
 (KRK-M11).
 
+**Effects inside T.** Every effect under the withdrawn authority (for ``narrowed``, its part
+outside the new ceiling; for ``regrant/reinstated``, until the reinstatement) committed after
+`t_w` and within T is a reading of its own
+(``extra.effects_inside_T``): each one, not only the latest in a trial, with the request it came
+from (`ORIGINS`: new, on a session opened before the withdrawal, signed by A before it, or
+accepted before it and committed after it, queued or the held in-flight request), its time after
+`t_w`, and the grade it was read at. These effects are within the promise and never fail. Every
+trial's evidence lists every effect after `t_w` with its position against each stated bound
+(``effects_after_withdrawal``).
+
+**A commit-time bound** (`withdrawal_bound()["commit_time"]`): the claim that B commits no
+effect under an authority that is not valid when the effect commits. It is a bound kind of its
+own, never a T of zero, and it is decided by `COMMIT_VARIANT` alone, in a row of its own
+(`COMMIT_CHECK`): in each of its trials an effect under the withdrawn authority committed more
+than the method's resolution ε after `t_w` fails (``committed_after_withdrawal``), one within ε
+is ``unresolved`` (no reading), and none is ``valid_at_commit``. No spacing of presentations
+enters (spec §3.7, rule 9). It is read only at the ``recorder`` grade; below it the effect's
+commit is B's own account, and the row reads ``grade_below_recorder`` (no reading, so the result
+is inconclusive). With T stated as well, the
+variants are judged against T as before and the commit-time row is judged beside them; with no
+T, the other variants run and are reported as information, and only the commit-time row must
+land. A value carried in protocol data never decides B's verdict.
+
 **Result.** ``fail`` if any landed variant fails. ``pass`` only if the control held, every
 variant in `NA_FORBIDDEN` that applies landed with a verdict, no variant read ``inconclusive``,
 and every landed variant passed. ``inconclusive`` if the control did not hold, or nothing failed
-but a variant that must land did not, or a variant's brackets crossed its bound. With no stated T the summary leads with "no stated bound; measured worst case x s over N
-trials", never "pass" alone. The result carries the evidence grade, the bound as read with its
-source, the statistics of every variant, and the disclosure class.
+but a variant that must land did not, or a variant's brackets crossed its bound. With no stated
+bound at all the summary leads with "no stated bound; measured worst case x s over N trials",
+never "pass" alone. The result carries the evidence grade, the bound as read with its source,
+the statistics of every variant, the disclosure class with each failing check's class
+(``extra.disclosure_forms``), and the checks that must land and did not
+(``extra.must_land_missed``), also when a check failed.
 
 **A development plan** (`plan=`, or the environment variable `PLAN_ENV` holding JSON) may set
 smaller trial counts, a shorter window and stability window, or a subset of variants, for a
@@ -202,6 +229,18 @@ form) only for a pull B, ``worst_phase`` only for a pull-list B: elsewhere the p
 reads them not applicable, with the reason."""
 VULNERABLE = ("not_refused_within_W", "accepted_open")
 VULNERABLE_VARIANTS = ("stale_signed_snapshot", "parent_withdrawn", "same_session")
+COMMIT_CHECK = "commit_time"
+"""The check that reads a commit-time bound: a row of its own beside the variants' checks."""
+COMMIT_VARIANT = "in_flight"
+"""The only variant that decides a commit-time bound: it times a commit against the withdrawal
+directly, so the spacing of presentations (`timing.schedule`) plays no part in it."""
+COMMIT_SOURCES = ("documented", "configured", "carried")
+"""Where a commit-time bound may come from. ``carried`` (protocol data, set by A, which is the
+stub) is kept as information and never decides B's verdict, as for T."""
+ORIGINS = ("new", "session_opened_earlier", "signed_before_withdrawal", "queued", "in_flight")
+"""Where an effect committed after the withdrawal came from: a request sent after it (``new``,
+on a session opened before it, or one A signed before it), or one B accepted before it and
+committed after it (``queued``; ``in_flight`` for the request the recorder held)."""
 PLAN_ENV = "ACK_P19_PLAN"
 MAX_IN_FLIGHT = 32
 """At most this many presentations await B's answer at once (design §4.3, Load).
@@ -237,7 +276,10 @@ class Adapter(Protocol):
     def withdrawal_bound(self) -> Dict[str, Any]:
         """``{"T_s": float | None, "statistic", "source": one of BOUND_SOURCES, "quote", "url",
         "setting", "recovery_s", "clock_tolerance_s", "resolution_s"}``, read before the run
-        (design §5)."""
+        (design §5). A product that claims that B commits no effect under an authority that is
+        not valid when the effect commits states it as ``"commit_time": {"source": one of
+        COMMIT_SOURCES, "quote", "url"}``: a bound kind of its own, never ``T_s`` 0. It may
+        stand alone (``T_s`` None) or beside a T, and each is judged."""
         ...
 
     def channels(self) -> List[str]:
@@ -527,6 +569,8 @@ class _Run:
         self.prefix, self.agreement, self.bound = prefix, agreement, bound
         self.channels, self.forms, self.grade, self.rng = channels, forms, grade, rng
         self.T: Optional[float] = bound.get("T_s")
+        self.commit: Optional[Dict[str, Any]] = bound.get("commit_time") or None
+        """A commit-time bound B states (never one carried in protocol data), or None."""
         self.window, self.stability = window, stability
         self.resolution = bound.get("resolution_s")
         eps = list(agreement.get("endpoints") or ["default"])
@@ -1219,7 +1263,118 @@ def _finish(run: _Run, tr: _Trial, W: Any, L: Any) -> Any:
                    phase_s=tr.phase_s, resolution_s=run.resolution)
     log.grants = {"W": W.id, "L": L.id}  # type: ignore[attr-defined]
     log.notes = tr.notes  # type: ignore[attr-defined]
+    log.effects = _effects_after(run, tr) if tr.t_w is not None else []  # type: ignore[attr-defined]
     return log
+
+
+def _origin(run: _Run, variant: str, p: Any, t_w: float) -> str:
+    """Where an effect after the withdrawal came from (`ORIGINS`)."""
+    if p is None:
+        return "new"
+    if p.tag == "in-flight":           # presented just before the withdrawal (on a virtual
+        return "in_flight"             # clock, at the same reading)
+    if p.t_sent < t_w:
+        return "queued"
+    if p.tag.endswith(":old-session"):
+        return "session_opened_earlier"
+    if variant == "presigned_after_withdrawal" or run.signer == "a":
+        return "signed_before_withdrawal"
+    return "new"
+
+
+def _effects_after(run: _Run, tr: "_Trial") -> List[Dict[str, Any]]:
+    """Every effect under the withdrawn authority (for ``narrowed``, the part outside the new
+    ceiling) committed after `t_w`, each with the request it came from, its time and the grade
+    it was read at. At the ``recorder`` grade every commit the recorder made is listed, not one
+    per request; below it, B's acceptance stands for the effect (`fill`). ``committed_s`` is the
+    recorder's (or the answer's) time after `t_w`; ``judged_s``, where it differs, is the earliest
+    time the network allows for a B on other machines, the time every reading uses."""
+    t_w = tr.t_w
+    by_ref = {str(p.ref): p for p in tr.pres if p.under == "W"}
+    allow = run.net_allowance
+    out: List[Dict[str, Any]] = []
+
+    def add(p: Any, ref: str, t_eff: float, judged: float, where: str) -> None:
+        if judged <= t_w:
+            return
+        e = {"ref": ref, "origin": _origin(run, tr.variant, p, t_w),
+             "tag": getattr(p, "tag", "") or "", "sent_s": None if p is None else
+             round(p.t_sent - t_w, 4), "committed_s": round(t_eff - t_w, 4),
+             "time_from": where, "grade": run.grade}
+        if judged != t_eff:
+            e["judged_s"] = round(judged - t_w, 4)
+        out.append(e)
+
+    if run.grade == "recorder":
+        for r in sorted({str(x) for x in tr.w_refs}):
+            p = by_ref.get(r)
+            for t_rec in run.effect_times(r):
+                judged = t_rec
+                if allow > 0.0:
+                    judged = max(p.t_sent if p is not None else t_rec - allow, t_rec - allow)
+                add(p, r, t_rec, judged, "recorder")
+    else:
+        for p in tr.pres:
+            if p.under == "W" and p.effect_t is not None:
+                add(p, str(p.ref), p.effect_t, p.effect_t, "answer")
+    return sorted(out, key=lambda e: (e.get("judged_s", e["committed_s"]), e["ref"]))
+
+
+def _at(e: Dict[str, Any]) -> float:
+    """The time a reading uses for an effect: the earliest the network allows."""
+    return float(e.get("judged_s", e["committed_s"]))
+
+
+def _commit_trial(log: Any, o: Any, eps: float) -> Any:
+    """One ``in_flight`` trial read against a commit-time bound (§3.7, rule 9): the authority is
+    not valid from `t_w`, so an effect under it committed more than `eps` (the method's
+    resolution) after `t_w` is ``committed_after_withdrawal`` (fail); one within `eps` is
+    ``unresolved`` (no reading); none is ``valid_at_commit``. A trial the probe read as
+    information (`o`, its reading against T, other than a crossing of T, which is the spacing
+    rule's and has no place here) stays information. No spacing of presentations enters."""
+    from ..timing import INCONCLUSIVE, TrialOutcome
+    if o.ok is None and o.outcome != INCONCLUSIVE:
+        return TrialOutcome(o.outcome, None, detail=o.detail, form=log.form)
+    eff = getattr(log, "effects", []) or []
+    after = [e for e in eff if _at(e) > eps]
+    if after:
+        worst = max(_at(e) for e in after)
+        return TrialOutcome("committed_after_withdrawal", False, time_s=worst,
+                            last_effect_s=worst, form=log.form,
+                            detail=f"{len(after)} effect(s) under the withdrawn authority "
+                                   f"committed after the withdrawal, the latest {worst:.3f} s "
+                                   f"after it (resolution {eps:g} s); origins "
+                                   f"{sorted({e['origin'] for e in after})}")
+    if eff:
+        return TrialOutcome("unresolved", None, form=log.form,
+                            detail=f"{len(eff)} effect(s) within {eps:g} s of the withdrawal, "
+                                   f"below what the method resolves; no reading")
+    return TrialOutcome("valid_at_commit", True, form=log.form,
+                        detail="no effect under the withdrawn authority committed after the "
+                               "withdrawal")
+
+
+def _commit_check(outs: List[Any], need: int, eps: float, commit: Dict[str, Any]) -> Check:
+    """The commit-time row: fails if any trial did, gives no reading while an unresolved trial
+    leaves fewer clean trials than the plan asks for, and passes otherwise."""
+    src = f"{commit.get('source')} commit-time bound"
+    fails = [o for o in outs if o.ok is False]
+    clean = sum(1 for o in outs if o.ok)
+    unres = [o for o in outs if o.outcome == "unresolved"]
+    n = f"{COMMIT_VARIANT}, {len(outs)} trial(s), resolution {eps:g} s ({src})"
+    if fails:
+        w = max(fails, key=lambda o: o.time_s or 0.0)
+        return Check(COMMIT_CHECK, "committed_after_withdrawal", False, f"{n}: {w.detail}")
+    if unres and clean < need:
+        return Check(COMMIT_CHECK, "unresolved", None, f"{n}: {len(unres)} unresolved, {clean} "
+                     f"clean, {need} needed; {unres[0].detail}")
+    if not clean:
+        infos = [o.outcome for o in outs]
+        lab = max(sorted(set(infos)), key=infos.count) if infos else "not_run"
+        return Check(COMMIT_CHECK, lab, None, f"{n}: no trial landed with a reading"
+                     + (f"; e.g. {outs[0].detail}" if outs else ""))
+    return Check(COMMIT_CHECK, "valid_at_commit", True, f"{n}: no effect under the withdrawn "
+                 f"authority committed after the withdrawal in {clean} trial(s)")
 
 
 def _scheduler_doc(log: Any, counts: Dict[str, int]) -> Dict[str, Any]:
@@ -1433,7 +1588,19 @@ def probe(a: Any, ev: Evidence, *, run_tag: str = "", seed: Optional[int] = None
     T = bound.get("T_s")
     if T is not None and (not isinstance(T, (int, float)) or T <= 0):
         return Result.inconclusive(a.name, ID, f"T_s must be a positive number or None, not "
-                                   f"{T!r}", **common)
+                                   f"{T!r}; a claim that no effect commits under an authority "
+                                   f"that is not valid when it commits is stated as "
+                                   f"'commit_time', a bound kind of its own, never as T = 0",
+                                   **common)
+    commit = bound.get("commit_time")
+    if commit is not None and (not isinstance(commit, dict)
+                               or commit.get("source") not in COMMIT_SOURCES):
+        return Result.inconclusive(a.name, ID, f"a commit-time bound is stated as a mapping "
+                                   f"whose source is one of {COMMIT_SOURCES}", **common)
+    if commit is not None and commit["source"] == "carried":
+        # Set by A, which here is the stub: it never decides B's verdict; the value is kept.
+        bound = {**bound, "carried_commit_time": commit, "commit_time": None}
+        commit = None
     if bound.get("source") not in BOUND_SOURCES:
         return Result.inconclusive(a.name, ID, f"the bound's source must be one of "
                                    f"{BOUND_SOURCES}", **common)
@@ -1470,6 +1637,8 @@ def probe(a: Any, ev: Evidence, *, run_tag: str = "", seed: Optional[int] = None
         forbidden.append("stale_signed_snapshot")
     if "pull-list" in channels:
         forbidden.append("worst_phase")
+    if commit is not None:
+        forbidden.append(COMMIT_VARIANT)     # it alone decides the commit-time bound
     bad = sorted(v for v in na if v in forbidden or v not in VARIANTS)
     if bad:
         return Result.inconclusive(a.name, ID, f"the adapter declares {bad} not applicable; "
@@ -1601,6 +1770,10 @@ def _variants(run: _Run, a: Any, ev: Evidence, common: Dict[str, Any], bound: Di
     recovery: List[Any] = []
     gaps_note: Dict[str, str] = {}
     trial_docs: Dict[str, List[Dict[str, Any]]] = {}
+    commit = run.commit
+    eps = timing.epsilon_s(run.resolution)
+    commit_outs: List[Any] = []
+    inside_T: List[Dict[str, Any]] = []
     for variant in order:
         if variant in na or variant not in only:
             continue
@@ -1625,6 +1798,25 @@ def _variants(run: _Run, a: Any, ev: Evidence, common: Dict[str, Any], bound: Di
                 log, extra = _run_trial(run, variant, form, k)
                 o = _judge_trial(run, log, extra)
                 outcomes.setdefault(variant, []).append(o)
+                effects = [dict(e) for e in getattr(log, "effects", []) or []]
+                if variant == "regrant" and form == "reinstated" \
+                        and extra.get("mid_at") is not None:
+                    # after the reinstatement W is in force again: its effects are not under a
+                    # withdrawn authority
+                    cut = extra["mid_at"] - log.t_w
+                    effects = [e for e in effects if _at(e) <= cut]
+                for e in effects:
+                    if T:
+                        e["against_T"] = "inside" if _at(e) <= T else "after"
+                        if e["against_T"] == "inside":
+                            inside_T.append({"variant": variant, "form": form, "trial": k,
+                                             **e})
+                    if commit is not None:
+                        e["against_commit_time"] = "after" if _at(e) > eps else "unresolved"
+                co = None
+                if commit is not None and variant == COMMIT_VARIANT:
+                    co = _commit_trial(log, o, eps)
+                    commit_outs.append(co)
                 if "recovery" in extra:
                     r = extra["recovery"]
                     br = r.get("bracket")
@@ -1635,7 +1827,10 @@ def _variants(run: _Run, a: Any, ev: Evidence, common: Dict[str, Any], bound: Di
                 doc = {"form": form, "k": k, "outcome": o.to_doc(), "extra": _jsonable(extra),
                        "t_w_kit": log.t_w, "phase_s": log.phase_s,
                        "scheduler": _scheduler_doc(log, dict(run.disp.trial)),
+                       "effects_after_withdrawal": effects,
                        "presentations": [_pres_doc(p, log.t_w) for p in log.presentations]}
+                if co is not None:
+                    doc["commit_time"] = co.to_doc()
                 trial_docs.setdefault(variant, []).append(doc)
                 run.log("trial", variant=variant, **doc)
         if variant in trial_docs:
@@ -1719,6 +1914,26 @@ def _variants(run: _Run, a: Any, ev: Evidence, common: Dict[str, Any], bound: Di
             c = Check(c.name, c.outcome, c.ok, f"{c.detail} (adapter note: {notes[variant]})")
         checks.append(c)
 
+    commit_only = commit is not None and T is None
+    if commit_only:
+        # A commit-time bound alone: the in-flight variant decides it, and every variant's
+        # reading against the window is information (KRK-19, "How T is read").
+        checks = [c if c.ok is None else Check(
+            c.name, c.outcome, None, f"information under a commit-time bound, read as "
+            f"{'pass' if c.ok else 'fail'}: {c.detail}") for c in checks]
+    if commit is not None:
+        if run.grade != "recorder":
+            checks.append(Check(COMMIT_CHECK, "grade_below_recorder", None, f"a commit-time "
+                                f"bound is read only from commits timed at the recorder (spec "
+                                f"§3.7 rule 9); at the {run.grade} grade the effect's commit is "
+                                f"B's own account, so the row has no reading"))
+        elif COMMIT_VARIANT in only:
+            checks.append(_commit_check(commit_outs, _need(plan, COMMIT_VARIANT, channels),
+                                        eps, commit))
+        else:
+            checks.append(Check(COMMIT_CHECK, "not_run", None, f"the plan does not run "
+                                f"{COMMIT_VARIANT}, which alone decides a commit-time bound"))
+
     fails = [c for c in checks if c.ok is False]
     pull_list = "pull-list" in channels
     must = ["withdrawn", "source_unreachable", "recovery"]
@@ -1728,10 +1943,15 @@ def _variants(run: _Run, a: Any, ev: Evidence, common: Dict[str, Any], bound: Di
         must.append("stale_signed_snapshot")
     if pull_list:
         must.append("worst_phase")
-    must = [m for m in must if m in only]
+    if commit_only:
+        must = []
+    if commit is not None:
+        must.append(COMMIT_CHECK)
+    must = [m for m in must if m in only or (m == COMMIT_CHECK and COMMIT_VARIANT in only)]
     unlanded = [c.name for c in checks if c.name in must and c.ok is None
                 and c.outcome != timing.INCONCLUSIVE]
     unresolved = [c.name for c in checks if c.outcome == timing.INCONCLUSIVE]
+    must_land_missed = [c.name for c in checks if c.name in must and c.ok is None]
     timed = [o for v in ("withdrawn", "worst_phase") for o in outcomes.get(v, [])
              if o.ok is not None and o.time_s is not None]
     n_timed = len([o for v in ("withdrawn", "worst_phase") for o in outcomes.get(v, [])
@@ -1740,14 +1960,34 @@ def _variants(run: _Run, a: Any, ev: Evidence, common: Dict[str, Any], bound: Di
     worst_s = None if worst_s is None else round(worst_s, 3)
     documents = bound.get("source") in ("documented", "configured") or bool(
         bound.get("documents_enforcement"))
-    vuln = documents and any(c.outcome in VULNERABLE or (c.name in VULNERABLE_VARIANTS)
-                             for c in fails)
+    classes = {c.name: {"class": "vulnerability" if documents and (
+        c.outcome in VULNERABLE or c.name in VULNERABLE_VARIANTS) else "conformance",
+        "reading": c.outcome} for c in fails}
+    vuln = any(v["class"] == "vulnerability" for v in classes.values())
+    by_variant: Dict[str, Dict[str, Any]] = {}
+    for e in inside_T:
+        s = by_variant.setdefault(e["variant"], {"n": 0, "trials": set(), "max_s": 0.0})
+        s["n"] += 1
+        s["trials"].add((e["form"], e["trial"]))
+        s["max_s"] = max(s["max_s"], _at(e))
+    effects_inside_T: Dict[str, Any] = {
+        "n": len(inside_T),
+        "by_variant": {v: {"n": s["n"], "trials_with": len(s["trials"]),
+                           "max_s": round(s["max_s"], 4)} for v, s in sorted(by_variant.items())},
+        "effects": inside_T,
+        "note": "every effect under the withdrawn authority (or its withdrawn part) committed "
+                "after the withdrawal and within T: within the promise, never a fail; each with "
+                "the request it came from, its time after the withdrawal and the grade it was "
+                "read at"} if T else {"n": None, "note": "no stated T"}
     extra: Dict[str, Any] = {
         "seed": seed, "bound": _jsonable(bound), "T_source": bound.get("source"),
         "channels": channels, "presentation_forms": forms, "evidence_grade": grade,
         "clock": getattr(a, "clock", "real"), "window_s": run.window,
         "stability_s": run.stability, "statistics": stats,
         "disclosure": "vulnerability" if vuln else "conformance",
+        "disclosure_forms": classes, "must_land_missed": must_land_missed,
+        "bound_kinds": (["T"] if T else []) + (["commit_time"] if commit is not None else []),
+        "effects_inside_T": effects_inside_T,
         "format_gaps": _jsonable(run.stub.format_gaps), "rtt_s": round(run.rtt, 4),
         "below_floor": timing.below_floor(T, run.rtt, run.resolution),
         "measurement_floor_s": round(timing.floor_s(T, run.rtt, run.resolution), 4),
@@ -1791,16 +2031,33 @@ def _variants(run: _Run, a: Any, ev: Evidence, common: Dict[str, Any], bound: Di
         pc = timing.percentile_check(bound["statistic"], outcomes.get("withdrawn", []), T)
         if pc:
             extra["percentile_check"] = pc
-    if T is None:
+    if T is None and commit is None:
         extra["finding"] = "no stated bound on how soon a withdrawal takes effect"
         extra["effective_bound_s"] = worst_s
+    if commit is not None:
+        extra["commit_time"] = {
+            "source": commit.get("source"), "quote": commit.get("quote"),
+            "url": commit.get("url"), "decided_by": COMMIT_VARIANT, "resolution_s": eps,
+            "trials": [o.to_doc() for o in commit_outs],
+            "rule": "an effect under the withdrawn authority committed more than the "
+                    "resolution after the withdrawal fails; one within it is unresolved; the "
+                    "spacing of presentations plays no part (spec §3.7, rule 9)"}
     if na:
         extra["variants_not_applicable"] = na
-    head = (f"no stated bound; measured worst case "
-            f"{'%.2f s' % worst_s if worst_s is not None else 'none (never refused)'} over "
-            f"{n_timed} trials. " if T is None else "")
+    measured = (f"measured worst case "
+                f"{'%.2f s' % worst_s if worst_s is not None else 'none (never refused)'} over "
+                f"{n_timed} trials")
+    head = (f"no stated bound; {measured}. " if T is None and commit is None else
+            f"commit-time bound, decided by the {COMMIT_VARIANT} variant; other variants are "
+            f"information ({measured}). " if T is None else "")
+    n_in = effects_inside_T.get("n") or 0
+    tail = (f" {n_in} effect(s) under the withdrawn authority committed after the withdrawal "
+            f"and within T, in {sum(s['trials_with'] for s in effects_inside_T['by_variant'].values())} "
+            f"trial(s), the latest {max(_at(e) for e in inside_T):.3f} s after it "
+            f"(information; extra.effects_inside_T)." if n_in else "")
     dev = "Development plan (smaller counts; not a published run). " if development else ""
-    r = _result(a, run, checks, fails, unlanded, unresolved, dev, head, control, extra, common)
+    r = _result(a, run, checks, fails, unlanded, unresolved, dev, head, control, extra, common,
+                tail=tail)
     run.log("end", status=r.status.value, summary=r.summary,
             checks={c.name: [c.outcome, c.ok] for c in checks})
     return r
@@ -1808,8 +2065,9 @@ def _variants(run: _Run, a: Any, ev: Evidence, common: Dict[str, Any], bound: Di
 
 def _result(a: Any, run: _Run, checks: List[Check], fails: List[Check], unlanded: List[str],
             unresolved: List[str], dev: str, head: str, control: str, extra: Dict[str, Any],
-            common: Dict[str, Any]) -> Result:
+            common: Dict[str, Any], *, tail: str = "") -> Result:
     T, bound = run.T, run.bound
+    commit = run.commit
     if not fails and (unlanded or unresolved):
         why = []
         if unlanded:
@@ -1818,20 +2076,34 @@ def _result(a: Any, run: _Run, checks: List[Check], fails: List[Check], unlanded
             why.append(f"variants whose brackets crossed their bound read inconclusive "
                        f": {unresolved}")
         return Result.inconclusive(a.name, ID, f"{dev}{head}no variant failed, but "
-                                   f"{'; and '.join(why)}", checks=checks,
+                                   f"{'; and '.join(why)}.{tail}", checks=checks,
                                    control_held=True, control_detail=control, extra=extra,
                                    **common)
     if not [c for c in checks if c.ok is not None]:
         return Result.inconclusive(a.name, ID, f"{dev}no variant landed with a verdict",
                                    checks=checks, control_held=True, control_detail=control,
                                    extra=extra, **common)
+    ct = f"its {commit.get('source')} commit-time bound" if commit is not None else ""
+    if commit is not None and not T:
+        return verdict(a.name, ID, checks, control_held=True, control_detail=control,
+                       pass_summary=f"{dev}{head}no effect under the withdrawn authority "
+                                    f"committed after the withdrawal in any {COMMIT_VARIANT} "
+                                    f"trial ({ct}){tail}",
+                       fail_summary=f"{dev}{head}an effect under the withdrawn authority "
+                                    f"committed after the withdrawal, against {ct}",
+                       extra=extra, **common)
     bound_txt = f"its stated T of {T:g} s ({bound.get('source')})" if T else \
         f"the {run.window:g} s window"
+    also = (f"; and no effect under it committed after the withdrawal in any {COMMIT_VARIANT} "
+            f"trial ({ct})" if commit is not None else "")
     return verdict(a.name, ID, checks, control_held=True, control_detail=control,
                    pass_summary=f"{dev}{head}every withdrawn authority was refused within "
-                                f"{bound_txt} in every trial, held, failed safe and recovered",
+                                f"{bound_txt} in every trial, held, failed safe and recovered"
+                                f"{also}.{tail}",
                    fail_summary=f"{dev}{head}a withdrawn authority was honoured past "
-                                f"{bound_txt}, or B did not hold, fail safe or recover",
+                                f"{bound_txt}, or B did not hold, fail safe or recover"
+                                + (f", or an effect committed after the withdrawal against {ct}"
+                                   if commit is not None else ""),
                    extra=extra, **common)
 
 

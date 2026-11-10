@@ -35,7 +35,7 @@ def _probe(pid, config):
 @pytest.mark.parametrize("pid,config", [("P24", "good"),
                                         ("P25", "good"), ("P25", "b-held-good"),
                                         ("P26", "good@T"), ("P26", "good@R"),
-                                        ("P26", "good@TR")])
+                                        ("P26", "good@TR"), ("P28", "good")])
 def test_the_inventory_holds_every_form_a_toy_writes_and_no_other(pid, config):
     toy, r = _probe(pid, config)
     have = [f for f, _c in cb.inventory(pid, toy)]
@@ -57,7 +57,7 @@ def test_an_adapter_with_no_profile_or_topology_gets_every_form():
 
 
 def test_the_inventories_are_the_rules_and_never_list_the_control():
-    assert set(cb.FORM_LEVEL) == {"P20", "P21", "P22", "P23", "P24", "P25", "P26"}
+    assert set(cb.FORM_LEVEL) == {"P20", "P21", "P22", "P23", "P24", "P25", "P26", "P28"}
     for pid in list(ALL) + list(ALL_BISSUER):
         inv = cb.inventory(pid)
         if pid in cb.FORM_LEVEL:

@@ -14,8 +14,11 @@ A known-bad run of one property runs its probe against each of its toys (`known_
   its role-A family's toys: ``a-good`` (MUST pass), one ``a-bad`` toy per flaw in
   `known_bad.binding_toys.A_FLAWS` (each MUST fail) and ``a-no-control`` (MUST give no verdict).
 - P19 has one ``bad`` toy per flaw in `known_bad.withdrawal_toys.FLAWS`; each MUST fail. Its
-  ``slow-good`` toy (the correct B, answering slowly) MUST pass. Its toys run on a
-  virtual clock, so the gate runs the published trial counts at T = 60 s in seconds.
+  ``slow-good`` toy (the correct B, answering slowly) MUST pass. Its commit-time toys
+  (`known_bad.withdrawal_toys.COMMIT_CASES`): ``commit-good`` and ``commit-only-good`` MUST pass,
+  ``commit-bad`` and ``commit-only-bad`` (a held effect retried inside T without a fresh check)
+  MUST fail. Its toys run on a virtual clock, so the gate runs the published trial counts at
+  T = 60 s in seconds.
 - P20 has one ``bad`` toy per flaw in `known_bad.standing_toys.FLAWS` (each MUST fail), its
   ``slow-good`` toy (MUST pass), ``pull-good``, the correct B that reads standing only by
   fetching it (MUST pass; KRK-M95b), and the X4-status profile's ``x4-good`` (MUST pass) and
@@ -43,12 +46,16 @@ A known-bad run of one property runs its probe against each of its toys (`known_
   ``good@<t>`` and ``good-strict@<t>`` (MUST pass), ``no-control@<t>`` (MUST give no verdict) and
   one ``bad:<flaw>@<t>`` per flaw in `known_bad.translation_toys.FLAWS` whose variant runs in that
   topology (each MUST fail). P26 has no plain ``good``, ``bad`` or ``no-control`` case.
+- P28 has its own case list (`known_bad.stop_toys.cases`): ``good``, ``good-unstoppable`` (accepts
+  every stop and acts on none, and records truthfully) and ``good-conservative`` MUST pass;
+  ``bad`` and one ``bad:<flaw>`` per flaw in `known_bad.stop_toys.FLAWS` MUST fail; ``no-control``
+  MUST give no verdict. Its toys run on a virtual clock.
 - P18B (the B-issuer profile, kept in `properties.ALL_BISSUER`) has its own case
   list, `known_bad.bissuer_binding_toys.cases`: in each of the three shapes ``good`` and
   ``slow-good`` (MUST pass), ``bad`` (MUST fail), ``no-control`` (MUST give no verdict), one
   ``bad:<flaw>`` per flaw that applies in the shape (each MUST fail), and
   ``finding:restates_silently`` (MUST give no verdict). It is gated only when named
-  (``-p P18B``): the full gate (no ``-p``) runs `properties.ALL`, P1 to P26.
+  (``-p P18B``): the full gate (no ``-p``) runs `properties.ALL`, P1 to P26 and P28.
 - P24 has its own case list (`known_bad.mandate_toys.cases`): ``good``, ``good-hold`` (holds a
   conditioned or unreadable action, never performs it) and ``good-clamp`` (performs only the
   goal's items) MUST pass; ``bad`` (``limits_only``) and one ``bad:<flaw>`` per other flaw in
@@ -127,9 +134,10 @@ def cases(pid: str) -> List[Tuple[str, Status]]:
         out += [(f"a-bad:{flaw}", Status.FAIL) for flaw in A_FLAWS]
         out += [("a-no-control", Status.INCONCLUSIVE)]
     if pid == "P19":
-        from known_bad.withdrawal_toys import FLAWS as WITHDRAWAL_FLAWS
+        from known_bad.withdrawal_toys import COMMIT_CASES, FLAWS as WITHDRAWAL_FLAWS
         out += [(f"bad:{flaw}", Status.FAIL) for flaw in WITHDRAWAL_FLAWS]
         out += [("slow-good", Status.PASS)]
+        out += [(c, Status(s)) for c, s in COMMIT_CASES.items()]
     if pid == "P20":
         from known_bad.standing_toys import FLAWS as STANDING_FLAWS
         out += [(f"bad:{flaw}", Status.FAIL) for flaw in STANDING_FLAWS]
@@ -154,6 +162,9 @@ def cases(pid: str) -> List[Tuple[str, Status]]:
     if pid == "P26":
         from known_bad.translation_toys import cases as translation_cases
         return [(c, Status(s)) for c, s in translation_cases()]
+    if pid == "P28":
+        from known_bad.stop_toys import cases as stop_cases
+        return [(c, Status(s)) for c, s in stop_cases()]
     if pid == "P23":
         from known_bad.reversal_toys import FLAWS as REVERSAL_FLAWS
         out += [(f"bad:{flaw}", Status.FAIL) for flaw in REVERSAL_FLAWS]
@@ -188,6 +199,9 @@ def _toy(pid: str, config: str):
     if pid == "P26":
         from known_bad.translation_toys import toy as translation_toy
         return translation_toy(config)
+    if pid == "P28":
+        from known_bad.stop_toys import toy as stop_toy
+        return stop_toy(config)
     if pid == "P19":
         from known_bad.withdrawal_toys import ToyWithdrawal
         if config.startswith("bad:"):
@@ -437,7 +451,7 @@ def gate(pids: List[str], claim_rule: Optional[Dict[str, str]] = None) -> List[D
 def main(pids: Optional[List[str]], *, record: bool, force: bool, show_status: bool,
          seed: Optional[int], as_json: bool) -> int:
     from .properties import ALL, known, ordered
-    pids = ordered(pids or list(ALL))        # the full gate is P1 to P26; P18B only when named
+    pids = ordered(pids or list(ALL))        # the full gate is P1 to P26 and P28; P18B when named
     unknown = [p for p in pids if not known(p)]
     if unknown:
         print(f"no such property: {', '.join(unknown)}")
