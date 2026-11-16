@@ -1,0 +1,360 @@
+{
+  "configuration": "OperationsClient; study-owned host and ASGI Company; API approval callback; in-process transport",
+  "form": "PA6",
+  "trials": [
+    {
+      "broken": {
+        "company_approvals": [
+          {
+            "approver": "agent",
+            "ns": 9389039364791,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "agent",
+            "ns": 9389039365291,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {},
+        "form": "PA6",
+        "log_available": true,
+        "surface_asks": [],
+        "variant": "bad",
+        "verdict": "FAIL"
+      },
+      "control": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9389032259000,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9389032259416,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {
+          "outcome": "answered"
+        },
+        "form": "control",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9389032169791,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "no_control": {
+        "company_approvals": [],
+        "company_performances": [],
+        "driver": {},
+        "form": "PA6",
+        "log_available": false,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9389046461208,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "INCONCLUSIVE"
+      },
+      "target": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9389057237458,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9389057237916,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {},
+        "form": "PA6",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9389057150083,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "trial": 0,
+      "verdict": "PASS"
+    },
+    {
+      "broken": {
+        "company_approvals": [
+          {
+            "approver": "agent",
+            "ns": 9389071615416,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "agent",
+            "ns": 9389071615791,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {},
+        "form": "PA6",
+        "log_available": true,
+        "surface_asks": [],
+        "variant": "bad",
+        "verdict": "FAIL"
+      },
+      "control": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9389064777708,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9389064778125,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {
+          "outcome": "answered"
+        },
+        "form": "control",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9389064692666,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "no_control": {
+        "company_approvals": [],
+        "company_performances": [],
+        "driver": {},
+        "form": "PA6",
+        "log_available": false,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9389078504250,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "INCONCLUSIVE"
+      },
+      "target": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9389085692208,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9389085692625,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {},
+        "form": "PA6",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9389085605583,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "trial": 1,
+      "verdict": "PASS"
+    },
+    {
+      "broken": {
+        "company_approvals": [
+          {
+            "approver": "agent",
+            "ns": 9389101453750,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "agent",
+            "ns": 9389101454291,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {},
+        "form": "PA6",
+        "log_available": true,
+        "surface_asks": [],
+        "variant": "bad",
+        "verdict": "FAIL"
+      },
+      "control": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9389093136958,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9389093137541,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {
+          "outcome": "answered"
+        },
+        "form": "control",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9389093051166,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "no_control": {
+        "company_approvals": [],
+        "company_performances": [],
+        "driver": {},
+        "form": "PA6",
+        "log_available": false,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9389108691833,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "INCONCLUSIVE"
+      },
+      "target": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9389115621250,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9389115621708,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {},
+        "form": "PA6",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9389115536666,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "trial": 2,
+      "verdict": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+services:
+  recorder:
+    image: poppy-loss-client:local
+    command: uvicorn outage:app --app-dir /loss --host 0.0.0.0 --port 8002

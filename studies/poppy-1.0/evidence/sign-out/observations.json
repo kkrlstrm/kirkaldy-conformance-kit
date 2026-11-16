@@ -1,0 +1,586 @@
+{
+  "broken": [
+    {
+      "control_effects": 1,
+      "control_operation": "op_PXieEPnck_dRXKtEKCPVdA",
+      "event_count_after_new": 2,
+      "event_count_before_new": 1,
+      "mode": "broken",
+      "new_action_effects": 1,
+      "new_action_response": {
+        "execution": {
+          "body": {
+            "data": {
+              "operation_id": "op_l6qDoyHMfs8QP1-sZkjj5g"
+            },
+            "summary": "Synthetic exchange recorded."
+          },
+          "status": 200
+        },
+        "has_operation": true,
+        "status": 403
+      },
+      "recorder_ns": {
+        "after_action": 8377043665791,
+        "after_refresh": 8376779615750,
+        "before_revoke": 8376777714083
+      },
+      "refusal_upper_bound_ms": null,
+      "revocation_and_refresh": {
+        "refresh_error": null,
+        "refresh_status": 200,
+        "revocation_status": 200
+      },
+      "trial": 0,
+      "w1_check": "FAIL"
+    },
+    {
+      "control_effects": 1,
+      "control_operation": "op_fyPT-YRsdPhnVKzwatzPjA",
+      "event_count_after_new": 4,
+      "event_count_before_new": 3,
+      "mode": "broken",
+      "new_action_effects": 1,
+      "new_action_response": {
+        "execution": {
+          "body": {
+            "data": {
+              "operation_id": "op_-KCAWQLrqsrc8IFPO1AESA"
+            },
+            "summary": "Synthetic exchange recorded."
+          },
+          "status": 200
+        },
+        "has_operation": true,
+        "status": 403
+      },
+      "recorder_ns": {
+        "after_action": 8377334749208,
+        "after_refresh": 8377070958125,
+        "before_revoke": 8377069057500
+      },
+      "refusal_upper_bound_ms": null,
+      "revocation_and_refresh": {
+        "refresh_error": null,
+        "refresh_status": 200,
+        "revocation_status": 200
+      },
+      "trial": 1,
+      "w1_check": "FAIL"
+    },
+    {
+      "control_effects": 1,
+      "control_operation": "op_cZ6u2bU2fjf41dgXdLbsqQ",
+      "event_count_after_new": 6,
+      "event_count_before_new": 5,
+      "mode": "broken",
+      "new_action_effects": 1,
+      "new_action_response": {
+        "execution": {
+          "body": {
+            "data": {
+              "operation_id": "op_BT13Cl4ahriaVxDgoqKNNA"
+            },
+            "summary": "Synthetic exchange recorded."
+          },
+          "status": 200
+        },
+        "has_operation": true,
+        "status": 403
+      },
+      "recorder_ns": {
+        "after_action": 8377626465416,
+        "after_refresh": 8377362284833,
+        "before_revoke": 8377360292583
+      },
+      "refusal_upper_bound_ms": null,
+      "revocation_and_refresh": {
+        "refresh_error": null,
+        "refresh_status": 200,
+        "revocation_status": 200
+      },
+      "trial": 2,
+      "w1_check": "FAIL"
+    }
+  ],
+  "configuration": {
+    "access_token_lifetime_seconds": 3600,
+    "clock": "SDK wall clock with device polling offset; intervals from recorder monotonic clock",
+    "sdk": "0.35.0",
+    "store": "MemoryCompanyStore",
+    "transport": "in-process ASGI; effect recorder loopback HTTP"
+  },
+  "inflight": {
+    "agent_response": {
+      "body": {
+        "data": {
+          "operation_id": "op_pWDgA6B7kleY3egpQ6LUqQ"
+        },
+        "summary": "Synthetic exchange recorded."
+      },
+      "status": 200
+    },
+    "barrier_entered": true,
+    "concurrent_response": {
+      "error": "temporarily_unavailable",
+      "status": 503
+    },
+    "control_effects": 1,
+    "control_operation": "op_UNWMf6yfSRfyZvFn5vrneg",
+    "effect_events": [
+      {
+        "body": {
+          "account_id": "acct_ada",
+          "operation_id": "op_pWDgA6B7kleY3egpQ6LUqQ",
+          "revision": "rev_LYGzKgfBu6O16WlniQBpNg",
+          "terms": {
+            "order_id": "ord_7Hk2",
+            "price_difference": {
+              "amount": "70.00",
+              "currency": "USD"
+            }
+          }
+        },
+        "ns": 1794822899084571000,
+        "seq": 14
+      }
+    ],
+    "effects": 1,
+    "operation": "op_pWDgA6B7kleY3egpQ6LUqQ",
+    "recorder_before_revoke_ns": 8377831471458,
+    "revocation_and_refresh": {
+      "refresh_error": "invalid_grant",
+      "refresh_status": 400,
+      "revocation_status": 200
+    },
+    "verdict": "OBSERVATION"
+  },
+  "no_control": {
+    "control_response": {
+      "exception": "TransportError"
+    },
+    "independent_effect_count": 0,
+    "reason": "positive control recorder unavailable",
+    "verdict": "INCONCLUSIVE"
+  },
+  "prepared": {
+    "after_effects": 0,
+    "agent_response": {
+      "error": "invalid_token",
+      "status": 401
+    },
+    "before_effects": 0,
+    "control_effects": 1,
+    "control_operation": "op_-TMtGMvH4gie8cJ6nnjN-g",
+    "operation": "op_bEhNECFOjkmPAlB_xv14uQ",
+    "revocation_and_refresh": {
+      "refresh_error": "invalid_grant",
+      "refresh_status": 400,
+      "revocation_status": 200
+    },
+    "verdict": "OBSERVATION"
+  },
+  "prepared_broken": {
+    "after_effects": 1,
+    "agent_response": {
+      "body": {
+        "data": {
+          "operation_id": "op_CTrz0io6xf7m3QGTl_-uPg"
+        },
+        "summary": "Synthetic exchange recorded."
+      },
+      "status": 200
+    },
+    "before_effects": 0,
+    "control_effects": 1,
+    "control_operation": "op_YOd0o91tnJMrI8hVKhD2jw",
+    "operation": "op_CTrz0io6xf7m3QGTl_-uPg",
+    "revocation_and_refresh": {
+      "refresh_error": null,
+      "refresh_status": 200,
+      "revocation_status": 200
+    },
+    "verdict": "OBSERVATION"
+  },
+  "recorder_events": [
+    {
+      "body": {
+        "account_id": "acct_ada",
+        "operation_id": "op_PXieEPnck_dRXKtEKCPVdA",
+        "revision": "rev_ldsj1psc6O-2E_-Auelcqg",
+        "terms": {
+          "order_id": "ord_7Hk2",
+          "price_difference": {
+            "amount": "70.00",
+            "currency": "USD"
+          }
+        }
+      },
+      "ns": 1794822898007260000,
+      "seq": 1
+    },
+    {
+      "body": {
+        "account_id": "acct_ada",
+        "operation_id": "op_l6qDoyHMfs8QP1-sZkjj5g",
+        "revision": "rev_85pM0w0gVOZRlreHb7_OXQ",
+        "terms": {
+          "order_id": "ord_7Hk2",
+          "price_difference": {
+            "amount": "70.00",
+            "currency": "USD"
+          }
+        }
+      },
+      "ns": 1794822898273968000,
+      "seq": 2
+    },
+    {
+      "body": {
+        "account_id": "acct_ada",
+        "operation_id": "op_fyPT-YRsdPhnVKzwatzPjA",
+        "revision": "rev_rYR0E_Df0hFmwdht_eZ96g",
+        "terms": {
+          "order_id": "ord_7Hk2",
+          "price_difference": {
+            "amount": "70.00",
+            "currency": "USD"
+          }
+        }
+      },
+      "ns": 1794822898298607000,
+      "seq": 3
+    },
+    {
+      "body": {
+        "account_id": "acct_ada",
+        "operation_id": "op_-KCAWQLrqsrc8IFPO1AESA",
+        "revision": "rev_XLQ61wfQfVqo9BYSZdQB6Q",
+        "terms": {
+          "order_id": "ord_7Hk2",
+          "price_difference": {
+            "amount": "70.00",
+            "currency": "USD"
+          }
+        }
+      },
+      "ns": 1794822898565218000,
+      "seq": 4
+    },
+    {
+      "body": {
+        "account_id": "acct_ada",
+        "operation_id": "op_cZ6u2bU2fjf41dgXdLbsqQ",
+        "revision": "rev_2jtGV0UEPKmRpbGJYLRTbQ",
+        "terms": {
+          "order_id": "ord_7Hk2",
+          "price_difference": {
+            "amount": "70.00",
+            "currency": "USD"
+          }
+        }
+      },
+      "ns": 1794822898589727000,
+      "seq": 5
+    },
+    {
+      "body": {
+        "account_id": "acct_ada",
+        "operation_id": "op_BT13Cl4ahriaVxDgoqKNNA",
+        "revision": "rev_GxAoCzML5drWyL3K2mqhOw",
+        "terms": {
+          "order_id": "ord_7Hk2",
+          "price_difference": {
+            "amount": "70.00",
+            "currency": "USD"
+          }
+        }
+      },
+      "ns": 1794822898856707000,
+      "seq": 6
+    },
+    {
+      "body": {
+        "account_id": "acct_ada",
+        "operation_id": "op_YOd0o91tnJMrI8hVKhD2jw",
+        "revision": "rev_XWOGuEAxkOGGh_e-owjuhw",
+        "terms": {
+          "order_id": "ord_7Hk2",
+          "price_difference": {
+            "amount": "70.00",
+            "currency": "USD"
+          }
+        }
+      },
+      "ns": 1794822898880325000,
+      "seq": 7
+    },
+    {
+      "body": {
+        "account_id": "acct_ada",
+        "operation_id": "op_CTrz0io6xf7m3QGTl_-uPg",
+        "revision": "rev_iHWuJ9JArB5lJnoxXK5qRA",
+        "terms": {
+          "order_id": "ord_7Hk2",
+          "price_difference": {
+            "amount": "70.00",
+            "currency": "USD"
+          }
+        }
+      },
+      "ns": 1794822898894277000,
+      "seq": 8
+    },
+    {
+      "body": {
+        "account_id": "acct_ada",
+        "operation_id": "op_1eGhrfm6OPkRemMHbQaiuw",
+        "revision": "rev_lR6lFRkzkLkAP9Q1OtiZow",
+        "terms": {
+          "order_id": "ord_7Hk2",
+          "price_difference": {
+            "amount": "70.00",
+            "currency": "USD"
+          }
+        }
+      },
+      "ns": 1794822898917001000,
+      "seq": 9
+    },
+    {
+      "body": {
+        "account_id": "acct_ada",
+        "operation_id": "op_WTFk4LoixxhyI4pu2ja_LA",
+        "revision": "rev_btNBBG7w8Smw6Fys9B0Zrw",
+        "terms": {
+          "order_id": "ord_7Hk2",
+          "price_difference": {
+            "amount": "70.00",
+            "currency": "USD"
+          }
+        }
+      },
+      "ns": 1794822898946491000,
+      "seq": 10
+    },
+    {
+      "body": {
+        "account_id": "acct_ada",
+        "operation_id": "op_3X2qNkziTeuD77F6tXORKg",
+        "revision": "rev_V1aDbDhu6-SxiNbI1w2K5Q",
+        "terms": {
+          "order_id": "ord_7Hk2",
+          "price_difference": {
+            "amount": "70.00",
+            "currency": "USD"
+          }
+        }
+      },
+      "ns": 1794822898974967000,
+      "seq": 11
+    },
+    {
+      "body": {
+        "account_id": "acct_ada",
+        "operation_id": "op_-TMtGMvH4gie8cJ6nnjN-g",
+        "revision": "rev_i0n1opIynhGHVAcSnmmOYg",
+        "terms": {
+          "order_id": "ord_7Hk2",
+          "price_difference": {
+            "amount": "70.00",
+            "currency": "USD"
+          }
+        }
+      },
+      "ns": 1794822899003179000,
+      "seq": 12
+    },
+    {
+      "body": {
+        "account_id": "acct_ada",
+        "operation_id": "op_UNWMf6yfSRfyZvFn5vrneg",
+        "revision": "rev_8k-vhqAD7FsAWiG8XznCng",
+        "terms": {
+          "order_id": "ord_7Hk2",
+          "price_difference": {
+            "amount": "70.00",
+            "currency": "USD"
+          }
+        }
+      },
+      "ns": 1794822899029225000,
+      "seq": 13
+    },
+    {
+      "body": {
+        "account_id": "acct_ada",
+        "operation_id": "op_pWDgA6B7kleY3egpQ6LUqQ",
+        "revision": "rev_LYGzKgfBu6O16WlniQBpNg",
+        "terms": {
+          "order_id": "ord_7Hk2",
+          "price_difference": {
+            "amount": "70.00",
+            "currency": "USD"
+          }
+        }
+      },
+      "ns": 1794822899084571000,
+      "seq": 14
+    }
+  ],
+  "recorder_marks": [
+    {
+      "label": "broken-0-before-revoke",
+      "ns": 8376777714083
+    },
+    {
+      "label": "broken-0-after-refresh",
+      "ns": 8376779615750
+    },
+    {
+      "label": "broken-0-after-new-action",
+      "ns": 8377043665791
+    },
+    {
+      "label": "broken-1-before-revoke",
+      "ns": 8377069057500
+    },
+    {
+      "label": "broken-1-after-refresh",
+      "ns": 8377070958125
+    },
+    {
+      "label": "broken-1-after-new-action",
+      "ns": 8377334749208
+    },
+    {
+      "label": "broken-2-before-revoke",
+      "ns": 8377360292583
+    },
+    {
+      "label": "broken-2-after-refresh",
+      "ns": 8377362284833
+    },
+    {
+      "label": "broken-2-after-new-action",
+      "ns": 8377626465416
+    },
+    {
+      "label": "target-0-before-revoke",
+      "ns": 8377687329416
+    },
+    {
+      "label": "target-0-after-refresh",
+      "ns": 8377690066958
+    },
+    {
+      "label": "target-0-after-new-action",
+      "ns": 8377692428375
+    },
+    {
+      "label": "target-1-before-revoke",
+      "ns": 8377716722541
+    },
+    {
+      "label": "target-1-after-refresh",
+      "ns": 8377718657791
+    },
+    {
+      "label": "target-1-after-new-action",
+      "ns": 8377720812083
+    },
+    {
+      "label": "target-2-before-revoke",
+      "ns": 8377745320125
+    },
+    {
+      "label": "target-2-after-refresh",
+      "ns": 8377747194208
+    },
+    {
+      "label": "target-2-after-new-action",
+      "ns": 8377749475375
+    },
+    {
+      "label": "inflight-before-revoke",
+      "ns": 8377831471458
+    }
+  ],
+  "target": [
+    {
+      "control_effects": 1,
+      "control_operation": "op_1eGhrfm6OPkRemMHbQaiuw",
+      "event_count_after_new": 9,
+      "event_count_before_new": 9,
+      "mode": "target",
+      "new_action_effects": 0,
+      "new_action_response": {
+        "error": "invalid_token",
+        "status": 401
+      },
+      "recorder_ns": {
+        "after_action": 8377692428375,
+        "after_refresh": 8377690066958,
+        "before_revoke": 8377687329416
+      },
+      "refusal_upper_bound_ms": 5.098959,
+      "revocation_and_refresh": {
+        "refresh_error": "invalid_grant",
+        "refresh_status": 400,
+        "revocation_status": 200
+      },
+      "trial": 0,
+      "w1_check": "PASS"
+    },
+    {
+      "control_effects": 1,
+      "control_operation": "op_WTFk4LoixxhyI4pu2ja_LA",
+      "event_count_after_new": 10,
+      "event_count_before_new": 10,
+      "mode": "target",
+      "new_action_effects": 0,
+      "new_action_response": {
+        "error": "invalid_token",
+        "status": 401
+      },
+      "recorder_ns": {
+        "after_action": 8377720812083,
+        "after_refresh": 8377718657791,
+        "before_revoke": 8377716722541
+      },
+      "refusal_upper_bound_ms": 4.089542,
+      "revocation_and_refresh": {
+        "refresh_error": "invalid_grant",
+        "refresh_status": 400,
+        "revocation_status": 200
+      },
+      "trial": 1,
+      "w1_check": "PASS"
+    },
+    {
+      "control_effects": 1,
+      "control_operation": "op_3X2qNkziTeuD77F6tXORKg",
+      "event_count_after_new": 11,
+      "event_count_before_new": 11,
+      "mode": "target",
+      "new_action_effects": 0,
+      "new_action_response": {
+        "error": "invalid_token",
+        "status": 401
+      },
+      "recorder_ns": {
+        "after_action": 8377749475375,
+        "after_refresh": 8377747194208,
+        "before_revoke": 8377745320125
+      },
+      "refusal_upper_bound_ms": 4.15525,
+      "revocation_and_refresh": {
+        "refresh_error": "invalid_grant",
+        "refresh_status": 400,
+        "revocation_status": 200
+      },
+      "trial": 2,
+      "w1_check": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+services:
+  recorder:
+    image: poppy-datalayer-integration:local
+    command: uvicorn poppy_docker.recorder:app --host 0.0.0.0 --port 8002
+    volumes: ["recorder-data:/state"]
+    ports: ["127.0.0.1:${RECORDER_PORT:-18972}:8002"]
+  company:
+    image: poppy-datalayer-integration:local
+    command: uvicorn poppy_docker.company:app --host 0.0.0.0 --port 8000
+    depends_on: [recorder]
+    environment:
+      STORE: ${STORE:-memory}
+      BAD_STORE: ${BAD_STORE:-0}
+      NO_RECORDER: ${NO_RECORDER:-0}
+      RACE_MODE: ${RACE_MODE:-}
+    volumes: ["company-data:/company-state"]
+  company2:
+    image: poppy-datalayer-integration:local
+    profiles: ["multi"]
+    command: uvicorn poppy_docker.company:app --host 0.0.0.0 --port 8000
+    environment:
+      STORE: sqlite
+      BAD_STORE: ${BAD_STORE:-0}
+      RACE_MODE: ${RACE_MODE:-}
+    volumes: ["company-data:/company-state"]
+    depends_on: [recorder]
+  client:
+    image: poppy-datalayer-integration:local
+    command: python -m poppy_docker.client
+    depends_on: [company, recorder]
+    environment:
+      CASE: ${CASE:-concurrency}
+      RECOVERY_CHECK: ${RECOVERY_CHECK:-0}
+      SECOND_COMPANY: ${SECOND_COMPANY:-company}
+      BAD_STORE: ${BAD_STORE:-0}
+      NO_RECORDER: ${NO_RECORDER:-0}
+volumes:
+  recorder-data:
+  company-data:

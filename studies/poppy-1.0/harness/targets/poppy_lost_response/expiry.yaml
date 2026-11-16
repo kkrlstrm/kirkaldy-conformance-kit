@@ -1,0 +1,4 @@
+services:
+  company:
+    image: poppy-loss-client:local
+    command: uvicorn clock_host:app --app-dir /loss --host 0.0.0.0 --port 8000

@@ -1,0 +1,5 @@
+services:
+  client:
+    command: python -m poppy_docker.race_client
+    environment:
+      RACE_CLIENT_MODE: ${RACE_CLIENT_MODE:-good}

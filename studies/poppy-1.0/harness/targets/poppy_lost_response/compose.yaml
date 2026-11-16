@@ -1,0 +1,6 @@
+services:
+  client:
+    image: poppy-loss-client:local
+    command: python /loss/client.py
+    environment:
+      CASE_MODE: ${CASE_MODE:-target}

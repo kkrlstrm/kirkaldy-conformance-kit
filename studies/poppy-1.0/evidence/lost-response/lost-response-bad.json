@@ -1,0 +1,131 @@
+{
+  "containers": {
+    "client": "2896dcc9cdd73d414da1851799f4bc07a28a4251590a8233acb173d033f0df82",
+    "company": "d430c95ff07e30b9c4393ccced7ef32e2de5987dbfdd8068a106786d19d411ed",
+    "proxy": "a43aa9e8d4a6dac101216ce227c8e8f6684bfdb216a6e8fa58271882aad67862",
+    "recorder": "6f6a12dfcd06189e9c62bec0583d008e72e33d9b29e8fad68e1bec10d1746af1"
+  },
+  "exit": 0,
+  "images": {
+    "client": "sha256:e4d9eb64babd33ed75ea4440f2f5871cb603142f3a64e7f773296a634ce8731c",
+    "company": "sha256:b722b69baf1c501e0ab7b0f10e6432e4db901747701094ad38ffc61d1c6b4f0c",
+    "proxy": "sha256:e4d9eb64babd33ed75ea4440f2f5871cb603142f3a64e7f773296a634ce8731c",
+    "recorder": "sha256:b722b69baf1c501e0ab7b0f10e6432e4db901747701094ad38ffc61d1c6b4f0c"
+  },
+  "mode": "bad",
+  "output": "Attaching to client-1, company-1, proxy-1, recorder-1\ncompany-1   | INFO:     172.22.0.4:49966 - \"GET /_test/ready HTTP/1.1\" 200 OK\nrecorder-1  | INFO:     172.22.0.4:59164 - \"GET /ready HTTP/1.1\" 200 OK\ncompany-1   | INFO:     172.22.0.4:49970 - \"GET /.well-known/poppy.json HTTP/1.1\" 200 OK\nclient-1    | network GET manzanita.example/.well-known/poppy.json 200\ncompany-1   | INFO:     172.22.0.4:49970 - \"GET /poppy/1.0.json HTTP/1.1\" 200 OK\nclient-1    | network GET manzanita.example/poppy/1.0.json 200\ncompany-1   | INFO:     172.22.0.4:49970 - \"GET /.well-known/oauth-protected-resource HTTP/1.1\" 200 OK\nclient-1    | network GET manzanita.example/.well-known/oauth-protected-resource 200\ncompany-1   | INFO:     172.22.0.4:49970 - \"GET /.well-known/oauth-authorization-server HTTP/1.1\" 200 OK\nclient-1    | network GET manzanita.example/.well-known/oauth-authorization-server 200\ncompany-1   | network GET atlas.example/agent.json 200\ncompany-1   | network GET atlas.example/jwks.json 200\ncompany-1   | INFO:     172.22.0.4:49970 - \"POST /oauth/device HTTP/1.1\" 200 OK\nclient-1    | network POST manzanita.example/oauth/device 200\ncompany-1   | INFO:     172.22.0.4:49982 - \"POST /_test/approve_device/[redacted] HTTP/1.1\" 200 OK\ncompany-1   | INFO:     172.22.0.4:49970 - \"POST /oauth/token HTTP/1.1\" 200 OK\nclient-1    | network POST manzanita.example/oauth/token 200\ncompany-1   | INFO:     172.22.0.4:49970 - \"POST /api/orders/ord_7Hk2/exchanges HTTP/1.1\" 403 Forbidden\nclient-1    | network POST manzanita.example/api/orders/ord_7Hk2/exchanges 403\nrecorder-1  | INFO:     172.22.0.3:43212 - \"POST /arrive HTTP/1.1\" 200 OK\nrecorder-1  | INFO:     172.22.0.3:43212 - \"POST /effect HTTP/1.1\" 200 OK\nrecorder-1  | INFO:     172.22.0.3:43212 - \"POST /checkpoint HTTP/1.1\" 200 OK\nrecorder-1  | INFO:     172.22.0.3:43224 - \"POST /ack/op_am7MMsJrszK41gvWoH9a1g HTTP/1.1\" 200 OK\ncompany-1   | INFO:     172.22.0.4:49970 - \"POST /api/orders/ord_7Hk2/exchanges HTTP/1.1\" 200 OK\nclient-1    | network POST manzanita.example/api/orders/ord_7Hk2/exchanges 200\nrecorder-1  | INFO:     172.22.0.4:59174 - \"GET /events HTTP/1.1\" 200 OK\ncompany-1   | INFO:     172.22.0.4:49970 - \"POST /api/orders/ord_7Hk2/exchanges HTTP/1.1\" 403 Forbidden\nclient-1    | network POST manzanita.example/api/orders/ord_7Hk2/exchanges 403\nrecorder-1  | INFO:     172.22.0.3:43234 - \"POST /arrive HTTP/1.1\" 200 OK\nrecorder-1  | INFO:     172.22.0.3:43234 - \"POST /effect HTTP/1.1\" 200 OK\nrecorder-1  | INFO:     172.22.0.3:43234 - \"POST /checkpoint HTTP/1.1\" 200 OK\nrecorder-1  | INFO:     172.22.0.3:43240 - \"POST /ack/op_e25CZNfQmaDCBIoJ6YWemg HTTP/1.1\" 200 OK\ncompany-1   | INFO:     172.22.0.5:40280 - \"POST /api/orders/ord_7Hk2/exchanges HTTP/1.1\" 200 OK\nproxy-1     | PROXY_RESPONSE {\"body\": {\"data\": {\"operation_id\": \"op_e25CZNfQmaDCBIoJ6YWemg\"}, \"summary\": \"Synthetic exchange recorded.\"}, \"request_method_path\": \"POST /api/orders/ord_7Hk2/exchanges HTTP/1.1\", \"status_line\": \"HTTP/1.1 200 OK\"}\nrecorder-1  | INFO:     172.22.0.4:59174 - \"GET /events HTTP/1.1\" 200 OK\ncompany-1   | INFO:     172.22.0.4:49986 - \"GET /_test/operation/op_e25CZNfQmaDCBIoJ6YWemg HTTP/1.1\" 200 OK\ncompany-1   | INFO:     172.22.0.4:49986 - \"POST /_test/fault/on HTTP/1.1\" 200 OK\nrecorder-1  | INFO:     172.22.0.3:43244 - \"POST /arrive HTTP/1.1\" 200 OK\nrecorder-1  | INFO:     172.22.0.3:43244 - \"POST /effect HTTP/1.1\" 200 OK\nrecorder-1  | INFO:     172.22.0.3:43244 - \"POST /checkpoint HTTP/1.1\" 200 OK\ncompany-1   | INFO:     172.22.0.4:49970 - \"POST /api/orders/ord_7Hk2/exchanges HTTP/1.1\" 503 Service Unavailable\nclient-1    | network POST manzanita.example/api/orders/ord_7Hk2/exchanges 503\nrecorder-1  | INFO:     172.22.0.4:59174 - \"GET /events HTTP/1.1\" 200 OK\nclient-1    | LOSS_RESULT {\"child_exit\": 0, \"control_events\": [{\"body\": {\"account_id\": \"acct_ada\", \"operation_id\": \"op_am7MMsJrszK41gvWoH9a1g\", \"revision\": \"rev_ROrl83D4rH7ZXICzH1RZvQ\", \"terms\": {\"order_id\": \"ord_7Hk2\", \"price_difference\": {\"amount\": \"70.00\", \"currency\": \"USD\"}}}, \"ns\": 1794822833866885488, \"seq\": 1}], \"control_status\": 200, \"dropped_response\": {\"detail\": \"request_failed: PAP resource request failed\", \"error\": \"TransportError\", \"pid\": 8}, \"duration_seconds\": 0.15, \"events_after\": [{\"body\": {\"account_id\": \"acct_ada\", \"operation_id\": \"op_e25CZNfQmaDCBIoJ6YWemg\", \"revision\": \"rev_JGOT7Mku6VUuecuFuP3JdA\", \"terms\": {\"order_id\": \"ord_7Hk2\", \"price_difference\": {\"amount\": \"70.00\", \"currency\": \"USD\"}}}, \"ns\": 1794822833909654831, \"seq\": 2}, {\"body\": {\"account_id\": \"acct_ada\", \"operation_id\": \"op_e25CZNfQmaDCBIoJ6YWemg\", \"revision\": \"rev_JGOT7Mku6VUuecuFuP3JdA\", \"terms\": {\"order_id\": \"ord_7Hk2\", \"price_difference\": {\"amount\": \"70.00\", \"currency\": \"USD\"}}}, \"ns\": 1794822833928456841, \"seq\": 3}], \"events_before\": [{\"body\": {\"account_id\": \"acct_ada\", \"operation_id\": \"op_e25CZNfQmaDCBIoJ6YWemg\", \"revision\": \"rev_JGOT7Mku6VUuecuFuP3JdA\", \"terms\": {\"order_id\": \"ord_7Hk2\", \"price_difference\": {\"amount\": \"70.00\", \"currency\": \"USD\"}}}, \"ns\": 1794822833909654831, \"seq\": 2}], \"expires_at\": \"2026-10-11 09:15:00+00:00\", \"expiry_observation\": null, \"mode\": \"bad\", \"operation_id\": \"op_e25CZNfQmaDCBIoJ6YWemg\", \"record_before_drop\": {\"outcome\": {\"data\": {\"operation_id\": \"op_e25CZNfQmaDCBIoJ6YWemg\"}, \"succeeded\": true, \"summary\": \"Synthetic exchange recorded.\"}, \"status\": \"performed\"}, \"retry_body\": {\"code\": \"temporarily_unavailable\", \"status\": 503}, \"retry_status\": 503, \"revision\": \"rev_JGOT7Mku6VUuecuFuP3JdA\", \"verdict\": \"fail\"}\n\n\u001b[Kclient-1 exited with code 0\n\n\u001b[Kproxy-1 exited with code 137\n\n\u001b[Kcompany-1 exited with code 0\n\n\u001b[Krecorder-1 exited with code 0\n\n Network poppy-loss-bad-64443_default Creating \n Volume poppy-loss-bad-64443_company-data Creating \n Volume poppy-loss-bad-64443_company-data Creating \n Network poppy-loss-bad-64443_default Creating \n Volume poppy-loss-bad-64443_recorder-data Creating \n Volume poppy-loss-bad-64443_recorder-data Creating \n Volume poppy-loss-bad-64443_company-data Created \n Volume poppy-loss-bad-64443_company-data Created \n Volume poppy-loss-bad-64443_recorder-data Created \n Volume poppy-loss-bad-64443_recorder-data Created \n Network poppy-loss-bad-64443_default Created \n Network poppy-loss-bad-64443_default Created \n Container poppy-loss-bad-64443-recorder-1 Creating \n Container poppy-loss-bad-64443-recorder-1 Created \n Container poppy-loss-bad-64443-company-1 Creating \n Container poppy-loss-bad-64443-company-1 Created \n Container poppy-loss-bad-64443-client-1 Creating \n Container poppy-loss-bad-64443-proxy-1 Creating \n Container poppy-loss-bad-64443-client-1 Created \n Container poppy-loss-bad-64443-proxy-1 Created \n Container poppy-loss-bad-64443-recorder-1 Starting \n Container poppy-loss-bad-64443-recorder-1 Started \n Container poppy-loss-bad-64443-company-1 Starting \n Container poppy-loss-bad-64443-company-1 Started \n Container poppy-loss-bad-64443-proxy-1 Starting \n Container poppy-loss-bad-64443-client-1 Starting \n Container poppy-loss-bad-64443-proxy-1 Started \n Container poppy-loss-bad-64443-client-1 Started \nrecorder-1  | INFO:     Started server process [1]\nrecorder-1  | INFO:     Waiting for application startup.\nrecorder-1  | INFO:     Application startup complete.\nrecorder-1  | INFO:     Uvicorn running on http://0.0.0.0:8002 (Press CTRL+C to quit)\ncompany-1   | INFO:     Started server process [1]\ncompany-1   | INFO:     Waiting for application startup.\ncompany-1   | INFO:     Application startup complete.\ncompany-1   | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)\n Compose Stopping Aborting on container exit...\n Container poppy-loss-bad-64443-proxy-1 Stopping \n Container poppy-loss-bad-64443-client-1 Stopping \n Container poppy-loss-bad-64443-client-1 Stopped \n Container poppy-loss-bad-64443-proxy-1 Stopped \n Container poppy-loss-bad-64443-company-1 Stopping \ncompany-1   | INFO:     Shutting down\ncompany-1   | INFO:     Waiting for application shutdown.\ncompany-1   | INFO:     Application shutdown complete.\ncompany-1   | INFO:     Finished server process [1]\n Container poppy-loss-bad-64443-company-1 Stopped \n Container poppy-loss-bad-64443-recorder-1 Stopping \nrecorder-1  | INFO:     Shutting down\nrecorder-1  | INFO:     Waiting for application shutdown.\nrecorder-1  | INFO:     Application shutdown complete.\nrecorder-1  | INFO:     Finished server process [1]\n Container poppy-loss-bad-64443-recorder-1 Stopped \n",
+  "proxy_responses": [
+    {
+      "body": {
+        "data": {
+          "operation_id": "op_e25CZNfQmaDCBIoJ6YWemg"
+        },
+        "summary": "Synthetic exchange recorded."
+      },
+      "request_method_path": "POST /api/orders/ord_7Hk2/exchanges HTTP/1.1",
+      "status_line": "HTTP/1.1 200 OK"
+    }
+  ],
+  "result": {
+    "child_exit": 0,
+    "control_events": [
+      {
+        "body": {
+          "account_id": "acct_ada",
+          "operation_id": "op_am7MMsJrszK41gvWoH9a1g",
+          "revision": "rev_ROrl83D4rH7ZXICzH1RZvQ",
+          "terms": {
+            "order_id": "ord_7Hk2",
+            "price_difference": {
+              "amount": "70.00",
+              "currency": "USD"
+            }
+          }
+        },
+        "ns": 1794822833866885488,
+        "seq": 1
+      }
+    ],
+    "control_status": 200,
+    "dropped_response": {
+      "detail": "request_failed: PAP resource request failed",
+      "error": "TransportError",
+      "pid": 8
+    },
+    "duration_seconds": 0.15,
+    "events_after": [
+      {
+        "body": {
+          "account_id": "acct_ada",
+          "operation_id": "op_e25CZNfQmaDCBIoJ6YWemg",
+          "revision": "rev_JGOT7Mku6VUuecuFuP3JdA",
+          "terms": {
+            "order_id": "ord_7Hk2",
+            "price_difference": {
+              "amount": "70.00",
+              "currency": "USD"
+            }
+          }
+        },
+        "ns": 1794822833909654831,
+        "seq": 2
+      },
+      {
+        "body": {
+          "account_id": "acct_ada",
+          "operation_id": "op_e25CZNfQmaDCBIoJ6YWemg",
+          "revision": "rev_JGOT7Mku6VUuecuFuP3JdA",
+          "terms": {
+            "order_id": "ord_7Hk2",
+            "price_difference": {
+              "amount": "70.00",
+              "currency": "USD"
+            }
+          }
+        },
+        "ns": 1794822833928456841,
+        "seq": 3
+      }
+    ],
+    "events_before": [
+      {
+        "body": {
+          "account_id": "acct_ada",
+          "operation_id": "op_e25CZNfQmaDCBIoJ6YWemg",
+          "revision": "rev_JGOT7Mku6VUuecuFuP3JdA",
+          "terms": {
+            "order_id": "ord_7Hk2",
+            "price_difference": {
+              "amount": "70.00",
+              "currency": "USD"
+            }
+          }
+        },
+        "ns": 1794822833909654831,
+        "seq": 2
+      }
+    ],
+    "expires_at": "2026-10-11 09:15:00+00:00",
+    "expiry_observation": null,
+    "mode": "bad",
+    "operation_id": "op_e25CZNfQmaDCBIoJ6YWemg",
+    "record_before_drop": {
+      "outcome": {
+        "data": {
+          "operation_id": "op_e25CZNfQmaDCBIoJ6YWemg"
+        },
+        "succeeded": true,
+        "summary": "Synthetic exchange recorded."
+      },
+      "status": "performed"
+    },
+    "retry_body": {
+      "code": "temporarily_unavailable",
+      "status": 503
+    },
+    "retry_status": 503,
+    "revision": "rev_JGOT7Mku6VUuecuFuP3JdA",
+    "verdict": "fail"
+  },
+  "seconds": 11.987
+}

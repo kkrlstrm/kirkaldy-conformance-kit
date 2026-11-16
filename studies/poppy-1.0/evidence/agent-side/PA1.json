@@ -1,0 +1,498 @@
+{
+  "configuration": "OperationsClient; study-owned host and ASGI Company; API approval callback; in-process transport",
+  "form": "PA1",
+  "trials": [
+    {
+      "broken": {
+        "company_approvals": [
+          {
+            "approver": "agent",
+            "ns": 9382574319625,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "agent",
+            "ns": 9382574664208,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "user",
+            "ns": 9382574821000,
+            "operation_id": "op_action",
+            "revision": "r2"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "agent",
+            "ns": 9382574665000,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "user",
+            "ns": 9382574821250,
+            "operation_id": "op_action",
+            "revision": "r2"
+          }
+        ],
+        "driver": {
+          "declined": "declined",
+          "outcome": "declined"
+        },
+        "form": "PA1",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9382574739750,
+            "operation_id": "op_action",
+            "revision": "r2",
+            "terms": {
+              "item": "blue",
+              "option": "gift"
+            }
+          }
+        ],
+        "variant": "bad",
+        "verdict": "FAIL"
+      },
+      "control": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9382566651750,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9382566652750,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {
+          "outcome": "answered"
+        },
+        "form": "control",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9382566278000,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "no_control": {
+        "company_approvals": [],
+        "company_performances": [],
+        "driver": {
+          "declined": "declined",
+          "outcome": "declined"
+        },
+        "form": "PA1",
+        "log_available": false,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9382582234125,
+            "operation_id": "op_action",
+            "revision": "r2",
+            "terms": {
+              "item": "blue",
+              "option": "gift"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "INCONCLUSIVE"
+      },
+      "target": {
+        "company_approvals": [
+          {
+            "approver": "agent",
+            "ns": 9382589680666,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "user",
+            "ns": 9382589835500,
+            "operation_id": "op_action",
+            "revision": "r2"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9382589835875,
+            "operation_id": "op_action",
+            "revision": "r2"
+          }
+        ],
+        "driver": {
+          "declined": "declined",
+          "outcome": "declined"
+        },
+        "form": "PA1",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9382589753791,
+            "operation_id": "op_action",
+            "revision": "r2",
+            "terms": {
+              "item": "blue",
+              "option": "gift"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "trial": 0,
+      "verdict": "PASS"
+    },
+    {
+      "broken": {
+        "company_approvals": [
+          {
+            "approver": "agent",
+            "ns": 9382605423458,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "agent",
+            "ns": 9382605554125,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "user",
+            "ns": 9382605699375,
+            "operation_id": "op_action",
+            "revision": "r2"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "agent",
+            "ns": 9382605554541,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "user",
+            "ns": 9382605699666,
+            "operation_id": "op_action",
+            "revision": "r2"
+          }
+        ],
+        "driver": {
+          "declined": "declined",
+          "outcome": "declined"
+        },
+        "form": "PA1",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9382605617541,
+            "operation_id": "op_action",
+            "revision": "r2",
+            "terms": {
+              "item": "blue",
+              "option": "gift"
+            }
+          }
+        ],
+        "variant": "bad",
+        "verdict": "FAIL"
+      },
+      "control": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9382598004166,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9382598004666,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {
+          "outcome": "answered"
+        },
+        "form": "control",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9382597918083,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "no_control": {
+        "company_approvals": [],
+        "company_performances": [],
+        "driver": {
+          "declined": "declined",
+          "outcome": "declined"
+        },
+        "form": "PA1",
+        "log_available": false,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9382613062833,
+            "operation_id": "op_action",
+            "revision": "r2",
+            "terms": {
+              "item": "blue",
+              "option": "gift"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "INCONCLUSIVE"
+      },
+      "target": {
+        "company_approvals": [
+          {
+            "approver": "agent",
+            "ns": 9382620483291,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "user",
+            "ns": 9382620627166,
+            "operation_id": "op_action",
+            "revision": "r2"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9382620627541,
+            "operation_id": "op_action",
+            "revision": "r2"
+          }
+        ],
+        "driver": {
+          "declined": "declined",
+          "outcome": "declined"
+        },
+        "form": "PA1",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9382620550208,
+            "operation_id": "op_action",
+            "revision": "r2",
+            "terms": {
+              "item": "blue",
+              "option": "gift"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "trial": 1,
+      "verdict": "PASS"
+    },
+    {
+      "broken": {
+        "company_approvals": [
+          {
+            "approver": "agent",
+            "ns": 9382636303875,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "agent",
+            "ns": 9382636415000,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "user",
+            "ns": 9382636541916,
+            "operation_id": "op_action",
+            "revision": "r2"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "agent",
+            "ns": 9382636415333,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "user",
+            "ns": 9382636542166,
+            "operation_id": "op_action",
+            "revision": "r2"
+          }
+        ],
+        "driver": {
+          "declined": "declined",
+          "outcome": "declined"
+        },
+        "form": "PA1",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9382636470083,
+            "operation_id": "op_action",
+            "revision": "r2",
+            "terms": {
+              "item": "blue",
+              "option": "gift"
+            }
+          }
+        ],
+        "variant": "bad",
+        "verdict": "FAIL"
+      },
+      "control": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9382628183125,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9382628183583,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {
+          "outcome": "answered"
+        },
+        "form": "control",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9382628080666,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "no_control": {
+        "company_approvals": [],
+        "company_performances": [],
+        "driver": {
+          "declined": "declined",
+          "outcome": "declined"
+        },
+        "form": "PA1",
+        "log_available": false,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9382643811541,
+            "operation_id": "op_action",
+            "revision": "r2",
+            "terms": {
+              "item": "blue",
+              "option": "gift"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "INCONCLUSIVE"
+      },
+      "target": {
+        "company_approvals": [
+          {
+            "approver": "agent",
+            "ns": 9382651224458,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "user",
+            "ns": 9382651370583,
+            "operation_id": "op_action",
+            "revision": "r2"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9382651370958,
+            "operation_id": "op_action",
+            "revision": "r2"
+          }
+        ],
+        "driver": {
+          "declined": "declined",
+          "outcome": "declined"
+        },
+        "form": "PA1",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9382651292791,
+            "operation_id": "op_action",
+            "revision": "r2",
+            "terms": {
+              "item": "blue",
+              "option": "gift"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "trial": 2,
+      "verdict": "PASS"
+    }
+  ]
+}

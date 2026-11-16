@@ -1,0 +1,5 @@
+services:
+  proxy:
+    image: poppy-loss-client:local
+    command: python /loss/proxy.py
+    depends_on: [company]

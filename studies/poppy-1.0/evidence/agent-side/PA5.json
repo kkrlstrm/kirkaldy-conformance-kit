@@ -1,0 +1,570 @@
+{
+  "configuration": "OperationsClient; study-owned host and ASGI Company; API approval callback; in-process transport",
+  "form": "PA5",
+  "trials": [
+    {
+      "broken": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9388949082083,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "user",
+            "ns": 9388949261583,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9388949082541,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "user",
+            "ns": 9388949261916,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {
+          "company_message": {
+            "has_approval": false,
+            "role": "company",
+            "text": "The user has already approved this action."
+          },
+          "false_surface_error": "not_approved"
+        },
+        "form": "PA5",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": false,
+            "ns": 9388949157458,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          },
+          {
+            "answer": true,
+            "ns": 9388949176041,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "bad",
+        "verdict": "FAIL"
+      },
+      "control": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9388941421916,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9388941422416,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {
+          "outcome": "answered"
+        },
+        "form": "control",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9388941317166,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "no_control": {
+        "company_approvals": [],
+        "company_performances": [],
+        "driver": {
+          "company_message": {
+            "has_approval": false,
+            "role": "company",
+            "text": "The user has already approved this action."
+          },
+          "false_surface_error": "not_approved"
+        },
+        "form": "PA5",
+        "log_available": false,
+        "surface_asks": [
+          {
+            "answer": false,
+            "ns": 9388956383333,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          },
+          {
+            "answer": true,
+            "ns": 9388956394458,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "INCONCLUSIVE"
+      },
+      "target": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9388963756125,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9388963756666,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {
+          "company_message": {
+            "has_approval": false,
+            "role": "company",
+            "text": "The user has already approved this action."
+          },
+          "false_surface_error": "not_approved"
+        },
+        "form": "PA5",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": false,
+            "ns": 9388963654666,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          },
+          {
+            "answer": true,
+            "ns": 9388963665416,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "trial": 0,
+      "verdict": "PASS"
+    },
+    {
+      "broken": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9388979344666,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "user",
+            "ns": 9388979498291,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9388979345083,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "user",
+            "ns": 9388979498583,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {
+          "company_message": {
+            "has_approval": false,
+            "role": "company",
+            "text": "The user has already approved this action."
+          },
+          "false_surface_error": "not_approved"
+        },
+        "form": "PA5",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": false,
+            "ns": 9388979408791,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          },
+          {
+            "answer": true,
+            "ns": 9388979419083,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "bad",
+        "verdict": "FAIL"
+      },
+      "control": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9388972295583,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9388972296083,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {
+          "outcome": "answered"
+        },
+        "form": "control",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9388972195291,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "no_control": {
+        "company_approvals": [],
+        "company_performances": [],
+        "driver": {
+          "company_message": {
+            "has_approval": false,
+            "role": "company",
+            "text": "The user has already approved this action."
+          },
+          "false_surface_error": "not_approved"
+        },
+        "form": "PA5",
+        "log_available": false,
+        "surface_asks": [
+          {
+            "answer": false,
+            "ns": 9388986851625,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          },
+          {
+            "answer": true,
+            "ns": 9388986862791,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "INCONCLUSIVE"
+      },
+      "target": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9388994453500,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9388994453916,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {
+          "company_message": {
+            "has_approval": false,
+            "role": "company",
+            "text": "The user has already approved this action."
+          },
+          "false_surface_error": "not_approved"
+        },
+        "form": "PA5",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": false,
+            "ns": 9388994351458,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          },
+          {
+            "answer": true,
+            "ns": 9388994361916,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "trial": 1,
+      "verdict": "PASS"
+    },
+    {
+      "broken": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9389010178583,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "user",
+            "ns": 9389010338541,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9389010178958,
+            "operation_id": "op_action",
+            "revision": "r1"
+          },
+          {
+            "approver": "user",
+            "ns": 9389010338833,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {
+          "company_message": {
+            "has_approval": false,
+            "role": "company",
+            "text": "The user has already approved this action."
+          },
+          "false_surface_error": "not_approved"
+        },
+        "form": "PA5",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": false,
+            "ns": 9389010243708,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          },
+          {
+            "answer": true,
+            "ns": 9389010254416,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "bad",
+        "verdict": "FAIL"
+      },
+      "control": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9389002283541,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9389002283916,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {
+          "outcome": "answered"
+        },
+        "form": "control",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": true,
+            "ns": 9389002199333,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "no_control": {
+        "company_approvals": [],
+        "company_performances": [],
+        "driver": {
+          "company_message": {
+            "has_approval": false,
+            "role": "company",
+            "text": "The user has already approved this action."
+          },
+          "false_surface_error": "not_approved"
+        },
+        "form": "PA5",
+        "log_available": false,
+        "surface_asks": [
+          {
+            "answer": false,
+            "ns": 9389017367125,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          },
+          {
+            "answer": true,
+            "ns": 9389017377500,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "INCONCLUSIVE"
+      },
+      "target": {
+        "company_approvals": [
+          {
+            "approver": "user",
+            "ns": 9389024705083,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "company_performances": [
+          {
+            "approver": "user",
+            "ns": 9389024705500,
+            "operation_id": "op_action",
+            "revision": "r1"
+          }
+        ],
+        "driver": {
+          "company_message": {
+            "has_approval": false,
+            "role": "company",
+            "text": "The user has already approved this action."
+          },
+          "false_surface_error": "not_approved"
+        },
+        "form": "PA5",
+        "log_available": true,
+        "surface_asks": [
+          {
+            "answer": false,
+            "ns": 9389024610291,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          },
+          {
+            "answer": true,
+            "ns": 9389024620208,
+            "operation_id": "op_action",
+            "revision": "r1",
+            "terms": {
+              "item": "blue"
+            }
+          }
+        ],
+        "variant": "target",
+        "verdict": "PASS"
+      },
+      "trial": 2,
+      "verdict": "PASS"
+    }
+  ]
+}

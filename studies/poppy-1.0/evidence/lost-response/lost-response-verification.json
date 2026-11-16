@@ -1,0 +1,8 @@
+{
+  "target": "PASS",
+  "target_trials": 3,
+  "broken_host": "FAIL as expected",
+  "no_control": "INCONCLUSIVE",
+  "expiry": "observation only",
+  "all_checks": true
+}
