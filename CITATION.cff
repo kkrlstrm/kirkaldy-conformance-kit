@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below, and cite the specification it implements."
 type: software
 title: "Kirkaldy conformance kit"
-version: "0.1.0"
+version: "0.3.0"
 authors:
   - family-names: Karlstrom
     given-names: Kai
@@ -22,7 +22,7 @@ references:
   - type: report
     title: "Kirkaldy Conformance Properties for Agent Infrastructure"
     version: "0.3"
-    doi: "10.5281/zenodo.23962761"
+    doi: "10.5281/zenodo.24278774"
     authors:
       - family-names: Karlstrom
         given-names: Kai
