@@ -1,0 +1,146 @@
+{
+  "scope": "synthetic local demonstration; not Poppy conformance",
+  "cases": [
+    {
+      "case": "safe",
+      "verdict": "PASS",
+      "reason": "one_stable_effect_and_original_response",
+      "before": {
+        "scope": {
+          "test_run_id": "run-1",
+          "account_id": "test-account",
+          "operation_id": "operation-1"
+        },
+        "status": "observed",
+        "effect_ids": [],
+        "reason": ""
+      },
+      "after_first": {
+        "scope": {
+          "test_run_id": "run-1",
+          "account_id": "test-account",
+          "operation_id": "operation-1"
+        },
+        "status": "observed",
+        "effect_ids": [
+          "return-1"
+        ],
+        "reason": ""
+      },
+      "after_retry": {
+        "scope": {
+          "test_run_id": "run-1",
+          "account_id": "test-account",
+          "operation_id": "operation-1"
+        },
+        "status": "observed",
+        "effect_ids": [
+          "return-1"
+        ],
+        "reason": ""
+      },
+      "first_captured": {
+        "result": "performed",
+        "return_id": "return-1"
+      },
+      "retry_response": {
+        "result": "performed",
+        "return_id": "return-1"
+      },
+      "responses_equal": true
+    },
+    {
+      "case": "duplicate",
+      "verdict": "FAIL",
+      "reason": "effects_changed_or_duplicated_on_retry",
+      "before": {
+        "scope": {
+          "test_run_id": "run-1",
+          "account_id": "test-account",
+          "operation_id": "operation-1"
+        },
+        "status": "observed",
+        "effect_ids": [],
+        "reason": ""
+      },
+      "after_first": {
+        "scope": {
+          "test_run_id": "run-1",
+          "account_id": "test-account",
+          "operation_id": "operation-1"
+        },
+        "status": "observed",
+        "effect_ids": [
+          "return-1"
+        ],
+        "reason": ""
+      },
+      "after_retry": {
+        "scope": {
+          "test_run_id": "run-1",
+          "account_id": "test-account",
+          "operation_id": "operation-1"
+        },
+        "status": "observed",
+        "effect_ids": [
+          "return-1",
+          "return-2"
+        ],
+        "reason": ""
+      },
+      "first_captured": {
+        "result": "performed",
+        "return_id": "return-1"
+      },
+      "retry_response": {
+        "result": "performed",
+        "return_id": "return-1"
+      },
+      "responses_equal": true
+    },
+    {
+      "case": "unavailable",
+      "verdict": "INCONCLUSIVE",
+      "reason": "effect_observation_unavailable_or_invalid",
+      "before": {
+        "scope": {
+          "test_run_id": "run-1",
+          "account_id": "test-account",
+          "operation_id": "operation-1"
+        },
+        "status": "observed",
+        "effect_ids": [],
+        "reason": ""
+      },
+      "after_first": {
+        "scope": {
+          "test_run_id": "run-1",
+          "account_id": "test-account",
+          "operation_id": "operation-1"
+        },
+        "status": "unavailable",
+        "effect_ids": [],
+        "reason": "synthetic_observer_outage"
+      },
+      "after_retry": {
+        "scope": {
+          "test_run_id": "run-1",
+          "account_id": "test-account",
+          "operation_id": "operation-1"
+        },
+        "status": "unavailable",
+        "effect_ids": [],
+        "reason": "synthetic_observer_outage"
+      },
+      "first_captured": {
+        "result": "performed",
+        "return_id": "return-1"
+      },
+      "retry_response": {
+        "result": "performed",
+        "return_id": "return-1"
+      },
+      "responses_equal": true
+    }
+  ]
+}
