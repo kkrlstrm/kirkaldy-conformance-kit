@@ -44,4 +44,4 @@ The example's SQLite read is immediately consistent with its local transaction. 
 
 The first-response capture is test instrumentation; it must faithfully record the response after the action and before simulated delivery failure. The example simply suppresses delivery in-process. It **does not** exercise HTTP, Poppy approval/identity, network faults, expiry, concurrency, crash recovery, or an actual company. Its successful result is not a Poppy conformance result. The action is assumed already approved.
 
-The proposal builds on the lost-response study linked above and Ariel Smoliar's [process-crash and effect-observer example](https://github.com/personal-agent-protocol/personal-agent-protocol/issues/103#issuecomment-6951286000). The example here is newly written; it does not import Ariel's code. See REPLY.md for a proposed issue comment.
+The proposal builds on the lost-response study linked above and Ariel Smoliar's [process-crash and effect-observer example](https://github.com/personal-agent-protocol/personal-agent-protocol/issues/103#issuecomment-6951286000). The example here is newly written; it does not import Ariel's code.
