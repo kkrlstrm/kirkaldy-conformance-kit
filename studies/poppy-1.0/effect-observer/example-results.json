@@ -4,7 +4,7 @@
     {
       "case": "safe",
       "verdict": "PASS",
-      "reason": "one_stable_effect_and_original_response",
+      "reason": "one_stable_effect_and_equivalent_response",
       "before": {
         "scope": {
           "test_run_id": "run-1",
@@ -39,15 +39,9 @@
         ],
         "reason": ""
       },
-      "first_captured": {
-        "result": "performed",
-        "return_id": "return-1"
-      },
-      "retry_response": {
-        "result": "performed",
-        "return_id": "return-1"
-      },
-      "responses_equal": true
+      "first_captured": "{\"result\": \"performed\", \"return_id\": \"return-1\"}",
+      "retry_response": "{\"result\": \"performed\", \"return_id\": \"return-1\"}",
+      "responses_byte_equal": true
     },
     {
       "case": "duplicate",
@@ -88,15 +82,9 @@
         ],
         "reason": ""
       },
-      "first_captured": {
-        "result": "performed",
-        "return_id": "return-1"
-      },
-      "retry_response": {
-        "result": "performed",
-        "return_id": "return-1"
-      },
-      "responses_equal": true
+      "first_captured": "{\"result\": \"performed\", \"return_id\": \"return-1\"}",
+      "retry_response": "{\"result\": \"performed\", \"return_id\": \"return-1\"}",
+      "responses_byte_equal": true
     },
     {
       "case": "unavailable",
@@ -120,7 +108,7 @@
         },
         "status": "unavailable",
         "effect_ids": [],
-        "reason": "synthetic_observer_outage"
+        "reason": "observation_unavailable_or_invalid"
       },
       "after_retry": {
         "scope": {
@@ -130,17 +118,11 @@
         },
         "status": "unavailable",
         "effect_ids": [],
-        "reason": "synthetic_observer_outage"
+        "reason": "observation_unavailable_or_invalid"
       },
-      "first_captured": {
-        "result": "performed",
-        "return_id": "return-1"
-      },
-      "retry_response": {
-        "result": "performed",
-        "return_id": "return-1"
-      },
-      "responses_equal": true
+      "first_captured": "{\"result\": \"performed\", \"return_id\": \"return-1\"}",
+      "retry_response": "{\"result\": \"performed\", \"return_id\": \"return-1\"}",
+      "responses_byte_equal": true
     }
   ]
 }
