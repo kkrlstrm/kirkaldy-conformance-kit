@@ -1,0 +1,77 @@
+{
+  "case": "readiness-expired",
+  "verdict": "violation",
+  "scheduled_at": 0,
+  "actual_cutoff": 3,
+  "replacement_usable_at_cutoff": false,
+  "approvals_unexpired_at_end": {
+    "A": true,
+    "B": true
+  },
+  "business_history": [
+    {
+      "seq": 1,
+      "tick": 0,
+      "company": "A",
+      "event": "initial",
+      "state": "active",
+      "covered_until": null
+    },
+    {
+      "seq": 2,
+      "tick": 0,
+      "company": "B",
+      "event": "initial",
+      "state": "absent",
+      "covered_until": null
+    },
+    {
+      "seq": 3,
+      "tick": 0,
+      "company": "B",
+      "event": "activation_order",
+      "state": "pending",
+      "covered_until": null
+    },
+    {
+      "seq": 4,
+      "tick": 0,
+      "company": "B",
+      "event": "provisioned",
+      "state": "usable",
+      "covered_until": 1
+    },
+    {
+      "seq": 5,
+      "tick": 0,
+      "company": "A",
+      "event": "cancel_scheduled",
+      "state": "active",
+      "covered_until": null
+    },
+    {
+      "seq": 6,
+      "tick": 2,
+      "company": "B",
+      "event": "readiness_expired",
+      "state": "unavailable",
+      "covered_until": null
+    },
+    {
+      "seq": 7,
+      "tick": 3,
+      "company": "A",
+      "event": "cutoff",
+      "state": "ended",
+      "covered_until": null
+    },
+    {
+      "seq": 8,
+      "tick": 4,
+      "company": "A",
+      "event": "service_observed",
+      "state": "ended",
+      "covered_until": null
+    }
+  ]
+}
